@@ -48,6 +48,8 @@ example : ℕ := 2
 #check 2 + 2 = 5
 #check Irrational (rexp 1 + π)
 #check myFavouriteNumber = yourFavouriteNumber
+
+-- You can give names to propositions too
 def MyDifficultProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
 def MyEasyProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
 
@@ -65,8 +67,12 @@ example : 2 = 2 := rfl
 example (a b : ℕ) : a + b = b + a := Nat.add_comm a b
 example (a b : ℕ) : a * b = b * a := Nat.mul_comm a b
 
+-- This is a proposition, at this point we don't know whether it's true
 def MyVeryEasyProposition : Prop := 2 = 2
+-- This is a proof showing the above proposition is true
 def my_proof : MyVeryEasyProposition := rfl
+
+-- Look closely at their types!
 #check MyVeryEasyProposition
 #check my_proof
 -- my proposition "has type Proposition", or "is a proposition"
