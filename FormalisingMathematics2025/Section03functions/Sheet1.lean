@@ -71,7 +71,6 @@ example (a b : ℕ) : a * b = b * a := Nat.mul_comm a b
 def MyVeryEasyProposition : Prop := 2 = 2
 -- This is a proof showing the above proposition is true
 def my_proof : MyVeryEasyProposition := rfl
-
 -- Look closely at their types!
 #check MyVeryEasyProposition
 #check my_proof
