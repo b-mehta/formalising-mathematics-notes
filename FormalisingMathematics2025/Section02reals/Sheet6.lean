@@ -35,7 +35,7 @@ theorem tendsTo_thirtyseven_mul (a : ℕ → ℝ) (t : ℝ) (h : TendsTo a t) :
   obtain ⟨B, hB⟩ := h (ε / 37) (by simpa)
   use B
   intro n hn
-  simp
+  dsimp only
   specialize hB n hn
 
 

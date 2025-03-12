@@ -36,7 +36,7 @@ theorem tendsTo_thirtyseven_mul (a : ℕ → ℝ) (t : ℝ) (h : TendsTo a t) :
   use X
   intro n hn
   specialize hX n hn
-  simp
+  dsimp only
   rw [← mul_sub, abs_mul, abs_of_nonneg] <;> linarith
 
 /-- If `a(n)` tends to `t` and `c` is a positive constant then
@@ -48,7 +48,7 @@ theorem tendsTo_pos_const_mul {a : ℕ → ℝ} {t : ℝ} (h : TendsTo a t) {c :
   use X
   intro n hn
   specialize hX n hn
-  simp
+  dsimp only
   rw [← mul_sub, abs_mul, abs_of_pos hc]
   exact (lt_div_iff₀' hc).mp hX
 
@@ -62,7 +62,7 @@ theorem tendsTo_neg_const_mul {a : ℕ → ℝ} {t : ℝ} (h : TendsTo a t) {c :
   use X
   intro n hn
   specialize hX n hn
-  simp
+  dsimp only
   rw [← mul_sub, abs_mul, abs_of_neg hc]
   exact (lt_div_iff₀' hc').mp hX
 
@@ -120,7 +120,7 @@ theorem tendsTo_mul (a b : ℕ → ℝ) (t u : ℝ) (ha : TendsTo a t) (hb : Ten
   -- rewrite as (a(n)-t)*(b(n)-u)+t(b(n)-u)+(a(n)-t)u ->0
   have h : ∀ n, a n * b n - t * u = (a n - t) * (b n - u) + t * (b n - u) + (a n - t) * u := by
     intro n; ring
-  simp [h]
+  simp only [h]
   rw [show (0 : ℝ) = 0 + t * 0 + 0 * u by simp]
   refine' tendsTo_add (tendsTo_add _ _) _
   · exact tendsTo_zero_mul_tendsTo_zero ha hb
