@@ -74,7 +74,7 @@ satisfy the proposition `IsFractionRing ℤ A`.
 -- works fine
 example : IsFractionRing ℤ ℚ :=
   Rat.isFractionRing
--- thanks `library_search`
+-- thanks `exact?`
 
 example : FractionRing ℤ = ℚ :=
   sorry

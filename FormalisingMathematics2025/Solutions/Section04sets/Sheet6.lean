@@ -58,7 +58,7 @@ example : f '' S ⊆ T ↔ S ⊆ f ⁻¹' T := by
 -- pullback is not so hard
 example : id ⁻¹' S = S := by rfl
 
--- pushforward is a little trickier. You might have to `ext x, constructor`.
+-- pushforward is a little trickier. You might have to `ext x`, `constructor`.
 example : id '' S = S := by
   ext x
   constructor
