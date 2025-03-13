@@ -40,7 +40,7 @@ example : A ⊆ B → x ∉ B → x ∉ A := by sorry
 -- to give it a hint by telling it the type of `∅`.
 example : x ∉ (∅ : Set X) := by sorry
 
-example : x ∈ Aᶜ → x ∉ A := by sorry
+example : x ∈ Aᶜ ↔ x ∉ A := by sorry
 
 example : (∀ x, x ∈ A) ↔ ¬∃ x, x ∈ Aᶜ := by sorry
 
