@@ -5,6 +5,7 @@ Authors: Bhavik Mehta, Jason Kexing Ying, Kevin Buzzard
 -/
 import Mathlib.Tactic
 import Mathlib.MeasureTheory.Integral.Bochner
+import Mathlib
 
 -- note to self: surely too much
 /-
@@ -272,3 +273,125 @@ Now, try the above examples again using the `filter_upwards` tactic.
 end MeasureTheory
 
 end Section13Sheet3
+
+open MeasureTheory Measure EMetric NNReal ENNReal
+
+example {R : Type*} [CommRing R] {a b c d e f : ℕ} {x y z : R}
+    (h₁ : a * x = b * y)
+    (h₂ : c * x = d * z)
+    (h₃ : e * y = f * z) :
+    (a * d * e) * (y * z) = (b * c * f) * (y * z) := by
+  linear_combination (z * c * f * h₁ - a * e * y * h₂ + a * x * c * h₃)
+
+/-- If the restrictions of a measure to countably many open sets covering the space are
+outer regular, then the measure itself is outer regular. -/
+lemma of_restrict {ι α : Type*} [Nonempty ι] [Countable ι] [MeasurableSpace α] [TopologicalSpace α]
+    [OpensMeasurableSpace α] {μ : Measure α} (s : ι → Set α)
+    (h : ∀ n, OuterRegular (μ.restrict (s n))) (h' : ∀ n, IsOpen (s n))
+    (h'' : Set.univ ⊆ ⋃ n, s n) :
+    OuterRegular μ := by
+  obtain ⟨f, hf⟩ := exists_surjective_nat ι
+  let s' : ℕ → Set α := fun i ↦ s (f i)
+  apply MeasureTheory.Measure.OuterRegular.of_restrict (s := s')
+  · simp [s', h]
+  · simp [s', h']
+  · refine h''.trans ?_
+    simp only [Set.iUnion_subset_iff, s']
+    intro i
+    obtain ⟨j, hj, rfl⟩ := hf i
+    exact Set.subset_iUnion (fun z ↦ s (f z)) j
+
+lemma iSup_nonempty_pos {E : Type*} [PseudoEMetricSpace E] {A : Set E} {s : ℝ} (hs : 0 < s) :
+    ⨆ (h : A.Nonempty), diam A ^ s = diam A ^ s := by
+  obtain rfl | hA := A.eq_empty_or_nonempty
+  · simp [zero_rpow_of_pos hs]
+  simp [hA]
+
+lemma le_of_forall_mul_le {a b : ℝ≥0∞} (h : ∀ ε : ℝ≥0, 1 < ε → a ≤ b * ε) : a ≤ b := by
+  obtain rfl | ha := eq_or_ne a ⊤
+  · have : b * 2 = ⊤ := by
+      specialize h 2
+      norm_num at h
+      assumption
+    sorry
+  apply le_of_forall_pos_nnreal_lt
+  intro r hr hra
+  generalize hε : a / r = ε
+  have hε' : ε ≠ ⊤ := by
+    rw [← hε]
+    exact (ENNReal.div_lt_top ha (by positivity)).ne
+  lift ε to ℝ≥0 using hε'
+  have hε' : 1 < ε := by
+    suffices (1 : ℝ≥0∞) < ε by simpa
+    rwa [← hε, ENNReal.lt_div_iff_mul_lt (by simp) (by simp), one_mul]
+  have := h ε hε'
+  rw [← hε, mul_div_comm] at this
+
+
+  -- have : r ≤ a / (1 + ε) ≤ b
+  -- 1 + ε ≤ a / r
+  -- ε ≤ a / r - 1
+
+
+
+theorem hausdorffMeasure_apply_open {X : Type*} [EMetricSpace X] [MeasurableSpace X] [BorelSpace X]
+    (d : ℝ) (s : Set X) :
+    μH[d] s =
+      ⨆ (r : ℝ≥0∞) (_ : 0 < r),
+        ⨅ (t : ℕ → Set X) (_ : s ⊆ ⋃ n, t n) (_ : ∀ n, diam (t n) ≤ r) (_ : ∀ n, IsOpen (t n)),
+          ∑' n, ⨆ _ : (t n).Nonempty, diam (t n) ^ d := by
+  rw [hausdorffMeasure_apply]
+  apply le_antisymm
+  · exact iSup₂_mono fun _ _ ↦ iInf₂_mono fun _ _ ↦ iInf_mono fun _' ↦ le_iInf fun _ ↦ le_rfl
+  · apply iSup₂_mono'
+    intro r hr
+    let r' : ℝ≥0∞ := 2 * r
+    have hr' : 0 < r' := ENNReal.mul_pos (by norm_num) hr.ne'
+    use r', hr'
+    -- refine iInf₂_mono' ?_
+    -- intro U hU
+    -- let U' (n : ℕ) : Set X := Metric.thickening r.toReal (U n)
+    -- have h'U : s ⊆ ⋃ n, U' n := by sorry
+    -- use U', h'U
+    -- refine iInf_mono' ?_
+    -- intro hU'
+    -- have h''U (n : ℕ) : diam (U' n) ≤ r := by sorry
+    -- use h''U
+    -- rw [iInf_pos]
+
+
+
+#exit
+
+
+
+theorem asdf {n : ℕ} {s : ℝ} (hs : 0 < s) (E : Set (Fin n → ℝ)) :
+    ∃ G : Set (Fin n → ℝ), IsGδ G ∧ E ⊆ G ∧ μH[s] G = μH[s] E := by
+  have h₁ : μH[s] E = ⊤ ∨ μH[s] E < ⊤ := by rw [← le_iff_eq_or_lt]; simp
+  obtain h₁ | h₁ := h₁
+  · exact ⟨Set.univ, by simp, by simp, le_antisymm (by rw [h₁]; simp) (measure_mono (by simp))⟩
+  have hc : ∀ i : ℕ, ∃ (U : ℕ → Set _) (hU : E ⊆ ⋃ j, U j)
+      (hU' : ∀ j, diam (U j) ≤ (i + 1 : ℝ≥0∞)⁻¹) (hU'' : ∀ j, IsOpen (U j)),
+      ∑' j, diam (U j) ^ s < μH[s] E + (i + 1 : ℝ≥0∞)⁻¹ := by
+    intro i
+    have h₂ : μH[s] E < μH[s] E + (i + 1 : ℝ≥0∞)⁻¹ := ENNReal.lt_add_right h₁.ne (by simp)
+    conv_lhs at h₂ =>
+      rw [hausdorffMeasure_apply_open]
+    simp only [iSup_lt_iff, iSup_le_iff] at h₂
+    obtain ⟨z, hz, h₂⟩ := h₂
+    specialize h₂ (i + 1 : ℝ≥0∞)⁻¹ (by sorry)
+    have := h₂.trans_lt hz
+    simp only [iInf_lt_iff, iSup_nonempty_pos hs] at this
+    exact this
+  choose U hCov hDiam hOpen hU using hc
+  let G : Set _ := ⋂ i, ⋃ j, U i j
+  have hEG : E ⊆ G := Set.subset_iInter hCov
+  refine ⟨G, ?_, hEG, ?_⟩
+  · apply IsGδ.iInter_of_isOpen
+    intro i
+    apply isOpen_iUnion
+    intro j
+    exact hOpen i j
+  refine le_antisymm ?_ (measure_mono hEG)
+
+  -- rw [hausdorffMeasure_apply]
