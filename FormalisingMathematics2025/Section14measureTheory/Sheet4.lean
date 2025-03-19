@@ -5,6 +5,8 @@ Authors: Bhavik Mehta, Jason Kexing Ying, Kevin Buzzard
 -/
 import Mathlib.Tactic
 import Mathlib.MeasureTheory.Integral.Bochner
+import Mathlib.MeasureTheory.Measure.Hausdorff
+import Mathlib.Order.CompletePartialOrder
 import Mathlib
 
 -- note to self: surely too much
@@ -276,13 +278,6 @@ end Section13Sheet3
 
 open MeasureTheory Measure EMetric NNReal ENNReal
 
-example {R : Type*} [CommRing R] {a b c d e f : ℕ} {x y z : R}
-    (h₁ : a * x = b * y)
-    (h₂ : c * x = d * z)
-    (h₃ : e * y = f * z) :
-    (a * d * e) * (y * z) = (b * c * f) * (y * z) := by
-  linear_combination (z * c * f * h₁ - a * e * y * h₂ + a * x * c * h₃)
-
 /-- If the restrictions of a measure to countably many open sets covering the space are
 outer regular, then the measure itself is outer regular. -/
 lemma of_restrict {ι α : Type*} [Nonempty ι] [Countable ι] [MeasurableSpace α] [TopologicalSpace α]
@@ -307,13 +302,27 @@ lemma iSup_nonempty_pos {E : Type*} [PseudoEMetricSpace E] {A : Set E} {s : ℝ}
   · simp [zero_rpow_of_pos hs]
   simp [hA]
 
+lemma ENNReal.div_div_cancel' {a b : ℝ≥0∞} (h₀ : a = 0 → b = 0) (h₁ : a = ∞ → b = 0) :
+    a / (a / b) = b := by
+  obtain rfl | ha := eq_or_ne a 0
+  · simp [h₀]
+  obtain rfl | ha' := eq_or_ne a ∞
+  · simp [h₁, top_div_of_lt_top]
+  rw [ENNReal.div_eq_inv_mul, ENNReal.inv_div (Or.inr ha') (Or.inr ha),
+    ENNReal.div_mul_cancel ha ha']
+
+lemma ENNReal.div_div_cancel {a b : ℝ≥0∞} (h₀ : a ≠ 0) (h₁ : a ≠ ∞) :
+    a / (a / b) = b :=
+  ENNReal.div_div_cancel' (by simp [h₀]) (by simp [h₁])
+
 lemma le_of_forall_mul_le {a b : ℝ≥0∞} (h : ∀ ε : ℝ≥0, 1 < ε → a ≤ b * ε) : a ≤ b := by
   obtain rfl | ha := eq_or_ne a ⊤
   · have : b * 2 = ⊤ := by
       specialize h 2
       norm_num at h
       assumption
-    sorry
+    by_contra! hb
+    exact ENNReal.mul_ne_top hb.ne (by simp) this
   apply le_of_forall_pos_nnreal_lt
   intro r hr hra
   generalize hε : a / r = ε
@@ -324,68 +333,237 @@ lemma le_of_forall_mul_le {a b : ℝ≥0∞} (h : ∀ ε : ℝ≥0, 1 < ε → a
   have hε' : 1 < ε := by
     suffices (1 : ℝ≥0∞) < ε by simpa
     rwa [← hε, ENNReal.lt_div_iff_mul_lt (by simp) (by simp), one_mul]
-  have := h ε hε'
-  rw [← hε, mul_div_comm] at this
+  have : a / ε = r := by
+    rw [← hε, ENNReal.div_div_cancel _ ha]
+    exact (hra.trans_le' (by simp)).ne'
+  rw [← this]
+  apply ENNReal.div_le_of_le_mul
+  exact h ε hε'
+
+variable {X : Type*} [EMetricSpace X]
+
+noncomputable def deltaHausdorffWith (p : Set (Set X)) (d : ℝ) (r : ℝ≥0∞) (S : Set X) : ℝ≥0∞ :=
+  ⨅ (t : ℕ → Set X) (_ : S ⊆ ⋃ n, t n) (_ : ∀ n, diam (t n) ≤ r) (_ : ∀ n, t n ∈ p),
+    ∑' n, ⨆ _ : (t n).Nonempty, diam (t n) ^ d
+
+lemma deltaHausdorffWith_antitone_prop {r : ℝ≥0∞} {d : ℝ} {S : Set X} :
+    Antitone (deltaHausdorffWith · d r S) :=
+  fun _ _ hp ↦ iInf₂_mono fun U hU ↦ iInf₂_mono' fun hU' hU'' ↦ ⟨hU', fun n ↦ hp (hU'' n), le_rfl⟩
+
+lemma deltaHausdorffWith_antitone {p : Set (Set X)} {d : ℝ} {S : Set X} :
+    Antitone (deltaHausdorffWith p d · S) :=
+  fun _ _ hr ↦ iInf₂_mono fun U hU ↦ iInf₂_mono' fun hU' hU'' ↦
+    ⟨fun n ↦ (hU' n).trans hr, hU'', le_rfl⟩
+
+open Filter Topology
+
+lemma iSup₂_nnreal_deltaHausdorffWith (p : Set (Set X)) (d : ℝ) (S : Set X) :
+    ⨆ (r : ℝ≥0) (_ : 0 < r), deltaHausdorffWith p d r S =
+      ⨆ (r : ℝ≥0∞) (_ : 0 < r), deltaHausdorffWith p d r S := by
+  refine le_antisymm (iSup₂_mono' ?_) (iSup₂_mono' ?_)
+  · intro r hr
+    exact ⟨r, by simpa⟩
+  · intro r hr
+    obtain rfl | hr' := eq_or_ne r ⊤
+    · refine ⟨1, by simp, ?_⟩
+      apply deltaHausdorffWith_antitone
+      simp
+    lift r to ℝ≥0 using hr'
+    exact ⟨r, by simpa using hr⟩
+
+lemma deltaHausdorffWith_isClosed (d : ℝ) (S : Set X) (r : ℝ≥0∞) :
+    deltaHausdorffWith {U | IsClosed U} d r S = deltaHausdorffWith Set.univ d r S := by
+  refine le_antisymm (iInf₂_mono' fun U hU ↦ ?_) (deltaHausdorffWith_antitone_prop (by simp))
+  let U' (n : ℕ) : Set X := closure (U n)
+  have hU' : S ⊆ ⋃ n, U' n := hU.trans (Set.iUnion_mono (by simp [U', subset_closure]))
+  use U', hU'
+  simp [U']
+
+lemma Metric.thickening_nonempty_iff_of_pos
+    {X : Type*} [PseudoEMetricSpace X] {ε : ℝ} {S : Set X} (hε : 0 < ε) :
+    (thickening ε S).Nonempty ↔ S.Nonempty := by
+  constructor
+  · intro h
+    contrapose! h
+    simp [h]
+  · intro h
+    exact h.mono (Metric.self_subset_thickening hε _)
+
+lemma Metric.thickening_nonempty_iff {X : Type*} [PseudoEMetricSpace X] {ε : ℝ} {S : Set X} :
+    (thickening ε S).Nonempty ↔ 0 < ε ∧ S.Nonempty := by
+  obtain hε | hε := lt_or_le 0 ε
+  · simp [hε, thickening_nonempty_iff_of_pos]
+  · simp [hε.not_lt, Set.not_nonempty_iff_eq_empty, thickening_of_nonpos hε]
+
+lemma exists_isOpen_diam {E : Set X} (hE : E.Nontrivial) {δ : ℝ≥0} (hδ : 1 < δ) :
+    ∃ U, E ⊆ U ∧ IsOpen U ∧ diam U ≤ δ * diam E := by
+  have hδ₀ : δ ≠ 0 := by positivity
+  obtain hE | hE := eq_or_ne (diam E) ⊤
+  · use Set.univ
+    simp [hE, hδ₀]
+  lift diam E to ℝ≥0 using hE with dE hdE
+  have hdE' : 0 < dE := by rwa [← EMetric.diam_pos_iff, ← hdE, ENNReal.coe_pos] at hE
+  let ε : ℝ≥0 := (δ - 1) / 2 * dE
+  have hε : 0 < ε := by
+    have : 0 < δ - 1 := by simpa
+    positivity
+  refine ⟨Metric.thickening ε E, Metric.self_subset_thickening (by simpa) _,
+    Metric.isOpen_thickening, ?_⟩
+  calc diam (Metric.thickening ε E) ≤ diam E + 2 * ε := Metric.ediam_thickening_le _
+    _ = dE + 2 * ε := by rw [hdE]
+    _ = dE + 2 * ↑((δ - 1) / 2 * dE) := rfl
+  norm_cast
+  rw [← mul_assoc, ← one_add_mul, mul_div_cancel₀ _ (by simp), add_tsub_cancel_of_le hδ.le]
+
+lemma deltaHausdorffWith_isOpen (S : Set X) (d : ℝ) (r : ℝ≥0) (ε : ℝ≥0)
+    (hr : 0 < r) (hε : 1 < ε) (hd : 0 ≤ d) :
+    deltaHausdorffWith {U | IsOpen U} d (ε * r) S ≤ ε ^ d * deltaHausdorffWith Set.univ d r S := by
+  apply ENNReal.le_of_forall_pos_le_add
+  intro ν hν h
+  have hε₀ : ε ≠ 0 := by positivity
+  simp only [deltaHausdorffWith, mul_iInf_of_ne (a := ε ^ d) (by simp [hε₀]) (by simp [hε₀]),
+    iInf_add, ← ENNReal.tsum_mul_left, ENNReal.mul_iSup]
+  refine iInf₂_mono' fun U hU ↦ ?_
+  obtain ⟨ν', hν', h'ν'⟩ := ENNReal.exists_pos_sum_of_countable (ε := ν) (by simp [hν.ne']) ℕ
+  have U' (n : ℕ) : ∃ V, U n ⊆ V ∧ IsOpen V ∧ (V.Nonempty → (U n).Nonempty) ∧
+      (diam V ≤ ε * diam (U n) ∨ diam (U n) = 0 ∧ diam V ≤ min (ε * r) (ν' n ^ d⁻¹)) := by
+    obtain h' | h' := (U n).eq_empty_or_nonempty
+    · use ∅
+      simp [h']
+    obtain ⟨x, hx⟩ | h' := h'.exists_eq_singleton_or_nontrivial
+    · refine ⟨EMetric.ball x (min (ε * r) (ν' n ^ d⁻¹) / 2), ?_, ?_, by simp [hx], Or.inr ?_⟩
+      · rw [hx, Set.singleton_subset_iff]
+        apply mem_ball_self
+        have : 0 < ν' n ^ d⁻¹ := NNReal.rpow_pos (hν' n)
+        refine ENNReal.div_pos ?_ (by simp)
+        positivity
+      · exact isOpen_ball
+      · simp only [hx, diam_singleton, true_and]
+        refine diam_ball.trans_eq ?_
+        rw [ENNReal.mul_div_cancel (by simp) (by simp)]
+    obtain ⟨V, hV, hV', hV''⟩ := exists_isOpen_diam h' hε
+    exact ⟨V, hV, hV', by simp [h'.nonempty], Or.inl hV''⟩
+  choose V hUV hVopen hVne hVdiam using U'
+  use V, hU.trans (Set.iUnion_mono hUV)
+  refine iInf₂_mono' fun h'U h''U ↦ ?_
+  have hVdiam_r (n : ℕ) : diam (V n) ≤ ε * r := by
+    obtain h | h := hVdiam n
+    · exact h.trans (mul_le_mul_left' (h'U n) ε)
+    · exact h.2.trans (by simp)
+  use hVdiam_r, hVopen
+  have h₁ : ∑' (i : ℕ), ((⨆ (_ : (U i).Nonempty), ε ^ d * diam (U i) ^ d) + ν' i) ≤
+      (∑' (i : ℕ), ⨆ (_ : (U i).Nonempty), ε ^ d * diam (U i) ^ d) + ν := by
+    rw [ENNReal.tsum_add]
+    gcongr
+  refine h₁.trans' <| ENNReal.tsum_le_tsum fun n ↦ ?_
+  simp only [iSup_le_iff]
+  intro hn
+  simp only [hVne _ hn, iSup_pos]
+  obtain h | ⟨h, h'⟩ := hVdiam n
+  · calc diam (V n) ^ d ≤ (ε * diam (U n)) ^ d := by gcongr
+      _ = ε ^ d * diam (U n) ^ d := by rw [ENNReal.mul_rpow_of_nonneg _ _ hd]
+      _ ≤ _ := le_self_add
+  · obtain rfl | hd := hd.eq_or_lt
+    · simp
+    calc diam (V n) ^ d ≤ (min (ε * r) (ν' n ^ d⁻¹)) ^ d := by gcongr
+      _ ≤ (ν' n ^ d⁻¹ : ℝ≥0) ^ d := by gcongr; exact min_le_right _ _
+      _ = ν' n := by
+        rw [ENNReal.coe_rpow_of_nonneg, ENNReal.rpow_inv_rpow hd.ne']
+        positivity
+      _ ≤ _ := le_add_self
+
+variable [MeasurableSpace X] [BorelSpace X]
+
+lemma hausdorffMeasure_eq_iSup₂_deltaHausdorffWith {d : ℝ} {S : Set X} :
+    μH[d] S = ⨆ (r : ℝ≥0∞) (_ : 0 < r), deltaHausdorffWith Set.univ d r S := by
+  simp only [hausdorffMeasure_apply, deltaHausdorffWith, Set.mem_univ, implies_true, iInf_pos]
+
+lemma hausdorffMeasure_eq_iSup₂_deltaHausdorffWith_isOpen {d : ℝ} {S : Set X} (hd : 0 ≤ d) :
+    μH[d] S = ⨆ (r : ℝ≥0∞) (_ : 0 < r), deltaHausdorffWith {U | IsOpen U} d r S := by
+  rw [hausdorffMeasure_eq_iSup₂_deltaHausdorffWith,
+    ← iSup₂_nnreal_deltaHausdorffWith, ← iSup₂_nnreal_deltaHausdorffWith]
+  refine le_antisymm (iSup₂_mono fun r hr ↦ deltaHausdorffWith_antitone_prop (by simp)) ?_
+  obtain rfl | hd := hd.eq_or_lt
+  · refine iSup₂_mono' fun r hr ↦ ?_
+    refine ⟨r / 2, by positivity, ?_⟩
+    convert deltaHausdorffWith_isOpen S 0 (r / 2) 2 (by positivity) (by simp) le_rfl using 2
+    · norm_cast
+      rw [mul_div_cancel₀ _ (by simp)]
+    simp
+  apply le_of_forall_mul_le
+  intro ε hε
+  rw [mul_comm]
+  simp only [ENNReal.mul_iSup]
+  refine iSup₂_mono' fun r hr ↦ ?_
+  have h₂ : 0 < ε ^ (-d⁻¹) * r := mul_pos (NNReal.rpow_pos (by positivity)) hr
+  use ε ^ (-d⁻¹) * r, h₂
+  convert deltaHausdorffWith_isOpen S d _ (ε ^ d⁻¹) h₂ (one_lt_rpow hε (by positivity)) hd.le
+  · norm_cast
+    rw [← mul_assoc, ← NNReal.rpow_add (by positivity)]
+    simp
+  · rw [ENNReal.coe_rpow_of_nonneg _ (by positivity), ENNReal.rpow_inv_rpow hd.ne']
+
+lemma tendsto_deltaHausdorffWith_isOpen_hausdorffMeasure {d : ℝ} {S : Set X} (hd : 0 ≤ d) :
+    Tendsto (deltaHausdorffWith {U | IsOpen U} d · S) (𝓝[>] 0) (𝓝 (μH[d] S)) := by
+  rw [hausdorffMeasure_eq_iSup₂_deltaHausdorffWith_isOpen hd]
+  convert deltaHausdorffWith_antitone.tendsto_nhdsGT 0
+  rw [sSup_image]
+  simp
+
+open Topology
+lemma iSup₂_eq_liminf {α β : Type*}
+    [LinearOrder α] [TopologicalSpace α] [OrderTopology α] [DenselyOrdered α]
+    [CompleteLattice β]
+    (a : α) (hb : ∃ b, a < b) {f : α → β} (hf : Antitone f) :
+    ⨆ r > a, f r = Filter.liminf f (𝓝[>] a) := by
+  rw [(nhdsGT_basis_of_exists_gt hb).liminf_eq_iSup_iInf]
+  refine le_antisymm (iSup₂_mono' fun r hr ↦ ?_) (iSup₂_mono' fun r hr ↦ ?_)
+  · use r, hr
+    apply le_iInf
+    simp only [Set.mem_Ioo, le_iInf_iff, and_imp]
+    intro i hi0 hir
+    exact hf hir.le
+  · obtain ⟨b, hb⟩ := exists_between hr
+    use b, hb.1
+    exact iInf₂_le b hb
 
 
-  -- have : r ≤ a / (1 + ε) ≤ b
-  -- 1 + ε ≤ a / r
-  -- ε ≤ a / r - 1
+open Filter
 
-
-
-theorem hausdorffMeasure_apply_open {X : Type*} [EMetricSpace X] [MeasurableSpace X] [BorelSpace X]
-    (d : ℝ) (s : Set X) :
-    μH[d] s =
-      ⨆ (r : ℝ≥0∞) (_ : 0 < r),
-        ⨅ (t : ℕ → Set X) (_ : s ⊆ ⋃ n, t n) (_ : ∀ n, diam (t n) ≤ r) (_ : ∀ n, IsOpen (t n)),
-          ∑' n, ⨆ _ : (t n).Nonempty, diam (t n) ^ d := by
-  rw [hausdorffMeasure_apply]
-  apply le_antisymm
-  · exact iSup₂_mono fun _ _ ↦ iInf₂_mono fun _ _ ↦ iInf_mono fun _' ↦ le_iInf fun _ ↦ le_rfl
-  · apply iSup₂_mono'
-    intro r hr
-    let r' : ℝ≥0∞ := 2 * r
-    have hr' : 0 < r' := ENNReal.mul_pos (by norm_num) hr.ne'
-    use r', hr'
-    -- refine iInf₂_mono' ?_
-    -- intro U hU
-    -- let U' (n : ℕ) : Set X := Metric.thickening r.toReal (U n)
-    -- have h'U : s ⊆ ⋃ n, U' n := by sorry
-    -- use U', h'U
-    -- refine iInf_mono' ?_
-    -- intro hU'
-    -- have h''U (n : ℕ) : diam (U' n) ≤ r := by sorry
-    -- use h''U
-    -- rw [iInf_pos]
-
-
-
-#exit
-
-
-
-theorem asdf {n : ℕ} {s : ℝ} (hs : 0 < s) (E : Set (Fin n → ℝ)) :
-    ∃ G : Set (Fin n → ℝ), IsGδ G ∧ E ⊆ G ∧ μH[s] G = μH[s] E := by
+theorem asdf {s : ℝ} (hs : 0 ≤ s) (E : Set X) :
+    ∃ G : Set X, IsGδ G ∧ E ⊆ G ∧ μH[s] G = μH[s] E := by
   have h₁ : μH[s] E = ⊤ ∨ μH[s] E < ⊤ := by rw [← le_iff_eq_or_lt]; simp
   obtain h₁ | h₁ := h₁
   · exact ⟨Set.univ, by simp, by simp, le_antisymm (by rw [h₁]; simp) (measure_mono (by simp))⟩
-  have hc : ∀ i : ℕ, ∃ (U : ℕ → Set _) (hU : E ⊆ ⋃ j, U j)
-      (hU' : ∀ j, diam (U j) ≤ (i + 1 : ℝ≥0∞)⁻¹) (hU'' : ∀ j, IsOpen (U j)),
-      ∑' j, diam (U j) ^ s < μH[s] E + (i + 1 : ℝ≥0∞)⁻¹ := by
-    intro i
-    have h₂ : μH[s] E < μH[s] E + (i + 1 : ℝ≥0∞)⁻¹ := ENNReal.lt_add_right h₁.ne (by simp)
+  obtain ⟨φ, h₁φ, h₂φ, h₃φ⟩ := exists_seq_strictAnti_tendsto' (show (0 : ℝ≥0∞) < 1 by norm_num)
+  have h₄φ : Tendsto φ atTop (𝓝[>] 0) :=
+    tendsto_nhdsWithin_mono_right
+      (Set.range_subset_iff.2 (by simp_all)) (tendsto_nhdsWithin_range.2 h₃φ)
+  have hc (i : ℕ) : ∃ (U : ℕ → Set X) (hU : E ⊆ ⋃ j, U j)
+      (hU' : ∀ j, diam (U j) ≤ φ i) (hU'' : ∀ j, IsOpen (U j)),
+      ∑' j, ⨆ (_ : (U j).Nonempty), diam (U j) ^ s <
+        deltaHausdorffWith {U | IsOpen U} s (φ i) E + φ i := by
+    have h₂ :
+        deltaHausdorffWith {U | IsOpen U} s (φ i) E <
+          deltaHausdorffWith {U | IsOpen U} s (φ i) E + φ i := by
+      apply ENNReal.lt_add_right _ _
+      · rw [← lt_top_iff_ne_top]
+        refine h₁.trans_le' ?_
+        rw [hausdorffMeasure_eq_iSup₂_deltaHausdorffWith_isOpen hs]
+        exact le_iSup₂ (α := ℝ≥0∞) _ (by simp_all)
+      · simp only [ne_eq, ENNReal.coe_eq_zero, (h₂φ i).1.ne', not_false_eq_true]
     conv_lhs at h₂ =>
-      rw [hausdorffMeasure_apply_open]
-    simp only [iSup_lt_iff, iSup_le_iff] at h₂
-    obtain ⟨z, hz, h₂⟩ := h₂
-    specialize h₂ (i + 1 : ℝ≥0∞)⁻¹ (by sorry)
-    have := h₂.trans_lt hz
-    simp only [iInf_lt_iff, iSup_nonempty_pos hs] at this
-    exact this
+      simp only [deltaHausdorffWith]
+    simp only [iInf_lt_iff, Set.mem_setOf_eq] at h₂
+    exact h₂
   choose U hCov hDiam hOpen hU using hc
   let G : Set _ := ⋂ i, ⋃ j, U i j
   have hEG : E ⊆ G := Set.subset_iInter hCov
+  have h₁ (i : ℕ) : deltaHausdorffWith {U | IsOpen U} s (φ i) G <
+      deltaHausdorffWith {U | IsOpen U} s (φ i) E + φ i := by
+    rw [deltaHausdorffWith]
+    simp only [iInf_lt_iff]
+    exact ⟨U i, Set.iInter_subset _ _, hDiam i, hOpen i, hU i⟩
   refine ⟨G, ?_, hEG, ?_⟩
   · apply IsGδ.iInter_of_isOpen
     intro i
@@ -393,5 +571,6 @@ theorem asdf {n : ℕ} {s : ℝ} (hs : 0 < s) (E : Set (Fin n → ℝ)) :
     intro j
     exact hOpen i j
   refine le_antisymm ?_ (measure_mono hEG)
-
-  -- rw [hausdorffMeasure_apply]
+  simpa using le_of_tendsto_of_tendsto'
+    ((tendsto_deltaHausdorffWith_isOpen_hausdorffMeasure hs).comp h₄φ)
+    (((tendsto_deltaHausdorffWith_isOpen_hausdorffMeasure hs).comp h₄φ).add h₃φ) (fun i ↦ (h₁ i).le)
