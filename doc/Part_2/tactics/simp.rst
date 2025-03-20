@@ -57,9 +57,13 @@ Details
 
 Note that ``simp``, like ``rw``, works up to :ref:`syntactic equality <syneq>`. In other words, if your goal mentions ``x`` and there is a simp lemma ``h : x' = y`` where ``x'`` is definitionally, but not syntactically, equal to ``x``, then ``simp`` will not do the rewrite; this is because ``rw [h]`` fails.
 
-You can use ``simp`` on goals too: ``simp at h`` will run the simplifier on ``h``.
+You can use ``simp`` on hypotheses too: ``simp at h`` will run the simplifier on ``h``.
 
-There's quite a lot to say about the ``simp`` tactic. More details of how to use it can be found in Theorem Proving In Lean, in the section "using the simplifier" `here <https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier>`_ .
+You can tell `simp` to use all hypotheses when simplifying the goal, with ``simp [*]``. Or
+you can tell ``simp`` to try and recursively simplify all goals and hypotheses using all
+other hypotheses, with the variant ``simp_all``. 
+
+There's quite a lot to say about the ``simp`` tactic. More details of how to use it can be found in Theorem Proving In Lean, in the section "using the simplifier" `here <https://lean-lang.org/theorem_proving_in_lean4/tactics.html#using-the-simplifier>`_ .
 
 Further notes
 -------------
