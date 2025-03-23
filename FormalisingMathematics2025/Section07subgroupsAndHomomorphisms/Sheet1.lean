@@ -155,6 +155,8 @@ theorem mem_conjugate_iff : a ∈ conjugate H x ↔ ∃ h, h ∈ H ∧ a = x * h
   rfl
 
 theorem conjugate_mono (H K : Subgroup G) (h : H ≤ K) : conjugate H x ≤ conjugate K x := by
+  -- start with `intro g` because the goal is definitionally
+  -- `∀ g, g ∈ conjugate H x → g ∈ conjugate K x`
   sorry
 
 theorem conjugate_bot : conjugate ⊥ x = ⊥ := by
