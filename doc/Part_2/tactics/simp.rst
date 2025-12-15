@@ -8,7 +8,7 @@ Summary
 
 There are many lemmas of the form ``x = y`` or ``P ↔ Q`` in ``mathlib`` which are "tagged" with the ``@[simp]`` tag. Note that these kinds of lemmas are ones for which the ``rw`` tactic can be used. A lemma tagged with ``@[simp]`` is called a "simp lemma".
 
-When Lean's simplifier ``simp`` is run, it tries to find simp lemmas for which the left hand side of the lemma is in the goal. It then uses the lemma to rewrite the goal and continues. Ultimately what happens is that the goal ends up simplified, and, ideally, solved.
+When Lean's simplifier ``simp`` is run, it tries to find simp lemmas for which the left hand side of the lemma is in the goal. It then uses a lemma to rewrite the goal and continues. Ultimately what happens is that the goal ends up simplified, and, ideally, solved.
 
 Overview
 --------
