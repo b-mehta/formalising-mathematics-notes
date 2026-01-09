@@ -1,17 +1,16 @@
-name = "FormalisingMathematics2025"
-defaultTargets = ["FormalisingMathematics2025"]
+name = "FormalisingMathematics2026"
+defaultTargets = ["FormalisingMathematics2026"]
 
 [leanOptions]
 pp.unicode.fun = true
 autoImplicit = false
 relaxedAutoImplicit = false
 linter.style.longLine = true
-linter.unusedTactic = false
-linter.unusedVariables = false
 
 [[require]]
 name = "mathlib"
+rev = "v4.26.0"
 git = "https://github.com/leanprover-community/mathlib4.git"
 
 [[lean_lib]]
-name = "FormalisingMathematics2025"
+name = "FormalisingMathematics2026"
