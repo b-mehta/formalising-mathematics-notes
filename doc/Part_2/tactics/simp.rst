@@ -8,7 +8,7 @@ Summary
 
 There are many lemmas of the form ``x = y`` or ``P ↔ Q`` in ``mathlib`` which are "tagged" with the ``@[simp]`` tag. Note that these kinds of lemmas are ones for which the ``rw`` tactic can be used. A lemma tagged with ``@[simp]`` is called a "simp lemma".
 
-When Lean's simplifier ``simp`` is run, it tries to find simp lemmas for which the left hand side of the lemma is in the goal. It then rewrites the lemma and continues. Ultimately what happens is that the goal ends up simplified, and, ideally, solved.
+When Lean's simplifier ``simp`` is run, it tries to find simp lemmas for which the left hand side of the lemma is in the goal. It then uses a lemma to rewrite the goal and continues. Ultimately what happens is that the goal ends up simplified, and, ideally, solved.
 
 Overview
 --------
@@ -57,7 +57,7 @@ Details
 
 Note that ``simp``, like ``rw``, works up to :ref:`syntactic equality <syneq>`. In other words, if your goal mentions ``x`` and there is a simp lemma ``h : x' = y`` where ``x'`` is definitionally, but not syntactically, equal to ``x``, then ``simp`` will not do the rewrite; this is because ``rw [h]`` fails.
 
-You can use ``simp`` on goals too: ``simp at h`` will run the simplifier on ``h``.
+You can use ``simp`` on hypotheses too: ``simp at h`` will run the simplifier on ``h``.
 
 There's quite a lot to say about the ``simp`` tactic. More details of how to use it can be found in Theorem Proving In Lean, in the section "using the simplifier" `here <https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier>`_ .
 
