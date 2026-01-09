@@ -25,15 +25,37 @@ and also the following tactics:
 -- Throughout this sheet, `P`, `Q` and `R` will denote propositions.
 variable (P Q R : Prop)
 
-example : P ∧ Q → P := by
-  intro hPaQ
-  cases hPaQ with
-  | intro hP hQ => exact hP
+-- Here are a few ways to break down a conjunction:
 
+-- You can use `obtain`
 example : P ∧ Q → P := by
-  intro hPaQ
-  rcases hPaQ with ⟨hP, hQ⟩
-  exact hP
+  intro h
+  obtain ⟨left, right⟩ := h
+  exact left
+
+-- or `rcases` (which is just `obtain` but with a slightly different syntax)
+example : P ∧ Q → P := by
+  intro h
+  rcases h with ⟨left, right⟩
+  exact left
+
+/--
+The pattern `intro h` then `rcases h with ...` is so common that it has an abbreviation as
+`rintro ...`, so you could also do
+-/
+example : P ∧ Q → P := by
+  rintro ⟨left, right⟩
+  exact left
+
+-- or you can get the relevant part out directly using `.left`
+example : P ∧ Q → P := by
+  intro h
+  exact h.left
+
+-- or by using `.1` (the first part)
+example : P ∧ Q → P := by
+  intro h
+  exact h.1
 
 example : P ∧ Q → Q := by
   rintro ⟨hP, hQ⟩
@@ -41,14 +63,17 @@ example : P ∧ Q → Q := by
 
 example : (P → Q → R) → P ∧ Q → R := by
   rintro hPQR ⟨hP, hQ⟩
-  apply hPQR <;> assumption
+  apply hPQR
+  · assumption
+  · assumption
 
 example : P → Q → P ∧ Q := by
-  intro hP
-  intro hQ
+  intro hP hQ
   constructor
-  · exact hP
-  · exact hQ
+  -- After the `constructor` tactic, we have *2 goals* for the first time!
+  -- We use centre-dots, typed as `\.` to help Lean (and the reader) figure out when we're done
+  · assumption
+  · assumption
 
 /-- `∧` is symmetric -/
 example : P ∧ Q → Q ∧ P := by

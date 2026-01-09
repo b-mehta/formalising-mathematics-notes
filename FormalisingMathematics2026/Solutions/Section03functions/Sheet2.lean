@@ -119,7 +119,7 @@ example (f : X → Y) (g : Y → Z) (hf : Surjective f) (hg : Surjective g) : Su
   -- Recall that g is surjective, so there
   -- must exist y ∈ Y such that g(y)=z
   have h : ∃ y, g y = z := hg z
-  cases h with ⟨y, hy⟩
+  rcases h with ⟨y, hy⟩
   -- Recall also that f is surjective, so
   -- there exists x ∈ X such that f(x)=y
   obtain ⟨x, hx⟩ := hf y

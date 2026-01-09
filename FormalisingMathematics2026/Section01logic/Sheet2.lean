@@ -29,58 +29,42 @@ variable (P Q R : Prop)
 
 example : True := by
   trivial
-  done
 
 example : True → True := by
   intro h
   trivial
-  done
 
 example : False → True := by
   intro h
   cases h
-  done
 
 example : False → False := by
   intro h
   exact h
-  done
 
 example : (True → False) → False := by
   intro h1
   apply h1
   trivial
-  done
 
 example : False → P := by
   intro h
   exfalso
   exact h
-  done
 
 example : True → False → True → False → True → False := by
   sorry
-  done
 
 example : P → (P → False) → False := by
   sorry
-  done
 
 example : (P → False) → P → Q := by
   sorry
-  done
 
 example : (True → False) → P := by
   intro h1
   have h3 : False := by
     apply h1
     trivial
-  -- have h2 : True := by
-  --   trivial
-  -- apply h1 at h2
   exfalso
   exact h3
-  -- apply h1
-  -- trivial
-  -- done
-  done

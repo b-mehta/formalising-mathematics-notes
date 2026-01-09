@@ -36,25 +36,41 @@ example : Q → P ∨ Q := by
   right
   exact hQ
 
+-- Here are a few ways to break down a disjunction
 example : P ∨ Q → (P → R) → (Q → R) → R := by
-  intro hPoQ hPR hQR
+  intro hPoQ hPQ hQR
   cases hPoQ with
-  | inl hP =>
-      apply hPR
-      exact hP
-  | inr hQ =>
-      exact hQR hQ
+  | inl h =>
+    apply hPQ
+    exact h
+  | inr h =>
+    apply hQR
+    apply h
+
+example : P ∨ Q → (P → R) → (Q → R) → R := by
+  intro hPoQ hPQ hQR
+  obtain h | h := hPoQ
+  · apply hPQ
+    exact h
+  · apply hQR
+    apply h
+
+-- note the way the intro / obtain get combined
+-- (don't forget obtain and rcases do basically the same)
+example : P ∨ Q → (P → R) → (Q → R) → R := by
+  rintro (h | h) hPQ hQR
+  · apply hPQ
+    exact h
+  · apply hQR
+    apply h
 
 -- symmetry of `or`
 example : P ∨ Q → Q ∨ P := by
-  intro hPoQ
-  cases hPoQ with
-  | inl hP =>
-      right
-      assumption
-  | inr hQ =>
-      left
-      assumption
+  rintro (hP | hQ)
+  · right
+    assumption
+  · left
+    assumption
 
 -- associativity of `or`
 example : (P ∨ Q) ∨ R ↔ P ∨ Q ∨ R := by

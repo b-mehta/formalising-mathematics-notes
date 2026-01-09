@@ -50,13 +50,15 @@ first logic section is to get you up to speed with ten very basic ones.
 ## Worked examples
 
 Click around in the proofs to see the tactic state (on the right) change.
-The tactic is implemented and the state changes just before the comma.
+The tactic is implemented and the state changes just before the newline or semicolon (`;`).
 I will use the following conventions: variables with capital
 letters like `P`, `Q`, `R` denote propositions
 (i.e. true/false statements) and variables whose names begin
 with `h` like `h1` or `hP` are proofs or hypotheses.
 
 -/
+
+set_option linter.unusedVariables false
 
 -- Throughout this sheet, `P`, `Q` and `R` will denote propositions.
 variable (P Q R : Prop)
@@ -66,14 +68,12 @@ variable (P Q R : Prop)
 example (hP : P) (hQ : Q) (hR : R) : P := by
   -- note that `exact P` does *not* work. `P` is the proposition, `hP` is the proof.
   exact hP
-  done
 
 -- Same example: assume that `P` and `Q` and `R` are true, but this time
 -- give the assumptions silly names. Deduce that `P` is true.
 example (fish : P) (giraffe : Q) (dodecahedron : R) : P := by
 -- `fish` is the name of the assumption that `P` is true (but `hP` is a better name)
   exact fish
-  done
 
 -- Assume `Q` is true. Prove that `P → Q`.
 example (hQ : Q) : P → Q := by
@@ -83,7 +83,6 @@ example (hQ : Q) : P → Q := by
   -- Our goal is now the same as a hypothesis so we can use `exact`
   exact hQ
   -- note `exact Q` doesn't work: `exact` takes the *term*, not the type.
-  done
 
 -- Assume `P → Q` and `P` is true. Deduce `Q`.
 example (h : P → Q) (hP : P) : Q := by
@@ -92,7 +91,6 @@ example (h : P → Q) (hP : P) : Q := by
   apply h at hP
   -- now `hP` is a proof of `Q` so that's exactly what we want.
   exact hP
-  done
 
 -- The `apply` tactic always needs a hypothesis of the form `P → Q`. But instead of applying
 -- it to a hypothesis `h : P` (which changes the hypothesis to a proof of `Q`), you can instead
@@ -106,18 +104,6 @@ example (h : P → Q) (hP : P) : Q := by
   apply h
   -- Our goal is now `⊢ P`.
   exact hP
-  done
-
-/-
-
-## Examples for you to try
-
--/
-
-/-- Every proposition implies itself. -/
-example : P → P := by
-  intro banana
-  exact banana
 
 /-
 
@@ -131,15 +117,29 @@ about it, this means that to deduce `R` you will need to prove both `P`
 and `Q`. In general to prove `P1 → P2 → P3 → ... Pn` you can assume
 `P1`, `P2`,...,`P(n-1)` and then you have to prove `Pn`.
 
-So the next level is asking you prove that `P → (Q → P)`.
+So the next level is asking you to prove that `P → (Q → P)`.
 
 -/
 example : P → Q → P := by
-  intro hP
-  intro hQ
+  intro hP hQ
   -- the `assumption` tactic will close a goal if
   -- it's exactly equal to one of the hypotheses.
   assumption
+
+/-
+
+## Examples for you to try
+
+Delete the `sorry`s and replace them with tactic proofs using `intro`,
+`exact` and `apply`, separating them with newlines or semicolons (`;`).
+-/
+
+/-- Every proposition implies itself. -/
+example : P → P := by
+  intro banana
+  exact banana
+
+
 
 /-- If we know `P`, and we also know `P → Q`, we can deduce `Q`.
 This is called "Modus Ponens" by logicians. -/
@@ -222,7 +222,7 @@ example :
   intro hP
   exact h2
 
--- another approach
+-- another approach using a more advanced tactic
 example :
     (((P → Q → Q) → (P → Q) → Q) → R) →
       ((((P → P) → Q) → P → P → Q) → R) → (((P → P → Q) → (P → P) → Q) → R) → R := by

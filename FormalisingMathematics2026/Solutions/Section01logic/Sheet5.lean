@@ -38,27 +38,22 @@ example : (P ↔ Q) ↔ (Q ↔ P) := by
 
 example : (P ↔ Q) → (Q ↔ R) → (P ↔ R) := by
   intro h1 h2
--- rwa is rw + assumption
+  -- rwa is rw + assumption
   rwa [h1]
 
+-- Here's a more subtle use of `all_goals`: note the indentation is useful for readability
 example : P ∧ Q ↔ Q ∧ P := by
-  constructor <;>
-  · rintro ⟨h1, h2⟩
+  constructor
+  all_goals
+    rintro ⟨h1, h2⟩
     exact ⟨h2, h1⟩
 
+-- Take a close look at the `rintro` pattern here, it's more than what we've seen before
 example : (P ∧ Q) ∧ R ↔ P ∧ Q ∧ R := by
   constructor
-  · intro h
-    cases h with
-    | intro hPaQ hR =>
-        cases hPaQ with
-        | intro hP hQ =>
-            constructor
-            · exact hP
-            constructor
-            · exact hQ
-            · exact hR
-  · rintro ⟨hP, hQ, hR⟩
+  · rintro ⟨⟨hP, hQ⟩, hR⟩
+    exact ⟨hP, ⟨hQ, hR⟩⟩
+  · rintro ⟨hP, ⟨hQ, hR⟩⟩
     exact ⟨⟨hP, hQ⟩, hR⟩
 
 example : P ↔ P ∧ True := by
@@ -93,10 +88,10 @@ example : ¬(P ↔ ¬P) := by
 example : ¬(P ↔ ¬P) := by
   intro h
   have hnP : ¬P := by
-    cases h with
-    | intro h1 h2 =>
-        intro hP
-        apply h1 <;> assumption
+    intro hP
+    rw [h] at hP
+    apply hP
+    rwa [h]
   apply hnP
   rw [h]
   exact hnP

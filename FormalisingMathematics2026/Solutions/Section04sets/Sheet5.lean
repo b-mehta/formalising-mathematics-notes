@@ -83,9 +83,9 @@ example : A ∪ (B ∪ C) = A ∪ B ∪ C := by
 
 -- thanks `exact?`
 example : A ∪ B ∩ C = (A ∪ B) ∩ (A ∪ C) :=
-  union_distrib_left A B C
+  union_inter_distrib_left A B C
 
 -- I guessed what this was called
 -- on the basis of the previous answer
 example : A ∩ (B ∪ C) = A ∩ B ∪ A ∩ C :=
-  inter_distrib_left A B C
+  inter_union_distrib_left A B C

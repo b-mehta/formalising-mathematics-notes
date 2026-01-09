@@ -26,40 +26,31 @@ variable (P Q R S : Prop)
 
 example : P ↔ P := by
   sorry
-  done
 
 example : (P ↔ Q) → (Q ↔ P) := by
   sorry
-  done
 
 example : (P ↔ Q) ↔ (Q ↔ P) := by
   sorry
-  done
 
 example : (P ↔ Q) → (Q ↔ R) → (P ↔ R) := by
   sorry
-  done
+  -- The pattern `rw` then `assumption` is common enough that it can be abbreviated to `rwa`
 
 example : P ∧ Q ↔ Q ∧ P := by
   sorry
-  done
 
 example : (P ∧ Q) ∧ R ↔ P ∧ Q ∧ R := by
   sorry
-  done
 
 example : P ↔ P ∧ True := by
   sorry
-  done
 
 example : False ↔ P ∧ False := by
   sorry
-  done
 
 example : (P ↔ Q) → (R ↔ S) → (P ∧ R ↔ Q ∧ S) := by
   sorry
-  done
 
 example : ¬(P ↔ ¬P) := by
   sorry
-  done

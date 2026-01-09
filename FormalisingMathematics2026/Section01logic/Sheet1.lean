@@ -58,6 +58,8 @@ with `h` like `h1` or `hP` are proofs or hypotheses.
 
 -/
 
+set_option linter.unusedVariables false
+
 -- Throughout this sheet, `P`, `Q` and `R` will denote propositions.
 variable (P Q R : Prop)
 
@@ -66,24 +68,21 @@ variable (P Q R : Prop)
 example (hP : P) (hQ : Q) (hR : R) : P := by
   -- note that `exact P` does *not* work. `P` is the proposition, `hP` is the proof.
   exact hP
-  done
 
 -- Same example: assume that `P` and `Q` and `R` are true, but this time
 -- give the assumptions silly names. Deduce that `P` is true.
 example (fish : P) (giraffe : Q) (dodecahedron : R) : P := by
 -- `fish` is the name of the assumption that `P` is true (but `hP` is a better name)
   exact fish
-  done
 
 -- Assume `Q` is true. Prove that `P → Q`.
 example (hQ : Q) : P → Q := by
   -- The goal is of the form `X → Y` so we can use `intro`
-  intro h
+  intro (fish : P)
   -- now `h` is the hypothesis that `P` is true.
   -- Our goal is now the same as a hypothesis so we can use `exact`
   exact hQ
   -- note `exact Q` doesn't work: `exact` takes the *term*, not the type.
-  done
 
 -- Assume `P → Q` and `P` is true. Deduce `Q`.
 example (h : P → Q) (hP : P) : Q := by
@@ -92,7 +91,6 @@ example (h : P → Q) (hP : P) : Q := by
   apply h at hP
   -- now `hP` is a proof of `Q` so that's exactly what we want.
   exact hP
-  done
 
 -- The `apply` tactic always needs a hypothesis of the form `P → Q`. But instead of applying
 -- it to a hypothesis `h : P` (which changes the hypothesis to a proof of `Q`), you can instead
@@ -106,21 +104,6 @@ example (h : P → Q) (hP : P) : Q := by
   apply h
   -- Our goal is now `⊢ P`.
   exact hP
-  done
-
-/-
-
-## Examples for you to try
-
-Delete the `sorry`s and replace them with tactic proofs using `intro`,
-`exact` and `apply`, separating them with newlines or semicolons (`;`).
-
--/
-/-- Every proposition implies itself. -/
-example : P → P := by
-  intro h
-  exact h
-  done
 
 /-
 
@@ -134,65 +117,68 @@ about it, this means that to deduce `R` you will need to prove both `P`
 and `Q`. In general to prove `P1 → P2 → P3 → ... Pn` you can assume
 `P1`, `P2`,...,`P(n-1)` and then you have to prove `Pn`.
 
-So the next level is asking you prove that `P → (Q → P)`.
+So the next level is asking you to prove that `P → (Q → P)`.
 
 -/
 example : P → Q → P := by
   intro hP hQ
-  exact hP
-  done
+  -- the `assumption` tactic will close a goal if
+  -- it's exactly equal to one of the hypotheses.
+  assumption
+
+/-
+
+## Examples for you to try
+
+Delete the `sorry`s and replace them with tactic proofs using `intro`,
+`exact` and `apply`, separating them with newlines or semicolons (`;`).
+
+-/
+/-- Every proposition implies itself. -/
+example : P → P := by
+  intro h
+  exact h
 
 /-- If we know `P`, and we also know `P → Q`, we can deduce `Q`.
 This is called "Modus Ponens" by logicians. -/
 example : P → (P → Q) → Q := by
   sorry
-  done
 
 /-- `→` is transitive. That is, if `P → Q` and `Q → R` are true, then
-  so is `P → R`. -/
+so is `P → R`. -/
 example : (P → Q) → (Q → R) → P → R := by
   sorry
-  done
 
--- If `h : P → Q → R` with goal `⊢ R` and you `apply h`, you'll get
--- two goals! Note that tactics operate on only the first goal.
+/-- If `h : P → Q → R` with goal `⊢ R` and you `apply h`, you'll get
+two goals! Note that tactics operate on only the first goal. -/
 example : (P → Q → R) → (P → Q) → P → R := by
   sorry
-  done
 
 /-
-
 Here are some harder puzzles. They won't teach you anything new about
 Lean, they're just trickier. If you're not into logic puzzles
 and you feel like you understand `intro`, `exact` and `apply`
 then you can just skip these and move onto the next sheet
 in this section, where you'll learn some more tactics.
-
 -/
 variable (S T : Prop)
 
 example : (P → R) → (S → Q) → (R → T) → (Q → R) → S → T := by
   sorry
-  done
 
 example : (P → Q) → ((P → Q) → P) → Q := by
   sorry
-  done
 
 example : ((P → Q) → R) → ((Q → R) → P) → ((R → P) → Q) → P := by
   sorry
-  done
 
 example : ((Q → P) → P) → (Q → R) → (R → P) → P := by
   sorry
-  done
 
 example : (((P → Q) → Q) → Q) → P → Q := by
   sorry
-  done
 
 example :
     (((P → Q → Q) → (P → Q) → Q) → R) →
       ((((P → P) → Q) → P → P → Q) → R) → (((P → P → Q) → (P → P) → Q) → R) → R := by
   sorry
-  done

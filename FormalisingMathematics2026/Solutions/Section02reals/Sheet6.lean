@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bhavik Mehta, Kevin Buzzard
 -/
 import Mathlib.Tactic -- imports all the Lean tactics
-import FormalisingMathematics2025.Solutions.Section02reals.Sheet5
+import FormalisingMathematics2026.Solutions.Section02reals.Sheet5
 -- import a bunch of previous stuff
 
 namespace Section2sheet6Solutions
@@ -132,7 +132,7 @@ theorem tendsTo_mul (a b : ℕ → ℝ) (t u : ℝ) (ha : TendsTo a t) (hb : Ten
 theorem tendsTo_unique (a : ℕ → ℝ) (s t : ℝ) (hs : TendsTo a s) (ht : TendsTo a t) : s = t := by
   by_contra h
   wlog h2 : s < t
-  · rcases Ne.lt_or_lt h with (h3 | h3)
+  · rcases Ne.lt_or_gt h with (h3 | h3)
     · contradiction
     · apply this _ _ _ ht hs _ h3
       exact ne_comm.mp h

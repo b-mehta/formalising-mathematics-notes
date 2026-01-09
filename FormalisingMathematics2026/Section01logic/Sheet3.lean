@@ -34,44 +34,33 @@ variable (P Q R : Prop)
 
 example : ¬True → False := by
   sorry
-  done
 
 example : False → ¬True := by
   sorry
-  done
 
 example : ¬False → True := by
   sorry
-  done
 
 example : True → ¬False := by
   sorry
-  done
 
 example : False → ¬P := by
   sorry
-  done
 
 example : P → ¬P → False := by
   sorry
-  done
 
 example : P → ¬¬P := by
   sorry
-  done
 
 example : (P → Q) → ¬Q → ¬P := by
   sorry
-  done
 
 example : ¬¬False → False := by
   sorry
-  done
 
 example : ¬¬P → P := by
   sorry
-  done
 
 example : (¬Q → ¬P) → P → Q := by
   sorry
-  done

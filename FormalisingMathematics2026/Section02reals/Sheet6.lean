@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bhavik Mehta, Kevin Buzzard
 -/
 import Mathlib.Tactic -- imports all the Lean tactics
-import FormalisingMathematics2025.Solutions.Section02reals.Sheet5 -- import a bunch of previous stuff
+import FormalisingMathematics2026.Solutions.Section02reals.Sheet5
+-- import a bunch of previous stuff
 
 namespace Section2sheet6
 
@@ -30,17 +31,7 @@ Good luck!
 /-- If `a(n)` tends to `t` then `37 * a(n)` tends to `37 * t`-/
 theorem tendsTo_thirtyseven_mul (a : ℕ → ℝ) (t : ℝ) (h : TendsTo a t) :
     TendsTo (fun n ↦ 37 * a n) (37 * t) := by
-  intro ε hε
-  rw [tendsTo_def] at h
-  obtain ⟨B, hB⟩ := h (ε / 37) (by simpa)
-  use B
-  intro n hn
-  dsimp only
-  specialize hB n hn
-
-
-
-
+  sorry
 
 /-- If `a(n)` tends to `t` and `c` is a positive constant then
 `c * a(n)` tends to `c * t`. -/

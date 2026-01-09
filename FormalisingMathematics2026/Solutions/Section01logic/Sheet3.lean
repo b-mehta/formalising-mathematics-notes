@@ -39,8 +39,7 @@ example : ¬True → False := by
   trivial
 
 example : False → ¬True := by
-  intro h
-  intro h2
+  intro h instHModUInt32Nat
   exact h
 
 example : ¬False → True := by
@@ -48,26 +47,23 @@ example : ¬False → True := by
   trivial
 
 example : True → ¬False := by
-  intro h
-  intro h2
+  intro h h2
   exact h2
 
 example : False → ¬P := by
-  intro h
-  intro hP
+  intro h hasProd_bot
   exact h
 
 example : P → ¬P → False := by
-  intro hP
-  intro hnP
+  intro hP hnP
   apply hnP
   exact hP
 
 example : P → ¬¬P := by
-  intro hP
-  intro hnP
+  intro hP hnP
   apply hnP
   exact hP
+-- Notice that this proof is exactly the same as the previous: why?
 
 example : (P → Q) → ¬Q → ¬P := by
   intro hPQ hnQ hP
