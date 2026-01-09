@@ -1,6 +1,6 @@
 # Formalising Mathematics
 
-This is the repository for Bhavik Mehta's 2025 course on formalising mathematics in the Lean theorem prover. The course runs from January to March 2025.
+This is the repository for Bhavik Mehta's 2026 course on formalising mathematics in the Lean theorem prover. The course runs from January to March 2026.
 
 Note: this course is written in Lean 4. Previous versions of this course were written in the (now end-of-life) Lean 3.
 
