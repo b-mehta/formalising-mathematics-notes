@@ -32,7 +32,7 @@ There are several ways to do it.
 The best way: install Lean on your computer
 -------------------------------------------
 
-If you are doing this course in 2025 at Imperial, and your computer
+If you are doing this course in 2026 at Imperial, and your computer
 is powerful enough to run Lean reasonably quickly, and you have about 4.5
 gigabytes of space available to install Lean and the course repository, then I recommend
 this method.
@@ -80,7 +80,7 @@ and the output in the terminal window has completely stopped; this may take seve
 When it's done, you should see a VS Code session in your browser, and the output
 should end with something like ``Decompressing 4053 file(s)``
 and ``unpacked in 21359 ms`` as the last couple of lines. Open the
-file `FormalisingMathematics2025/Section01logic/Sheet1.lean` to check it's working.
+file `FormalisingMathematics2026/Section01logic/Sheet1.lean` to check it's working.
 Wait to check that the orange bars disappear and the infoview responds as you click
 between the different examples in the file.
 
@@ -98,7 +98,7 @@ repository is stored. I think that you'll need to have an account on github
 for this to work? Click on the green "Code" button and then click on
 "Codespaces". Then click on the green "Create codespace on main".
 Again, wait for several minutes until everything is completely finished. Open the
-file `FormalisingMathematics2025/Section01logic/Sheet1.lean` to check it's working.
+file `FormalisingMathematics2026/Section01logic/Sheet1.lean` to check it's working.
 Wait to check that the orange bars disappear and the infoview responds as you click
 between the different examples in the file.
 

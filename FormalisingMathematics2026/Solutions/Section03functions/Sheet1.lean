@@ -7,173 +7,14 @@ import Mathlib
 
 open Real
 
-/-!
-
-# Types and terms
-
-In this sheet we'll talk a bit more about how types work in Lean, as well as learning more about
-the `rw` tactic.
-
-Lean uses something called "types" instead of sets, as its foundational
-way of saying a "collection of stuff". For example, the real numbers
-are a type in Lean, a group `G` is a type `G` equipped with a multiplication
-and satisfying some axioms, and so on.
--/
-
--- Lean is a dependently-typed language
--- Every expression has a type, and `#check` can tell you the type
-
-#check 2
-#check 17 + 4
-#check π
-#check rexp 1
-
--- (If you get the Error Lens extension in VSCode, these show up nicely)
-
--- Types are expressions too!
-
-#check ℕ
-#check ℝ
-
--- We can also make our own expressions, and give them names
-def myFavouriteNumber : ℕ := 7
-
-def yourFavouriteNumber : ℕ := sorry
-
-#check myFavouriteNumber
-
--- or not give them a name
-example : ℕ := 2
-
--- # But this isn't maths!
-
--- The type `Prop` contains `Prop`ositions...
-
-#check 2 + 2 = 4
-#check rexp 1 < π
-
-#check 2 + 2 = 5
-#check Irrational (rexp 1 + π)
-#check myFavouriteNumber = yourFavouriteNumber
-
-def MyDifficultProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
-def MyEasyProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
-def MyVeryEasyProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p
-
--- Key! If `p : Prop`, an expression of type `p` is a proof of `p`.
-
-example : 2 + 2 = 4 := rfl
-example : 2 + 2 ≠ 5 := by simp
-example : ∀ n : ℕ, 2 ≤ n → ∃ x y z : ℕ, 4 * x * y * z = n * (x * y + x * z + y * z) := sorry
--- Erdős-Strauss conjecture
-
-example (n : ℕ) (hn : 2 ≤ n) :
-  ∃ x y z : ℕ, 4 * x * y * z = n * (x * y + x * z + y * z) := sorry
-
--- # How can we make these expressions?
-
--- Simple proof terms
-example : True := trivial
-example : 2 = 2 := rfl
-example (a b : ℕ) : a + b = b + a := Nat.add_comm a b
-
-example (a b : ℕ) : a * b = b * a := Nat.mul_comm a b
-
-theorem my_proof : MyVeryEasyProposition := fun n => ⟨n, le_rfl⟩
-
-#check MyVeryEasyProposition
-#check my_proof
--- my proposition "has type Proposition", or "is a proposition"
--- my proof "has type my proposition", or "has type ∀ n : ℕ, ∃ p, n ≤ p",
---    or "is a proof of ∀ n : ℕ, ∃ p, n ≤ p"
-
--- But just proof terms get ugly...
-example (a b : ℕ) : a + a * b = (b + 1) * a :=
-  (add_comm a (a * b)).trans ((mul_add_one a b).symm.trans (mul_comm a (b + 1)))
-
--- Very clever tactics
-example (a b : ℕ) : a + a * b = (b + 1) * a := by ring
-
-example : 2 + 2 ≠ 5 := by simp
-example : 4 ^ 25 < 3 ^ 39 := by norm_num
-
-open Nat
-
--- Simple tactics
-example (a b : ℝ) : a + b = b + a := by
-  exact add_comm a b
-example : 3 = 3 := by rfl
-
-#check add_mul (R := ℕ)
-
--- In practice we write tactic proofs, and write them with help of the infoview
-example (a b : ℕ) : a + a * b = (b + 1) * a := by
-  rw [add_mul b 1 a, one_mul a, add_comm a (a * b), mul_comm a b]
-  --> This sheet has many examples and some more information about using `rw`
-
-open Nat
-
--- # Some more difficult proofs
-def myFactorial : ℕ → ℕ
-  | 0 => 1
-  | n + 1 => (n + 1) * myFactorial n
-
-#check myFactorial
-
--- Lean can compute too!
--- #eval myFactorial 10
--- sometimes useful for sanity-checking definitions
-
-theorem myFactorial_add_one (n : ℕ) : myFactorial (n + 1) = (n + 1) * myFactorial n := rfl
-theorem myFactorial_zero : myFactorial 0 = 1 := rfl
-
-theorem myFactorial_pos (n : ℕ) : 0 < myFactorial n := by
-  induction n
-  case zero =>
-    rw [myFactorial_zero]
-    simp
-  case succ n ih =>
-    rw [myFactorial_add_one]
-    positivity
-
--- Expressions and types, every expression has a type
--- A proof has type given by what it's proved!
-
--- ## Dependently typed
--- Lean is *dependently typed* (unlike C, Java, Haskell), which means that types can depend on
--- terms. Not every theorem proving language is dependently typed, but it's sometimes useful in
--- practice when formalising maths.
-#check Fin 10
-#check Fin
-
-example (n : ℕ) : Fintype.card (Fin n) = n := by simp
-
--- ## terminal simps
-example (n : ℕ) : Fintype.card (Fin n) = n := by simp?
-
--- ## naming
--- https://leanprover-community.github.io/contribute/naming.html
-
--- ## hierarchy!
-#check 3
-#check ℕ
-#check 4 = 4
-#check Prop
-#check Type
-#check Type 1
-#check Type 2
-
-#check Type 0
-
--- myproof : myVeryEasyProposition : Prop : Type : Type 1 : Type 2 : Type 3 : ...
-
 -- ## Practicing with the `rw` tactic
+-- Let's get some practice with the `rw` tactic for equalities now.
 
 example (a b c : ℝ) : a * b * c = b * (a * c) := by
   rw [mul_comm a b]
   rw [mul_assoc b a c]
 
--- Try these using rw
+-- Try these using rw.
 example (a b c : ℝ) : c * b * a = b * (a * c) := by
   rw [mul_comm c b, mul_assoc, mul_comm c a]
 
@@ -321,6 +162,7 @@ end
 
 -- The nth_rw tactic allows you to be more precise about which occurrence of a subterm you want to
 -- rewrite.
+-- Usually this isn't necessary, but it's occasionally very helpful.
 example (a b c : ℕ) (h : a + b = c) : (a + b) * (a + b) = a * c + b * c := by
   nth_rw 2 [h]
   rw [add_mul]
