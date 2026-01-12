@@ -28,6 +28,8 @@ and then select the directory where you want the project installed, type in the 
 
 and navigate to the `FormalisingMathematics2026` directory, where you should find a whole bunch of directories containing the exercises.
 
+**Important**: if you see messages saying that it's building mathlib, with something like `[4/209] Building ...`, this isn't good! Instead, click the upside-down A again, then Project Actions, then Fetch Mathlib Build Cache.
+
 ### Local installation via command line
 
 An older way is via the command line. Fire up the same command line which you used to install Lean 4 and type this:
