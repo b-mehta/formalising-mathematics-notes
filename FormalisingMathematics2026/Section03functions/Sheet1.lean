@@ -42,9 +42,10 @@ def myFavouriteNumber : ℕ := 7
 /-- For any expression in Lean, I can use `sorry` as a placeholder to mean "I'll fill this in
 later". Any definition or proof that uses `sorry` will give a warning. Let's fill this one in now
 with your favourite number! -/
-def yourFavouriteNumber : ℕ := sorry
+def yourFavouriteNumber : ℕ := 7
 
 #check myFavouriteNumber
+#check yourFavouriteNumber
 
 -- or not give them a name
 example : ℕ := 2
@@ -70,7 +71,12 @@ def MyEasyProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prim
 -- ...and the last one is hopefully recognisable as an open problem!
 def MyDifficultProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
 
--- *Key!* If `p : Prop`, an expression of type `p` is a proof of `p`.
+/-
+*KEY!* If `p : Prop`, an expression of type `p` is a proof of `p`.
+
+Thus, for example, an expression `hp` of type `2 + 2 = 4` (that is, `hp : 2 + 2 = 4`) corresponds to
+a proof that `2 + 2 = 4`.
+-/
 
 -- The syntax to make these expressions can be just like we saw before, except with `theorem`
 -- rather than `def`.
@@ -83,6 +89,21 @@ lemma two_plus_two_equals_four_again : 2 + 2 = 4 := rfl
 
 -- Here's another proof, this time slightly less trivial. We'll see `simp` in more detail later.
 theorem two_plus_two_not_equals_five : 2 + 2 ≠ 5 := by simp
+
+/-
+Recall that Lean checked that `3` was indeed a natural number, and so `3 : ℕ`.
+Similarly, Lean is checking (at each point, in real time) that the
+proof (the stuff after the `:= by`) does indeed have its type as what it
+should be (the stuff before the `:=`).
+In other words, Lean is checking that the proof we provide makes sense in proving what we claimed
+to be proving.
+
+In this way, Lean is verifying that our proofs are correct!
+
+
+
+We'll come back to proofs in the next section.
+-/
 
 -- Finally, we can also use `sorry` for proofs, for example for the Erdős-Straus conjecture, which
 -- is an open problem in number theory.
@@ -100,11 +121,19 @@ theorem erdos_straus :
 theorem true : True := trivial
 theorem two_equals_two : 2 = 2 := rfl
 -- And here are two examples of proof terms I can take from the library:
-theorem addition_commutes : ∀ (a b : ℕ), a + b = b + a := Nat.add_comm
+theorem addition_commutes                 : ∀ (a b : ℕ), a + b = b + a := add_comm
+theorem addition_commutes'      (a b : ℕ) : a + b = b + a := Nat.add_comm a b
 theorem multiplication_commutes (a b : ℕ) : a * b = b * a := Nat.mul_comm a b
+
+#check (5 : ℝ)
+
+example : ∃ x : ℝ, x = 5 := by simp
+
 -- Observe the second example is stated slightly differently - I've moved `a` and `b` into the
 -- "assumptions" for the theorem instead; and so the proof term changes a little to say I want to
 -- use it for `a` and `b`.
+
+#check add_comm
 
 def MySuperEasyProposition : Prop := 2 = 2
 theorem my_proof : MySuperEasyProposition := rfl
