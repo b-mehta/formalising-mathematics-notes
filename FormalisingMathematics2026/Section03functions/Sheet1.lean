@@ -138,7 +138,7 @@ example : ∃ x : ℝ, x = 5 := by simp
 def MySuperEasyProposition : Prop := 2 = 2
 theorem my_proof : MySuperEasyProposition := rfl
 -- Look closely at their types!
-#check MyVeryEasyProposition
+#check MySuperEasyProposition
 #check my_proof
 -- my proposition "has type Proposition", or "is a proposition"
 -- my proof "has type my proposition", or "has type 2 = 2",
