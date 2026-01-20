@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ring &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="rintro" href="rintro.html" />
+    <link rel="prev" title="right" href="right.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_1/Part_1.html">Part 1: Lean tips</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Part_2.html">Part 2: Tactics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet.html">Tactic cheatsheet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tactics.html">Tactic documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="apply.html">apply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assumption.html">assumption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="by_cases.html">by_cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="by_contra.html">by_contra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cases.html">cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="change.html">change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="choose.html">choose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constructor.html">constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="convert.html">convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exact.html">exact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exfalso.html">exfalso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ext.html">ext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="have.html">have</a></li>
+<li class="toctree-l3"><a class="reference internal" href="induction.html">induction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html">intro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intros.html">intros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="left.html">left</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linarith.html">linarith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlinarith.html">nlinarith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="norm_num.html">norm_num</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nth_rw.html">nth_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obtain.html">obtain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="positivity.html">positivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcases.html">rcases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refine.html">refine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfl.html">rfl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="right.html">right</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ring</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#further-notes">Further notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rintro.html">rintro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rw.html">rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simp.html">simp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simpa.html">simpa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specialize.html">specialize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use.html">use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Part_2.html">Part 2: Tactics</a></li>
+          <li class="breadcrumb-item"><a href="tactics.html">Tactic documentation</a></li>
+      <li class="breadcrumb-item active">ring</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Part_2/tactics/ring.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ring">
+<span id="tac-ring"></span><h1>ring<a class="headerlink" href="#ring" title="Link to this heading"></a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic proves identities in commutative rings such as <code class="docutils literal notranslate"><span class="pre">(x+y)^2=x^2+2*x*y+y^2</span></code>. It works on concrete rings such as <code class="docutils literal notranslate"><span class="pre">ℝ</span></code> and abstract rings, and will also prove some results in “semirings” such as <code class="docutils literal notranslate"><span class="pre">ℕ</span></code> (which isn’t a ring because it doesn’t have additive inverses).</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">ring</span></code> does not and cannot look at hypotheses. See the examples for various ways of working around this.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>A basic example is</p></li>
+</ol>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">3</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">3</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="n">ring</span>
+</pre></div>
+</div>
+<p>2) Note that <code class="docutils literal notranslate"><span class="pre">ring</span></code> cannot use hypotheses – the goal has to be an
+identity. For example faced with</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span>
+<span class="bp">⊢</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic will not close the goal, because it does not know about <code class="docutils literal notranslate"><span class="pre">h</span></code>. The way to solve this goal is <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[h]</span></code> and <em>then</em> <code class="docutils literal notranslate"><span class="pre">ring</span></code>.</p>
+<ol class="arabic simple" start="3">
+<li><p>Sometimes you are in a situation where you cannot <code class="docutils literal notranslate"><span class="pre">rw</span></code> the hypothesis you want to use. For example if the tactic state is</p></li>
+</ol>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span>
+<span class="bp">⊢</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">4</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>then <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">h</span></code> will fail (of course we know that <code class="docutils literal notranslate"><span class="pre">x^4=(x^2)^2</span></code>, but <code class="docutils literal notranslate"><span class="pre">rw</span></code> works up to syntactic equality and it cannot see an <code class="docutils literal notranslate"><span class="pre">x^2</span></code> in the goal). In this situation we can use <code class="docutils literal notranslate"><span class="pre">ring</span></code> to prove an intermediate result and then rewrite our way out of trouble. For example this goal can be solved in the following way.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">4</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">4</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="k">show</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">4</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="kd">by</span> <span class="n">ring</span><span class="o">]</span> <span class="c1">-- prove x^4=(x^2)^2, rewrite with it, forget it</span>
+  <span class="c1">-- goal now `⊢ (x ^ 2) ^ 2 = y ^ 4`</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+  <span class="c1">-- goal now `⊢ (y ^ 2) ^ 2 = y ^ 4`</span>
+  <span class="n">ring</span>
+</pre></div>
+</div>
+<p>It can also be solved in the following way:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">4</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">4</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="n">convert_to</span> <span class="o">(</span><span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">4</span>
+<span class="c1">-- creates new goal ⊢ x ^ 4 = (x ^ 2) ^ 2</span>
+<span class="bp">·</span> <span class="n">ring</span> <span class="c1">-- solves this new goal</span>
+<span class="c1">-- goal now `⊢ (x ^ 2) ^ 2 = y ^ 4`</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+<span class="c1">-- goal now `⊢ (y ^ 2) ^ 2 = y ^ 4`</span>
+<span class="n">ring</span>
+</pre></div>
+</div>
+</section>
+<section id="further-notes">
+<h2>Further notes<a class="headerlink" href="#further-notes" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ring</span></code> is a “finishing tactic”; this means that it should only be used to close goals. If <code class="docutils literal notranslate"><span class="pre">ring</span></code> does not close a goal it will issue a warning that you should use the related tactic <code class="docutils literal notranslate"><span class="pre">ring_nf</span></code>.</p>
+<p>The algorithm used in the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic is based on the 2005 paper “Proving Equalities in a Commutative Ring Done Right in Coq” by Benjamin Grégoire and Assia Mahboubi.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="right.html" class="btn btn-neutral float-left" title="right" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rintro.html" class="btn btn-neutral float-right" title="rintro" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

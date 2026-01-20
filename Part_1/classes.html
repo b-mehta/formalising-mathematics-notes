@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classes &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dot notation" href="dot_notation.html" />
+    <link rel="prev" title="Structures" href="structures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Classes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/classes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="classes">
+<span id="id1"></span><h1>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h1>
+<p>In the previous section, we saw how to make structures. Here is another example of a structure:
+the structure of a group homomorphism.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">structure</span> <span class="n">GroupHom</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span> <span class="n">where</span>
+<span class="sd">/-- The underlying function -/</span>
+<span class="n">toFun</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">H</span>
+<span class="sd">/-- The proposition that the function preserves multiplication -/</span>
+<span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">toFun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">toFun</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">toFun</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">G</span></code> and <code class="docutils literal notranslate"><span class="pre">H</span></code> are groups, then a to give a group homomorphism from <code class="docutils literal notranslate"><span class="pre">G</span></code> to <code class="docutils literal notranslate"><span class="pre">H</span></code> is to give a function from <code class="docutils literal notranslate"><span class="pre">G</span></code> to <code class="docutils literal notranslate"><span class="pre">H</span></code> which preserves multiplication, so a term of type <code class="docutils literal notranslate"><span class="pre">GroupHom</span> <span class="pre">G</span> <span class="pre">H</span></code> is a <em>pair</em>, consisting of a function and a proof. But what does that <code class="docutils literal notranslate"><span class="pre">[Group</span> <span class="pre">G]</span></code> mean and why is it in weird brackets?</p>
+<p>So the deal is that <code class="docutils literal notranslate"><span class="pre">Group</span></code> is a <em>class</em>, which is simply a structure tagged with the <code class="docutils literal notranslate"><span class="pre">&#64;[class]</span></code> attribute. The definition of a group might look like this (I’ll call it <code class="docutils literal notranslate"><span class="pre">MyGroup</span></code> because <code class="docutils literal notranslate"><span class="pre">Group</span></code> is already used):</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">class</span> <span class="n">MyGroup</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">One</span> <span class="n">G</span><span class="o">,</span> <span class="n">Inv</span> <span class="n">G</span> <span class="n">where</span>
+<span class="n">mul_assoc</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span>
+<span class="n">one_mul</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span>
+<span class="n">mul_one</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span>
+<span class="n">mul_left_inv</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span>
+<span class="n">mul_right_inv</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">extends</span> <span class="pre">Mul</span> <span class="pre">G</span></code> etc stuff just means “assume <code class="docutils literal notranslate"><span class="pre">G</span></code> already has a <code class="docutils literal notranslate"><span class="pre">*</span></code> defined on it”, so <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span></code> makes sense if <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">b</span> <span class="pre">:</span> <span class="pre">G</span></code>.
+Similarly we assume there’s an element of <code class="docutils literal notranslate"><span class="pre">G</span></code> called <code class="docutils literal notranslate"><span class="pre">1</span></code>, and that if <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">:</span> <span class="pre">G</span></code> then there’s an element <code class="docutils literal notranslate"><span class="pre">a⁻¹</span> <span class="pre">:</span> <span class="pre">G</span></code>. The structure
+of a group on <code class="docutils literal notranslate"><span class="pre">G</span></code> is then, on top of this data, proofs of the axioms of a group.</p>
+<p>So why is this a <code class="docutils literal notranslate"><span class="pre">class</span></code>, whereas group homomorphisms were a <code class="docutils literal notranslate"><span class="pre">structure</span></code>? Mathematically a group and a group homomorphism are just the same sort of object: both are a “list of stuff”. The difference is in how we want to use this stuff. If <code class="docutils literal notranslate"><span class="pre">φ</span></code> is a group homomorphism then we would expect to mention <code class="docutils literal notranslate"><span class="pre">φ</span></code> explicitly when talking about it, and there can be more than one group homomorphism between two groups. In contrast, we would only usually expect one group structure (with group law <code class="docutils literal notranslate"><span class="pre">*</span></code>) on a type <code class="docutils literal notranslate"><span class="pre">G</span></code>, rather than the option of moving between several. Furthermore, if we have a group structure <code class="docutils literal notranslate"><span class="pre">i</span></code> on a type <code class="docutils literal notranslate"><span class="pre">G</span></code> then we would <em>not</em> expect to keep having to mention <code class="docutils literal notranslate"><span class="pre">i</span></code> (which is a big list consisting of a multiplication, identity, inverse and proof of five axioms) explicitly, we just want to write <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">*</span> <span class="pre">h</span></code> if <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">h</span> <span class="pre">:</span> <span class="pre">G</span></code> and don’t want to talk about <code class="docutils literal notranslate"><span class="pre">i.mul</span></code> or whatever it would be called. We just want the multiplication notation to <em>work</em>.</p>
+<p>Lean’s <em>typeclass inference system</em> (or “square bracket system”) informally keeps track of classes and instances, meaning that we can write mathematics naturally without having to write down names of structures which are invisible to mathematicians. We don’t say “let <code class="docutils literal notranslate"><span class="pre">G</span></code> be a set and let <code class="docutils literal notranslate"><span class="pre">i</span></code> be a group structure on <code class="docutils literal notranslate"><span class="pre">G</span></code>”; similarly we don’t have to name <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">:</span> <span class="pre">Group</span> <span class="pre">G</span></code> here; we just write <code class="docutils literal notranslate"><span class="pre">[Group</span> <span class="pre">G]</span></code> and Lean assigns some internal name like <code class="docutils literal notranslate"><span class="pre">inst✝</span> <span class="pre">:</span> <span class="pre">Group</span> <span class="pre">G</span></code> to the package. Let’s take a look at the type of <code class="docutils literal notranslate"><span class="pre">mul_left_inv</span></code>:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">mul_left_inv</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">inst</span><span class="bp">✝</span> <span class="o">:</span> <span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>If we try to use this theorem (e.g. with <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[mul_left_inv]</span></code> when our goal is <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">a⁻¹</span> <span class="pre">*</span> <span class="pre">a</span></code>) then Lean looks at the type of <code class="docutils literal notranslate"><span class="pre">a</span></code> (which could be an abstract type like <code class="docutils literal notranslate"><span class="pre">G</span></code> or a concrete type like <code class="docutils literal notranslate"><span class="pre">ℕ</span></code>, supplies the type of <code class="docutils literal notranslate"><span class="pre">a</span></code> as the first input <code class="docutils literal notranslate"><span class="pre">G</span></code> to <code class="docutils literal notranslate"><span class="pre">mul_left_inv</span></code>, and then asks the square bracket machine to look through its big list of <em>instances</em> to see if it can find a term of type <code class="docutils literal notranslate"><span class="pre">Group</span> <span class="pre">G</span></code>. If it can, then it will use that term to fill in the second input to <code class="docutils literal notranslate"><span class="pre">mul_left_inv</span></code>. If it can’t, then it will complain that it can’t find a group structure on <code class="docutils literal notranslate"><span class="pre">G</span></code>. So the square bracket system is a way of telling Lean “I want to use the group structure on <code class="docutils literal notranslate"><span class="pre">G</span></code>” without having to name it.</p>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>We use structures when there is likely to be more than one term of the relevant type (e.g. it’s fine to consider several group homomorphisms from <code class="docutils literal notranslate"><span class="pre">G</span></code> to <code class="docutils literal notranslate"><span class="pre">H</span></code>) and we use classes when there is likely to be only one term of the relevant type (e.g. it would be very confusing to have two group structures on <code class="docutils literal notranslate"><span class="pre">G</span></code> both with group law written <code class="docutils literal notranslate"><span class="pre">*</span></code>, so it’s safe to make <code class="docutils literal notranslate"><span class="pre">Group</span> <span class="pre">G</span></code> into a class). Under the assumption that there is only ever going to be at most one instance of a class, the typeclass inference system (or square bracket system) can be used to find it.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="structures.html" class="btn btn-neutral float-left" title="Structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dot_notation.html" class="btn btn-neutral float-right" title="Dot notation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

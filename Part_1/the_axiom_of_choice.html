@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The axiom of choice &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to format your code well" href="well_formatted_code.html" />
+    <link rel="prev" title="Coercions" href="coercions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The axiom of choice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nonempty-x"><code class="docutils literal notranslate"><span class="pre">Nonempty</span> <span class="pre">X</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classical-choose">Classical.choose</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">The axiom of choice</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/the_axiom_of_choice.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-axiom-of-choice">
+<h1>The axiom of choice<a class="headerlink" href="#the-axiom-of-choice" title="Link to this heading"></a></h1>
+<p>The axiom of choice was something I found quite complicated as an undergraduate; it was summarised as “you can make infinitely many choices at the same time” but because I didn’t really know much about set theory it took me a while before this description made any sense.</p>
+<p>In Lean’s type theory, the situation is much simpler (at least in my mind). There are two universes in Lean (at least for the purposes of this course) – <code class="docutils literal notranslate"><span class="pre">Prop</span></code> and <code class="docutils literal notranslate"><span class="pre">Type</span></code>. The <code class="docutils literal notranslate"><span class="pre">Prop</span></code> universe is for proofs, and the <code class="docutils literal notranslate"><span class="pre">Type</span></code> universe is for data. The axiom of choice is a route from the <code class="docutils literal notranslate"><span class="pre">Prop</span></code> universe to the <code class="docutils literal notranslate"><span class="pre">Type</span></code> universe. In other words, it is a way of getting data from a proof.</p>
+<section id="nonempty-x">
+<h2><code class="docutils literal notranslate"><span class="pre">Nonempty</span> <span class="pre">X</span></code><a class="headerlink" href="#nonempty-x" title="Link to this heading"></a></h2>
+<p>If <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">:</span> <span class="pre">Type</span></code> then <code class="docutils literal notranslate"><span class="pre">Nonempty</span> <span class="pre">X</span> <span class="pre">:</span> <span class="pre">Prop</span></code> is the true-false statement asserting that <code class="docutils literal notranslate"><span class="pre">X</span></code> is nonempty, or equivalently, that there’s a term of type <code class="docutils literal notranslate"><span class="pre">X</span></code>. For example here’s part of the API for <code class="docutils literal notranslate"><span class="pre">Nonempty</span></code>:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">True</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">Nonempty</span> <span class="n">X</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">exact</span> <span class="n">exists_true_iff_nonempty</span>
+</pre></div>
+</div>
+<p>This example shows that given a term of type <code class="docutils literal notranslate"><span class="pre">Nonempty</span> <span class="pre">X</span></code>, you can get a term of type <code class="docutils literal notranslate"><span class="pre">∃</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">X,</span> <span class="pre">True</span></code> (i.e., “there exists an element of <code class="docutils literal notranslate"><span class="pre">X</span></code> such that a true statement is true”). We would now like to go from this to actually <em>get</em> a term of type <code class="docutils literal notranslate"><span class="pre">X</span></code>! In constructive mathematics this is impossible: because <code class="docutils literal notranslate"><span class="pre">h</span></code> lives in the <code class="docutils literal notranslate"><span class="pre">Prop</span></code> universe, Lean forgot how it was proved. However in classical mathematics we can pass from the <code class="docutils literal notranslate"><span class="pre">Prop</span></code> universe to the <code class="docutils literal notranslate"><span class="pre">Type</span></code> universe with <code class="docutils literal notranslate"><span class="pre">Classical.choice</span> <span class="pre">h</span></code>, a term of type <code class="docutils literal notranslate"><span class="pre">`X`</span></code>. This gives us a “noncomputable” term of type <code class="docutils literal notranslate"><span class="pre">X</span></code>, magically constructed only from the proof <code class="docutils literal notranslate"><span class="pre">h</span></code> that <code class="docutils literal notranslate"><span class="pre">X</span></code> was nonempty. Mathematically, “noncomputable” means “it exists, but we don’t actually have an algorithm or a formula for it”. This is a subtlety which is often not explicitly talked about in mathematics courses, probably because it is often not relevant in a mathematical argument; a proof in classical mathematics is not a program, so we don’t need an algorithm or formula for the terms involved.</p>
+<p>You might wonder what the code for this <code class="docutils literal notranslate"><span class="pre">Classical.choice</span></code> function looks like, but in fact there isn’t any code for it; Lean simply declares that <code class="docutils literal notranslate"><span class="pre">Classical.choice</span></code> is an <code class="docutils literal notranslate"><span class="pre">axiom</span></code>, just like how in set theory the axiom of choice is declared to be an axiom.</p>
+<p>When I first saw this axiom, it felt to me like it was way weaker than the set theory axiom of choice; in set theory you can make infinitely many choices of elements of nonempty sets all at once, whereas in Lean we’re just making one choice. But later on I realised that in fact you could think of it as much <em>stronger</em> than the set theory axiom of choice, because you can interpret <code class="docutils literal notranslate"><span class="pre">Classical.choice</span></code> as a function which makes, once and for all, a choice of an element of <em>every single nonempty type</em>, so it easily implies the usual set-theoretic axiom of choice.</p>
+</section>
+<section id="classical-choose">
+<h2>Classical.choose<a class="headerlink" href="#classical-choose" title="Link to this heading"></a></h2>
+<p>In my experience, the way people want to use the axiom of choice when doing mathematics in Lean is to get an element of X not from a hypothesis <code class="docutils literal notranslate"><span class="pre">∃</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">X,</span> <span class="pre">true</span></code>, but from a hypothesis like <code class="docutils literal notranslate"><span class="pre">∃</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">ℝ,</span> <span class="pre">x^2</span> <span class="pre">=</span> <span class="pre">2</span></code> or more generally <code class="docutils literal notranslate"><span class="pre">∃</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">X,</span> <span class="pre">p</span> <span class="pre">x</span></code> where <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">→</span> <span class="pre">Prop</span></code> is a predicate on <code class="docutils literal notranslate"><span class="pre">X</span></code>. The way to do this is as follows: you run <code class="docutils literal notranslate"><span class="pre">Classical.choose</span></code> on <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">∃</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">X,</span> <span class="pre">p</span> <span class="pre">x</span></code> to get the element of <code class="docutils literal notranslate"><span class="pre">X</span></code>, and the proof that this element satisfies <code class="docutils literal notranslate"><span class="pre">p</span></code> is <code class="docutils literal notranslate"><span class="pre">Classical.choose_spec</span> <span class="pre">h</span></code>. Here’s a worked example.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+<span class="kn">import</span> <span class="n">Mathlib.Analysis.Complex.Polynomial</span> <span class="c1">-- import proof of fundamental theorem of algebra</span>
+
+<span class="kn">open</span> <span class="n">Polynomial</span> <span class="c1">-- so I can use notation ℂ[X] for polynomial rings</span>
+                <span class="c1">-- and so I can write `X` and not `polynomial.X`</span>
+
+<span class="n">suppress_compilation</span> <span class="c1">-- because everything is noncomputable</span>
+
+<span class="kd">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">[</span><span class="n">X</span><span class="o">]</span> <span class="o">:=</span> <span class="n">X</span><span class="bp">^</span><span class="mi">5</span> <span class="bp">+</span> <span class="n">X</span> <span class="bp">+</span> <span class="mi">37</span> <span class="c1">-- a random polynomial</span>
+
+<span class="kd">lemma</span> <span class="n">f_degree</span> <span class="o">:</span> <span class="n">degree</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">5</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">unfold</span> <span class="n">f</span>
+  <span class="n">compute_degree</span> <span class="c1">-- polynomial degree computing tactic</span>
+  <span class="n">norm_num</span>
+
+<span class="kd">theorem</span> <span class="n">f_has_a_root</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">),</span> <span class="n">f.IsRoot</span> <span class="n">z</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">apply</span> <span class="n">Complex.exists_root</span> <span class="c1">-- the fundamental theorem of algebra</span>
+  <span class="c1">-- ⊢ 0 &lt; degree f</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">f_degree</span><span class="o">]</span>
+  <span class="c1">-- ⊢ 0 &lt; 5</span>
+  <span class="n">norm_num</span>
+
+<span class="c1">-- let z be a root of f (getting data from a theorem)</span>
+<span class="kd">def</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="n">Classical.choose</span> <span class="n">f_has_a_root</span>
+
+<span class="c1">-- proof that z is a root of f (the &quot;API&quot; for `Classical.choose`)</span>
+<span class="kd">theorem</span> <span class="n">z_is_a_root_of_f</span> <span class="o">:</span> <span class="n">f.IsRoot</span> <span class="n">z</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">exact</span> <span class="n">Classical.choose_spec</span> <span class="n">f_has_a_root</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="coercions.html" class="btn btn-neutral float-left" title="Coercions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="well_formatted_code.html" class="btn btn-neutral float-right" title="How to format your code well" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

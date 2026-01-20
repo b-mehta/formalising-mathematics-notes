@@ -1,0 +1,129 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dot notation &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Coercions" href="coercions.html" />
+    <link rel="prev" title="Classes" href="classes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Dot notation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/dot_notation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dot-notation">
+<span id="id1"></span><h1>Dot notation<a class="headerlink" href="#dot-notation" title="Link to this heading"></a></h1>
+<p>Say you have a type, like <code class="docutils literal notranslate"><span class="pre">Subgroup</span> <span class="pre">G</span></code>, and a term of that type, like <code class="docutils literal notranslate"><span class="pre">H</span> <span class="pre">:</span> <span class="pre">Subgroup</span> <span class="pre">G</span></code>. Say you have a function in the <code class="docutils literal notranslate"><span class="pre">Subgroup</span></code> namespace which takes as input a term of type <code class="docutils literal notranslate"><span class="pre">Subgroup</span> <span class="pre">G</span></code>, for example <code class="docutils literal notranslate"><span class="pre">Subgroup.inv_mem</span></code>, which has as an explicit input a term <code class="docutils literal notranslate"><span class="pre">H</span> <span class="pre">:</span> <span class="pre">Subgroup</span> <span class="pre">G</span></code> and spits out a proof that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">∈</span> <span class="pre">H</span> <span class="pre">→</span> <span class="pre">x⁻¹</span> <span class="pre">∈</span> <span class="pre">H</span></code>. Then instead of writing <code class="docutils literal notranslate"><span class="pre">Subgroup.inv_mem</span> <span class="pre">H</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">∈</span> <span class="pre">H</span> <span class="pre">→</span> <span class="pre">x⁻¹</span> <span class="pre">∈</span> <span class="pre">H</span></code> you can just write <code class="docutils literal notranslate"><span class="pre">H.inv_mem</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">∈</span> <span class="pre">H</span> <span class="pre">→</span> <span class="pre">x⁻¹</span> <span class="pre">∈</span> <span class="pre">H</span></code>.</p>
+<p>In general the rule is that if you have a term <code class="docutils literal notranslate"><span class="pre">H</span> <span class="pre">:</span> <span class="pre">Foo</span> <span class="pre">...</span></code> of type <code class="docutils literal notranslate"><span class="pre">Foo</span></code> or <code class="docutils literal notranslate"><span class="pre">Foo</span> <span class="pre">A</span> <span class="pre">B</span></code> or whatever, and then you have a function called <code class="docutils literal notranslate"><span class="pre">Foo.bar</span></code> which has an explicit (i.e., round brackets) input of type <code class="docutils literal notranslate"><span class="pre">Foo</span> <span class="pre">...</span></code>, then instead of <code class="docutils literal notranslate"><span class="pre">Foo.bar</span> <span class="pre">H</span></code> you can just write <code class="docutils literal notranslate"><span class="pre">H.bar</span></code>. This is why it’s a good idea to define theorems about <code class="docutils literal notranslate"><span class="pre">Foo``s</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``Foo</span></code> namespace.</p>
+<p>This sort of trick can be used all over the place; it’s surprisingly powerful. For example Lean has a proof <code class="docutils literal notranslate"><span class="pre">Eq.symm</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span> <span class="pre">→</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code>. If you have a term <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code> then, remembering that <code class="docutils literal notranslate"><span class="pre">=</span></code> is just notation for <code class="docutils literal notranslate"><span class="pre">Eq</span></code> so that <code class="docutils literal notranslate"><span class="pre">h</span></code> really has type <code class="docutils literal notranslate"><span class="pre">Eq</span> <span class="pre">a</span> <span class="pre">b</span></code>, you can write <code class="docutils literal notranslate"><span class="pre">h.symm</span> <span class="pre">:</span> <span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code> as shorthand for <code class="docutils literal notranslate"><span class="pre">Eq.symm</span> <span class="pre">h</span></code>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classes.html" class="btn btn-neutral float-left" title="Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coercions.html" class="btn btn-neutral float-right" title="Coercions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
