@@ -43,7 +43,7 @@ see if you can start beginning to guess what various lemmas should be called.
 example (x : ℝ) : |-x| = |x| := by exact?
 -- click where it says "try this" to replace
 -- `exact?` with an "exact" proof
--- Why do this? Because it's quicker!
+-- Why do the replacement? Because it's quicker!
 
 example (x y : ℝ) : |x - y| = |y - x| := by exact?
 
