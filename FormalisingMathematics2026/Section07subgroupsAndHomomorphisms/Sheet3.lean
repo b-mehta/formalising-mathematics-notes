@@ -25,8 +25,6 @@ example : Type :=
 -- Let's check that the typeclass inference system can find the group structure on the quotient
 example : Group (G ⧸ N) := by
   infer_instance
-  done
-
 
 -- The group homomorphism from `G` to `G ⧸ N`
 example : G →* G ⧸ N :=
