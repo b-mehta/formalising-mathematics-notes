@@ -124,16 +124,17 @@ end failed_to_synthesize_instance
 
 -- What should a - b mean if a < b?
 
-example : 2 - 3 = 0 := by
-  sorry
+example : 2 - 3 = 0 := by simp
+
+example : 5 / 3 = 1 := by simp
 
 example : (2 : ℤ) - 3 = -1 := by
   simp
 
-example : (2 : ℚ) / 3 = 2 / 3 := by
+example : (2 : ℚ) / 3 ≠ 0 := by
   simp
 
-example : (2.01 : ℝ) / 3 = 2 / 3 := by
+example : (2.01 : ℝ) / 3 ≠ 2 / 3 := by
   sorry
 
 #eval 2 - 3
@@ -142,7 +143,7 @@ example : (2.01 : ℝ) / 3 = 2 / 3 := by
 
 example : (1 : ℝ) / 0 = 0 := by simp
 
-example {x y : ℝ} (hy : y ≠ 0) : x / y * y = x := by
+example {x y : ℝ} (hy : y ≠ 0) : (x / y) * y = x := by
   rw [div_mul_cancel₀]
   exact hy
 
