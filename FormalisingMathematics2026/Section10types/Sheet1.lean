@@ -20,7 +20,6 @@ still present.
 -- Just like a group is a set defining the group axioms, the type theory of Lean is a collection
 -- which satisfies the axioms of LeanTT. But these are pretty complex and abstract to write down
 -- so we'll just stick with our model of, a type is just a set, but they're all disjoint.
--- But now we have the deeper fact that while this is fair in Lean, it's not quite right in MLTT.
 
 -- Let's now talk about the types of Lean
 -- Pi types, inductive types, quotient types
