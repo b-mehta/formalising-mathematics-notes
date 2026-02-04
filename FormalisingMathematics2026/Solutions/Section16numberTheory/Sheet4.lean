@@ -1,0 +1,51 @@
+/-
+Copyright (c) 2025 Bhavik Mehta. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bhavik Mehta, Kevin Buzzard
+-/
+import Mathlib.Tactic
+
+namespace Section15Sheet4
+/-
+
+# Prove that for all positive integers n we have that
+# 169 | 3³ⁿ⁺³-26n-27
+
+This is the fourth question in Sierpinski's book "250 elementary problems
+in number theory".
+
+Proof: note that n=0 also works :-) In general use induction on n.
+
+Base case n=0 works fine.
+
+Inductive step: we assume `169 ∣ 3³ⁿ⁺³-26d-27`
+So it divides 27 times this
+which is `3³⁽ᵈ⁺¹⁾⁺³-26*27*d-27*27`
+and we want it to divide `3³⁽ᵈ⁺¹⁾⁺³-26(d+1)-27`
+
+so we're done if it divides the difference, which is
+`-26d-26-27+26*27d+27*27`
+which is `26*26n+26*26 = 13*13*something`
+-/
+
+-- The statement has subtraction in, so we use integers.
+example (n : ℕ) (hn : 0 < n) : -- remark; not going to use hn
+    (169 : ℤ) ∣ 3 ^ (3 * n + 3) - 26 * n - 27 := by
+  induction n with
+  | zero =>
+    simp
+  | succ d hd =>
+    push_cast
+    have h_pow : (3 : ℤ) ^ (3 * (d + 1) + 3) = 27 * 3 ^ (3 * d + 3) := by
+      rw [show 3 * (d + 1) + 3 = (3 * d + 3) + 3 by ring, pow_add]
+      ring
+    rw [h_pow]
+    have : 27 * 3 ^ (3 * d + 3) - 26 * (d + 1 : ℤ) - 27 =
+        27 * (3 ^ (3 * d + 3) - 26 * d - 27) + 169 * (4 * d + 4) := by
+      ring
+    rw [this]
+    apply dvd_add
+    · exact dvd_mul_of_dvd_right hd 27
+    · apply dvd_mul_right
+
+end Section15Sheet4

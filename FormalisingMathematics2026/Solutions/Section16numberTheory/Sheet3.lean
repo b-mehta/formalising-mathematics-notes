@@ -27,16 +27,36 @@ they're the same is fiddly)
 -- The number-theoretic heart of the argument.
 -- Note that "divides" is `\|` not `|`
 theorem divides_of_cong_four (t : ℕ) :
-    5 ∣ 4 * (65 * t + 4) ^ 2 + 1 ∧ 13 ∣ 4 * (65 * t + 4) ^ 2 + 1 := sorry
+    5 ∣ 4 * (65 * t + 4) ^ 2 + 1 ∧ 13 ∣ 4 * (65 * t + 4) ^ 2 + 1 := by
+  constructor
+  · have : 4 * (65 * t + 4) ^ 2 + 1 = 5 * (3380 * t ^ 2 + 416 * t + 13) := by ring
+    rw [this]
+    apply dvd_mul_right
+  · have : 4 * (65 * t + 4) ^ 2 + 1 = 13 * (1300 * t ^ 2 + 160 * t + 5) := by ring
+    rw [this]
+    apply dvd_mul_right
 
 -- There are arbitrarily large solutions to `5 ∣ 4*n²+1 ∧ 13 ∣ 4*n²+1`
 theorem arb_large_soln :
-    ∀ N : ℕ, ∃ n > N, 5 ∣ 4 * n ^ 2 + 1 ∧ 13 ∣ 4 * n ^ 2 + 1 := sorry
+    ∀ N : ℕ, ∃ n > N, 5 ∣ 4 * n ^ 2 + 1 ∧ 13 ∣ 4 * n ^ 2 + 1 := by
+  intro N
+  use 65 * (N + 1) + 4
+  constructor
+  · linarith
+  · exact divides_of_cong_four _
 
 -- This is not number theory any more, it's switching between two
 -- interpretations of "this set of naturals is infinite"
 theorem infinite_iff_arb_large (S : Set ℕ) :
-    S.Infinite ↔ ∀ N, ∃ n > N, n ∈ S := sorry
+    S.Infinite ↔ ∀ N, ∃ n > N, n ∈ S := by
+  rw [Set.infinite_iff_exists_gt]
+  constructor
+  · intro h N
+    obtain ⟨n, hnS, hNn⟩ := h N
+    exact ⟨n, hNn, hnS⟩
+  · intro h N
+    obtain ⟨n, hNn, hnS⟩ := h N
+    exact ⟨n, hnS, hNn⟩
 
 -- Another way of stating the question (note different "|" symbols:
 -- there's `|` for "such that" in set theory and `\|` for "divides" in number theory)

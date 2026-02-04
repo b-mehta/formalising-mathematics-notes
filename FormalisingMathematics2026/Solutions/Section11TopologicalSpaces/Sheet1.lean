@@ -55,23 +55,37 @@ splitting into cases in this proof.
 example : TopologicalSpace X where
   IsOpen (s : Set X) := s = ∅ ∨ s = Set.univ -- empty set or whole thing
   isOpen_univ := by
-    sorry -- use `dsimp`
+    right
+    rfl
   isOpen_inter s t := by
     intro hs ht
     rcases hs with rfl | rfl
     · simp
     · simpa
   isOpen_sUnion := by
-    intro F
-    -- do cases on whether Set.univ ∈ F
-    -- by_cases
-    sorry
+    intro F hF
+    by_cases h : Set.univ ∈ F
+    · right
+      ext x
+      simp
+      exact ⟨Set.univ, h, Set.mem_univ x⟩
+    · left
+      ext x
+      simp
+      intro s hs hxs
+      rcases hF s hs with rfl | rfl
+      · exact hxs
+      · exact h hs
 
 -- `isOpen_empty` is the theorem that in a topological space, the empty set is open.
 -- Can you prove it yourself? Hint: arbitrary unions are open
 
 example (X : Type) [TopologicalSpace X] : IsOpen (∅ : Set X) := by
-  sorry
+  -- ∅ is the union of the empty family
+  rw [← Set.sUnion_empty]
+  apply isOpen_sUnion
+  intro s hs
+  cases hs
 
 -- The reals are a topological space. Let's check Lean knows this already
 #synth TopologicalSpace ℝ
@@ -94,10 +108,31 @@ lemma Real.isOpen_univ : Real.IsOpen (Set.univ : Set ℝ) := by
   norm_num
 
 lemma Real.isOpen_inter (s t : Set ℝ) (hs : IsOpen s) (ht : IsOpen t) : IsOpen (s ∩ t) := by
-  sorry
+  intro x hx
+  rcases hs x hx.1 with ⟨δs, hδs, hBs⟩
+  rcases ht x hx.2 with ⟨δt, hδt, hBt⟩
+  use min δs δt
+  constructor
+  · exact lt_min hδs hδt
+  · intro y hy1 hy2
+    constructor
+    · apply hBs y
+      · linarith [min_le_left δs δt]
+      · linarith [min_le_left δs δt]
+    · apply hBt y
+      · linarith [min_le_right δs δt]
+      · linarith [min_le_right δs δt]
 
 lemma Real.isOpen_sUnion (F : Set (Set ℝ)) (hF : ∀ s ∈ F, IsOpen s) : IsOpen (⋃₀ F) := by
-  sorry
+  intro x hx
+  rcases hx with ⟨s, hs, hxs⟩
+  rcases hF s hs x hxs with ⟨δ, hδ, hB⟩
+  use δ
+  constructor
+  · exact hδ
+  · intro y hy1 hy2
+    use s
+    exact ⟨hs, hB y hy1 hy2⟩
 
 set_option autoImplicit true
 
