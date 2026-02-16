@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coercions &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The axiom of choice" href="the_axiom_of_choice.html" />
+    <link rel="prev" title="Dot notation" href="dot_notation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Coercions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#coercion-to-function">Coercion to function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coercion-to-type">Coercion to type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Coercions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/coercions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="coercions">
+<span id="id1"></span><h1>Coercions<a class="headerlink" href="#coercions" title="Link to this heading"></a></h1>
+<p>Sometimes you have a term of a type, and you really want it to have another type (because that’s what we do in maths; we are liberal with our types, unlike Lean). For example you might have a natural number <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">:</span> <span class="pre">ℕ</span></code> but a function <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">ℝ</span> <span class="pre">→</span> <span class="pre">ℝ</span></code> (like <code class="docutils literal notranslate"><span class="pre">Real.sqrt</span></code> or similar), and you want to consider <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">n</span></code>. This is problematic in a strongly typed language like Lean: <code class="docutils literal notranslate"><span class="pre">n</span></code> has type <code class="docutils literal notranslate"><span class="pre">Nat</span></code> and not <code class="docutils literal notranslate"><span class="pre">Real</span></code>, so <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">n</span></code> does not make sense. However, if you try it…</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">def</span> <span class="n">a</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="o">:=</span> <span class="mi">37</span>
+
+<span class="k">#check</span> <span class="n">Real.sqrt</span> <span class="n">a</span> <span class="c1">-- real.sqrt ↑a : ℝ</span>
+</pre></div>
+</div>
+<p>…it works anyway! But actually looking more closely, something funny is going on; what is that <code class="docutils literal notranslate"><span class="pre">↑</span></code> by the <code class="docutils literal notranslate"><span class="pre">a</span></code>? That up-arrow is Lean’s notation for the completely obvious function from <code class="docutils literal notranslate"><span class="pre">ℕ</span></code> to <code class="docutils literal notranslate"><span class="pre">ℝ</span></code> which doesn’t have a name in mathematics but which Lean needs to apply in order for everything to typecheck.</p>
+<section id="coercion-to-function">
+<h2>Coercion to function<a class="headerlink" href="#coercion-to-function" title="Link to this heading"></a></h2>
+<p>Here’s another example of something which shouldn’t work but which does:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">variable</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">φ</span> <span class="n">g</span> <span class="c1">-- ↑φ g : H</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">φ</span></code> is a group homomorphism, so in particular it is <em>not a function</em>, it is a pair consisting
+of a function and a proof that the function preserves multiplication. But we treat it as a function
+and it works anyway, because there is a coercion from the type <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">→*</span> <span class="pre">H</span></code> to the type <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">→</span> <span class="pre">H</span></code>,
+indicated by an arrow.</p>
+</section>
+<section id="coercion-to-type">
+<h2>Coercion to type<a class="headerlink" href="#coercion-to-type" title="Link to this heading"></a></h2>
+<p>A subset of the reals is a term, not a type. The type is <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">ℝ</span></code> of <em>all</em> subsets of the reals,
+so here <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">ℝ</span></code> is a term, not a type, and so <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">:</span> <span class="pre">s</span></code> shouldn’t even make sense. But if
+you look carefully, you see that the type of <code class="docutils literal notranslate"><span class="pre">a</span></code> is in fact <code class="docutils literal notranslate"><span class="pre">↑s</span></code>, because <code class="docutils literal notranslate"><span class="pre">s</span></code> has been
+coerced from a term to the corresponding subtype <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">:</span> <span class="pre">ℝ</span> <span class="pre">//</span> <span class="pre">x</span> <span class="pre">∈</span> <span class="pre">s}</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="c">/-</span>
+<span class="cm">  s : Set ℝ</span>
+<span class="cm">  a : ↑s</span>
+<span class="cm">  ⊢ a = a</span>
+<span class="cm">  -/</span>
+  <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>A term of the subtype <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">:</span> <span class="pre">ℝ</span> <span class="pre">//</span> <span class="pre">x</span> <span class="pre">∈</span> <span class="pre">s}</span></code> is a pair consisting of a term <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">ℝ</span></code> and a proof
+that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">∈</span> <span class="pre">s</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dot_notation.html" class="btn btn-neutral float-left" title="Dot notation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="the_axiom_of_choice.html" class="btn btn-neutral float-right" title="The axiom of choice" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
