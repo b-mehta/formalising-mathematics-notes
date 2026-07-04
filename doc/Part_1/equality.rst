@@ -5,7 +5,7 @@ Equality
 
    "Syntactic equality is they look identical, definitional equality is they are the same, propositional equality is they turn out to be the same."
 
-As mathematicians we tend not to fuss too much about equality, at least at undergraduate level. When formalising mathematics in Lean's type theory, it turns out that one has to think a bit more carefully about what is going on. In Lean there are three different kinds of equality which one has to be aware of, and the differences between them are "non-mathematical". The strongest kind of equality is syntactic equality; this is the kind of equality that tactics like ``rw`` and ``simp`` care about. Then there is definitional equality; this is he kind of equality that tactics like ``exact`` and ``intro`` and ``rfl`` care about. Finally, there is propositional equality; this is the "usual" kind of equality as understood by mathematicians.
+As mathematicians we tend not to fuss too much about equality, at least at undergraduate level. When formalising mathematics in Lean's type theory, it turns out that one has to think a bit more carefully about what is going on. In Lean there are three different kinds of equality which one has to be aware of, and the differences between them are "non-mathematical". The strongest kind of equality is syntactic equality; this is the kind of equality that tactics like ``rw`` and ``simp`` care about. Then there is definitional equality; this is the kind of equality that tactics like ``exact`` and ``intro`` and ``rfl`` care about. Finally, there is propositional equality; this is the "usual" kind of equality as understood by mathematicians.
 
 Overview
 --------
@@ -25,7 +25,7 @@ Non-example: ``x + 0`` and ``x`` are not syntactically equal (even though they a
 
 The ``rewrite`` tactic works at the syntactic equality level. For example, let's say that your tactic state looks like this:
 
-.. code-block::
+.. code-block:: lean
 
    a b x : ℕ
    h : x + 0 = a
@@ -54,21 +54,21 @@ Note also: the fact that ``x + 0`` and ``x`` are definitionally equal is specifi
 
 Tactics like ``exact`` and ``rfl`` work up to definitional equality. For example, the following proof works in Lean:
 
-.. code-block:: console
+.. code-block:: lean
 
    example (x : ℕ) : x + 0 = x := by
      rfl
 
 which is perhaps not what you would expect if you have played the natural number game; I explicitly disabled this hack there. However the following does not work:
 
-.. code-block:: console
+.. code-block:: lean
 
    example (x : ℕ) : 0 + x = x := by
      rfl -- type mismatch
 
 Similarly, this code works:
 
-.. code-block:: console
+.. code-block:: lean
 
    example (x y : ℕ) (h : x + 0 = y) : x = y := by
      exact h
@@ -80,7 +80,7 @@ because hypothesis ``h`` is definitionally equal to the goal ``x = y``.
 *definition* of ``not P`` is ``P → False``, so the ``intro`` tactic
 works here:
 
-.. code-block:: console
+.. code-block:: lean
 
    example (P : Prop) : ¬ P := by
      intro h
@@ -103,7 +103,7 @@ This is the weakest kind of equality, and the kind most familiar to mathematicia
 Appendix: syntactic equality again
 ----------------------------------
 
-What I said about syntactic equality is not strictly speaking true. The below paragraph fixes it, but can be ignored by everyone other then pedants.
+What I said about syntactic equality is not strictly speaking true. The below paragraph fixes it, but can be ignored by everyone other than pedants.
 
 There are actually a couple of ways that things can be syntactically equal without literally being made by pressing the same keys in the same order. Firstly, *notation* can be unfolded without breaking syntactic equality. For example the ``=`` sign in ``x = y`` is actually notation for the ``eq`` function, and the terms ``x = y`` and ``eq x y`` are syntactically equal. Secondly, the names of globally quantified variables can change without breaking syntactical equality; for example ``∃ x, x^2 = 4`` and ``∃ y, y^2 = 4`` are syntactically equal. This is because Lean "uses de Bruijn indices" under the hood, something we won't
 be talking about.
