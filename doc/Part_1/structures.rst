@@ -7,10 +7,10 @@ A lot of the time in this course we are concerned with proving theorems. However
 
 Let's start by talking about the structure ``Equiv X Y``, with notation ``X ≃ Y``.
 
-`Equiv` -- two inverse bijections
+``Equiv`` -- two inverse bijections
 ---------------------------------
 
-Let `X` and `Y` be types. Here's how ``mathlib`` defines a type ``X ≃ Y``
+Let ``X`` and ``Y`` be types. Here's how ``mathlib`` defines a type ``X ≃ Y``
 whose elements are bijections from ``X`` to ``Y``.
 
 .. code-block::
@@ -36,7 +36,7 @@ To make a term of this type, you have to supply four things:
 
 (1) a map from ``X`` to ``Y``
 (2) a map from ``Y`` to ``X``
-(3) a proof that if you do the map from ``X`` to ``Y`` and then the map from ``Y`` to ``X`` you get back to where you started;
+(3) a proof that if you do the map from ``X`` to ``Y`` and then the map from ``Y`` to ``X`` you get back to where you started
 (4) same as (3) but start at ``Y`` then go to ``X`` then back to ``Y``.
 
 In other words, you need to supply two maps and then a proof that one is the two-sided inverse
@@ -53,7 +53,7 @@ of type ``ℤ ≃ ℤ`` using this data. Let's call it ``e``. By the way, I star
 this definition by typing ``def e : ℤ ≃ ℤ := _`` and then clicking on the blue lightbulb
 and selecting the option which mentioned structures.
 
-.. code-block::
+.. code-block:: lean
 
    def e : ℤ ≃ ℤ where
      toFun n := n + 37 
@@ -74,7 +74,7 @@ the hood when ``Equiv`` was defined. Here are some examples of how to use the "p
 Note that because the type of ``e`` is ``Equiv [something]``, ``e.toFun`` is short for
 ``Equiv.toFun e``. This is Lean's :ref:`dot notation <dot_notation>` in action.
 
-.. code-block::
+.. code-block:: lean
 
    #check Equiv.toFun e -- ℤ → ℤ
    #check e.toFun -- ℤ → ℤ
@@ -94,7 +94,7 @@ The final thing I'll explain is the *coercion* associated to the bijection. We s
 ``e`` as a function from ``ℤ`` to ``ℤ``, and forget the fact that it's really an ``Equiv``. We could
 do this by talking about ``e.toFun`` all the time, but Lean will just let you use ``e`` as a function:
 
-.. code-block::
+.. code-block:: lean
 
    example : e 1 = 38 := by
      dsimp [e]

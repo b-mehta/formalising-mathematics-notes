@@ -10,7 +10,7 @@ Indentation
 
 Code in a tactic block gets indented two spaces.
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Tactic
 
@@ -21,7 +21,7 @@ Code in a tactic block gets indented two spaces.
 If you have a long theorem statement and want to write it over two or more lines
 then you should indent subsequent lines with *four* spaces, for example:
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Data.Nat.Basic
 
@@ -48,7 +48,7 @@ Have only one goal
 
 Sometimes you can end up with more than one goal. This can happen for two reasons. Firstly, perhaps you manually created a new goal. For example, perhaps you wrote ``have intermediate_result : a = b + c := by `` or ``suffices h : a = b + c by``. You just created an extra goal on top of the goal which was already there, so the proof should be indented two more spaces.
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Tactic
 
@@ -60,13 +60,13 @@ Sometimes you can end up with more than one goal. This can happen for two reason
 
 The other way it can happen is if you use a tactic or apply a function which changes your old goal into more than one goal.
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Tactic
 
    example (P Q : Prop) (hP : P) (hQ : Q) : P ∧ Q := by
      constructor -- this tactic replaced the goal we were working on with two goals
-     · -- so use the right kind of dot (`\.`) and work with one goal at a time
+     · -- so use the right kind of dot (\.) and work with one goal at a time
        exact hP
      · exact hQ -- note also extra indentation
 
@@ -75,7 +75,7 @@ Module docstrings
 
 For your projects, you might want to consider writing "module docstrings", which is a fancy
 name for "a big comment at the top of each file explaining what happens in the file." Look
-at any file in mathlib to see an example, or you can see one `here <https://leanprover-community.github.io/contribute/doc.html>`_ .
+at any file in mathlib to see an example, or you can see one `here <https://leanprover-community.github.io/contribute/doc.html>`_.
 
 Want to know more?
 ------------------
