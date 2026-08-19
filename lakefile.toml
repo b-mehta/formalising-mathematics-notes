@@ -9,7 +9,7 @@ weak.linter.style.longLine = true
 
 [[require]]
 name = "mathlib"
-rev = "v4.26.0"
+rev = "v4.43.0"
 git = "https://github.com/leanprover-community/mathlib4.git"
 
 [[lean_lib]]
