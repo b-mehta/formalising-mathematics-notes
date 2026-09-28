@@ -10,7 +10,7 @@ public import Mathlib.Tactic -- imports all of the tactics in Lean's maths libra
 /-!
 # Lecture 1: Introduction
 
-This lecture covers `example`, `sorry`, `exact`, `intro`.
+This introductory lecture covers `example`, `sorry`, `exact`, `intro`.
 -/
 
 set_option linter.unusedVariables false
@@ -51,7 +51,108 @@ Before continuing, let's break down the syntax here:
   With the `sorry`, there is only a warning informing you that the proof uses sorry.
 -/
 
--- next: infoview
+/-
+When writing proofs on paper, you must constantly keep track of what your
+current assumptions are and what your current goal is. Every step of the
+proof such as proof by induction or proof by contradiction will update your
+assumptions and goal, and you have to keep track of these changes in your head.
+
+Lean has an infoview which keeps track of this information for you automatically.
+
+For example, if you put your cursor just before the `sorry`, then the infoview
+will display the following information:
+```
+P : Prop
+h : P
+⊢ P
+```
+Again, let's break down what thie means:
+* `P : Prop` means that `P` is a true-false statement.
+* `h : P` is the hypothesis that `P` is true.
+* `⊢ P` means that the goal is to prove that `P` is true.
+So right now, this is just a repackaging of the theorem statement.
+But in middle of a long proof, this information will be extremely helpful.
+-/
+
+/-
+We are now ready for our first tactic (besides `sorry`).
+The `exact` tactic allows you to say "the goal is exactly this".
+This is a gross oversimplification, but we will get a better understanding in lecture 5.
+-/
+
+example (P : Prop) (h : P) : P := by
+  exact h
+
+/-
+Now if you put your cursor after the proof, there is no infoview.
+Instead, it says "no goals", indicating that the theorem is proved.
+-/
+
+/-
+Note that `exact P` does *not* work. `P` is the proposition, and `h` is the fact that `P` is true.
+-/
+
+/-
+-/
+
+variable (P Q R : Prop)
+
+/-
+Here is another example.
+It says that if propositions `P`, `Q`, and `R` are all true, then `P` is true.
+-/
+
+example (hP : P) (hQ : Q) (hR : R) : P := by
+  exact hP
+
+/-
+Note that `hP`, `hQ`, and `hR` are just names. They can be anything you want.
+-/
+
+example (fish : P) (giraffe : Q) (dodecahedron : R) : P := by
+  exact fish
+
+/-
+However, if you try to give them all the same name, then `h`
+will refer only to the most recent one.
+-/
+
+example (h : P) (h : Q) (h : R) : P := by
+  exact h
+
+example (h : R) (h : Q) (h : P) : P := by
+  exact h
+
+/-
+Given two propositions `P` and `Q`, then `P → Q` is the implication
+"if `P` is true, then `Q` is true". Mathematicians usually write the
+implication arrow as `P ⇒ Q`, but Lean prefers a single arrow
+for reasons that we will discuss in lecture 4.
+
+(spoiler about functions?)
+-/
+
+example : P → P := by
+  intro h
+  exact h
+
+example (hQ : Q) : P → Q := by
+  intro hP
+  exact hQ
+
+example : P → (Q → P) := by
+  intro hP
+  intro hQ
+  exact hP
+
+/-
+Lean helpfully gives a warning saying that `intro hP hQ` works.
+-/
+
+example : P → (Q → P) := by
+  intro hP hQ
+  exact hP
+
 
 
 /-!
