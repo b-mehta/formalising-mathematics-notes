@@ -125,10 +125,10 @@ implication "if `P` is true, then `Q` is true". Mathematicians usually
 write the implication arrow as `P ⇒ Q`, but Lean prefers a single arrow
 for reasons that we will discuss in lecture 5.
 
-When the goal is of the form `P → Q`, the `intro` tactic will introduce
-`P` as a hypothesis and reduce the goal to `Q`. So after the `intro`
-tactic, you are now reduced to showing that if `P` is true (as a hypothesis),
-then `Q` is true (the new goal).
+When the current goal is of the form `P → Q`, the `intro` tactic will introduce
+`P` as a hypothesis and replace the goal with `Q`. So after the `intro` tactic,
+you are reduced to showing that if `P` is true (as a hypothesis), then `Q` is
+true (the new goal).
 
 Here are few examples of how to use `intro` with `exact`.
 -/

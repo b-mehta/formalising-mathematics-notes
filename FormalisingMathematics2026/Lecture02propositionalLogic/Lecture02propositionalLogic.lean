@@ -27,53 +27,47 @@ We can also express and, or, and not in Lean.
 * "`P` is true or `Q` is true" is denoted `P ∨ Q`.
 * "`P` is not true" is denoted `¬ P`.
 
-There is also `True` and `False` which denote the trivially
-true proposition and the trivially false proposition.
+Lean also has `True` and `False` which denote the trivially true proposition
+and the trivially false proposition.
 
-At this point we should probably say something about associativity.
+Before getting on to tactics, we should first discuss associativity.
 Implication (`→`) is not associative. The propositions `P → (Q → R)` and
 `(P → Q) → R` are genuinely different. The first says "if `P` is true,
 then if `Q` is also true, then `R` is true". In other words,
 "if `P` and `Q` are both true, then `R` is true". The second says,
 "if it is true that [if `P` is true, then `Q` is true], then `R` is true".
 These are different statements. The first can be true while the second
-remains false (but not the other way around, curiously enough).
+remains false (but not the other way around).
 
 The first version `P → (Q → R)` is more natural, so Lean has decided that
 the implication arrow `→` is right-associative. This means that Lean will
 interpret `P → Q → R` as meaning `P → (Q → R)`. It also means that Lean will
 display `P → Q → R` in place of `P → (Q → R)`. This can be confusing for
-beginners. For example, if you put your cursor just before the `sorry`,
-then the infoview will display `P → Q → R` instead of `P → (Q → R)`.
+beginners. For example, if you put your cursor just before the following
+`sorry`, then the infoview will display `P → Q → R` instead of `P → (Q → R)`.
 -/
 
 example : P → (Q → R) := by
   sorry
 
 /-
-And (`∧`) and or (`∨`) are associative mathematically, but this is a theorem,
-not automatic in Lean.
-`P ∧ (Q ∧ R)` and `(P ∧ Q) ∧ R` are not the same.
-Lean has decided that `∧` and `∨` are also right-associative, like implication.
--/
+And (`∧`) and or (`∨`) are associative mathematically, but in Lean this is
+a theorem that needs to be proved. This means that `P ∧ (Q ∧ R)` and
+`(P ∧ Q) ∧ R` are not the same. Lean has decided that `∧` and `∨` are also
+right-associative, like implication, so `P ∧ Q ∧ R` will be interpreted as
+`P ∧ (Q ∧ R)` which will display as `P ∧ Q ∧ R`.
 
-/-
+We can now discuss tactics. For each of the logical building blocks
+(`→`, `∧`, `∨`, `¬`, `True`, `False`), we will need tactics that can work with
+them when they are the goal or a hypothesis.
 
-
-
-
-
-For each of these expressions, we will need tactics that can
-deal with them when the show up in the goal and when the show
-up as hypotheses.
-
-We have already seen that `intro` works when the goal is
-of the form `P → Q`. But we also need to able to handle
-the situation where a hypothesis is of the form `P → Q`.
-There are actually multiple different tactics that fit this
-purpose. The first is `apply` which works when the
-hypothesis is of the form `h : P → Q` and the goal is exactly `Q`.
-In this situation, `apply h` will replace the goal with `P`.
+We have already seen that `intro` works when the goal is of the form `P → Q`.
+But we also need to able to handle the situation where a hypothesis is of the
+form `P → Q`. There are actually multiple different tactics that fit this
+purpose. The first is `apply` which works when one of your assumptions is an
+implication whose conclusion matches the goal. If your goal is `Q` and you have
+a hypothesis `hPQ : P → Q`, then the tactic `apply hPQ` will replace the goal
+with `P`.
 -/
 
 example (hPQ : P → Q) (hP : P) : Q := by
@@ -81,7 +75,10 @@ example (hPQ : P → Q) (hP : P) : Q := by
   exact hP
 
 /-
-
+The second is `specialize` which works when one of your assumptions is an
+implication whose assumption matches another hypothesis. If you have hypotheses
+`hP : P` and `hPQ : P → Q`, then `specialize hPQ hP` will replace `hPQ` with
+`Q`.
 -/
 
 example (hPQ : P → Q) (hP : P) : Q := by
@@ -89,142 +86,76 @@ example (hPQ : P → Q) (hP : P) : Q := by
   exact hPQ
 
 /-
-Use `apply` vs `specialize` to talk about backwards vs forward reasoning
-and `have` (`suffices`).
+The difference between `specialize` and `apply` is in forwards reasoning vs
+backwards reasoning. With `specialize`, you are reasoning forward from the
+hypotheses you current have. With `apply`, you are reasoning backwards from
+the goal. Forwards reasoning is more common in regular mathematics, but for
+Lean it is useful to be able to work with both.
+
+Another pair of tactics for forwards reasoning and backwards reasoning is
+`have` and `suffices`. Both allow you to specify an intermediate goal.
+With `have`, you first prove the intermediate goal, and then have it available
+in the remaining proof of the original goal. With `suffices`, you first prove
+the original goal from the intermediate goal, and then prove the intermediate
+goal.
 -/
 
+example (hPQ : P → Q) (hQR : Q → R) (hP : P) : R := by
+  have hQ : Q := by
+    specialize hPQ hP
+    exact hPQ
+  specialize hQR hQ
+  exact hQR
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/-!
-
-# Lecture 1: Introduction
-
-
-
-# Logic in Lean, example sheet 1 : "implies" (`→`)
-
-The purpose of these first few sheets is to teach you some very basic
-*tactics*. In particular we will learn how to manipulate statements
-such as "P implies Q", which is itself a true-false statement (e.g.
-it is false when P is true and Q is false). In Lean we use the
-notation `P → Q` for "P implies Q". You can get
-this arrow by typing `\to` or `\r`. Mathematicians usually write the
-implication arrow as `P ⇒ Q` but Lean prefers a single arrow.
-
-## The absolute basics
-
-`P : Prop` means that `P` is a true-false statement. `h : P` means
-that `h` is a proof that `P` is true. You can also regard `h` as the
-hypothesis that `P` is true; logically these are the same. Stuff above
-the `⊢` symbol is your assumptions. The statement to the right of it is
-the goal. Your job is to prove the goal from the assumptions.
-
-## Tactics you will need
-
-To solve the levels on this sheet you will need to know how to use the
-following three tactics:
-
-* `intro`
-* `exact`
-* `apply`
-
-You can read the descriptions of these tactics in Part 2 of the online course
-notes here https://b-mehta.github.io/formalising-mathematics-notes/
-In this course we'll be learning about 30 tactics in total; the goal of this
-first logic section is to get you up to speed with ten very basic ones.
-
-## Worked examples
-
-Click around in the proofs to see the tactic state (on the right) change.
-The tactic is implemented and the state changes just before the newline or semicolon (`;`).
-I will use the following conventions: variables with capital
-letters like `P`, `Q`, `R` denote propositions
-(i.e. true/false statements) and variables whose names begin
-with `h` like `h1` or `hP` are proofs or hypotheses.
-
--/
-
-
-
--- Throughout this sheet, `P`, `Q` and `R` will denote propositions.
-variable (P Q R : Prop)
-
--- Here are some examples of `intro`, `exact` and `apply` being used.
--- Assume that `P` and `Q` and `R` are all true. Deduce that `P` is true.
-example (hP : P) (hQ : Q) (hR : R) : P := by
-  -- note that `exact P` does *not* work. `P` is the proposition, `hP` is the proof.
-  exact hP
-
--- Same example: assume that `P` and `Q` and `R` are true, but this time
--- give the assumptions silly names. Deduce that `P` is true.
-example (fish : P) (giraffe : Q) (dodecahedron : R) : P := by
--- `fish` is the name of the assumption that `P` is true (but `hP` is a better name)
-  exact fish
-
--- Assume `Q` is true. Prove that `P → Q`.
-example (hQ : Q) : P → Q := by
-  -- The goal is of the form `X → Y` so we can use `intro`
-  intro (fish : P)
-  -- now `h` is the hypothesis that `P` is true.
-  -- Our goal is now the same as a hypothesis so we can use `exact`
-  exact hQ
-  -- note `exact Q` doesn't work: `exact` takes the *term*, not the type.
-
--- Assume `P → Q` and `P` is true. Deduce `Q`.
-example (h : P → Q) (hP : P) : Q := by
-  -- `hP` says that `P` is true, and `h` says that `P` implies `Q`, so `apply h at hP` will change
-  -- `hP` to a proof of `Q`.
-  apply h at hP
-  -- now `hP` is a proof of `Q` so that's exactly what we want.
-  exact hP
-
--- The `apply` tactic always needs a hypothesis of the form `P → Q`. But instead of applying
--- it to a hypothesis `h : P` (which changes the hypothesis to a proof of `Q`), you can instead
--- just use a bare `apply h` and it will apply it to the *goal*, changing it from `Q` to `P`.
--- Here we are "arguing backwards" -- if we know that P implies Q, then to prove Q it suffices to
--- prove P.
-
--- Assume `P → Q` and `P` is true. Deduce `Q`.
-example (h : P → Q) (hP : P) : Q := by
-  -- `h` says that `P` implies `Q`, so to prove `Q` (our goal) it suffices to prove `P`.
-  apply h
-  -- Our goal is now `⊢ P`.
+example (hPQ : P → Q) (hQR : Q → R) (hP : P) : R := by
+  suffices hQ : Q by
+    apply hQR
+    exact hQ
+  apply hPQ
   exact hP
 
 /-
-
-Note that `→` is not associative: in general `P → (Q → R)` and `(P → Q) → R`
-might not be equivalent. This is like subtraction on numbers -- in general
-`a - (b - c)` and `(a - b) - c` might not be equal.
-
-So if we write `P → Q → R` then we'd better know what this means.
-The convention in Lean is that it means `P → (Q → R)`. If you think
-about it, this means that to deduce `R` you will need to prove both `P`
-and `Q`. In general to prove `P1 → P2 → P3 → ... Pn` you can assume
-`P1`, `P2`,...,`P(n-1)` and then you have to prove `Pn`.
-
-So the next level is asking you to prove that `P → (Q → P)`.
-
+For `∨` in the goal, the relevant tactics are `left` and `right`.
 -/
-example : P → Q → P := by
-  intro hP hQ
-  -- the `assumption` tactic will close a goal if
-  -- it's exactly equal to one of the hypotheses.
-  assumption
+
+/-
+For `∧` in the goal, the relevant tactic is `constructor`.
+-/
+
+/-
+For `∨` in a hypothesis, the relevant tactic is `rcases`.
+-/
+
+/-
+For `∧` in a hypothesis, the relevant tactic is again `rcases`, but this time
+with different syntax. Remember this angle bracket syntax, since it will show
+up quite a bit.
+-/
+
+/-
+For `True`, the only relevant tactic is `trivial`.
+
+For `False`, the relevant tactics are `by_contra` and `exfalso`.
+-/
+
+/-
+Technically `¬ P` is implemented as `P → False`, but one extra tactic you
+might find useful is `by_cases P` which splits into two cases.
+-/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /-
 
@@ -234,10 +165,6 @@ Delete the `sorry`s and replace them with tactic proofs using `intro`,
 `exact` and `apply`, separating them with newlines or semicolons (`;`).
 
 -/
-/-- Every proposition implies itself. -/
-example : P → P := by
-  intro h
-  exact h
 
 /-- If we know `P`, and we also know `P → Q`, we can deduce `Q`.
 This is called "Modus Ponens" by logicians. -/
