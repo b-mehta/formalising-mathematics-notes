@@ -11,7 +11,7 @@ public import Mathlib.Tactic -- imports all of the tactics in mathlib
 # Lecture 1: Introduction
 -/
 
-set_option linter.style.longLine.maxLineLength 80
+set_option linter.style.longLine.maxLineLength 80 -- for lectures
 set_option linter.unusedVariables false
 set_option linter.style.setOption false
 set_option pp.parens true
