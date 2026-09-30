@@ -82,10 +82,10 @@ example (P : Prop) (h : P) : P := by
   exact h
 
 /-
-Now if you put your cursor after the proof, there is no infoview.
-Instead, it says "no goals", indicating that the theorem is proved.
+Now if you put your cursor after the proof, the infoview just says "no goals",
+indicating that the theorem has been proved.
 
-Note that `exact P` does *not* work. `P` is the name of the proposition,
+Note that `exact P` does not work. `P` is the name of the proposition,
 but the goal is exactly the hypothesis `h` that `P` is true.
 
 Rather than having to write `(P : Prop)` on every subsequent example,
@@ -96,15 +96,16 @@ referred to in all subsequent examples.
 variable (P Q R : Prop)
 
 /-
-Here is another example.
-It says that if propositions `P`, `Q`, and `R` are all true, then `P` is true.
+Here is another example. It says that if propositions `P`, `Q`, and `R` are
+all true, then `P` is true.
 -/
 
 example (hP : P) (hQ : Q) (hR : R) : P := by
   exact hP
 
 /-
-Note that `hP`, `hQ`, and `hR` are just names. They can be anything you want.
+Note that `hP`, `hQ`, and `hR` are just names. They can be anything you want,
+but typically short meaningful names like `hP` are helpful in practice.
 -/
 
 example (fish : P) (giraffe : Q) (dodecahedron : R) : P := by
