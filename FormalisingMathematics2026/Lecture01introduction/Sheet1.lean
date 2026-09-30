@@ -5,23 +5,25 @@ Authors: Thomas Browning, Kevin Buzzard, Bhavik Mehta
 -/
 module
 
-public import Mathlib.Tactic -- imports all of the tactics in Lean's maths library
+public import Mathlib.Tactic -- imports all of the tactics in mathlib
 
 /-!
 # Lecture 1: Introduction
 -/
 
+set_option linter.style.longLine.maxLineLength 80
 set_option linter.unusedVariables false
+set_option linter.style.setOption false
 set_option pp.parens true
 
 @[expose] public section
 
 /-
-A *proposition* is a true-false statement, like `2 + 2 = 4` or `2 + 2 = 5`
-or the Riemann hypothesis. In algebra we manipulate numbers whilst not
-knowing what the numbers actually are; the trick is that we call the numbers
-`x` and `y` and so on. In this lecture we will manipulate propositions without
-saying what the propositions are -- we'll just call them things like `P` and `Q`.
+A *proposition* is a true-false statement, like `2 + 2 = 4` or `2 + 2 = 5` or
+the Riemann hypothesis. In algebra we manipulate numbers whilst not knowing
+what the numbers actually are; the trick is that we give the numbers names like
+`x` and `y`. In this lecture we will manipulate propositions without saying what
+the propositions are by giving them names like `P` and `Q`.
 
 Here is one of the most basic theorems you can write down in Lean.
 It says that if a proposition `P` is true, then `P` is true.
@@ -32,48 +34,48 @@ example (P : Prop) (h : P) : P := by
 
 /-
 Before continuing, let's break down the syntax here:
-* `example` tells Lean that we are about to state and prove a theorem.
-  We must first provide the statement of the theorem, consisting of the
-  hypotheses followed by the conclusion, and then we can start writing the proof.
+* `example` tells Lean that we are about to state and prove a theorem. We must
+  first provide the statement of the theorem, consisting of the hypotheses
+  followed by the conclusion, and then we can start writing the proof.
 * `(P : Prop)` means that `P` is a true-false statement.
 * `(h : P)` is the assumption that `P` is true.
 * The next colon marks the transition from the hypotheses to the conclusion,
-  so `: P` means that the conclusion of the theorem is that `P` is true.
+  so the `: P` means that the conclusion of the theorem is that `P` is true.
 * The `:= by` marks the transition from the statement of the theorem
   (the hypotheses and the conclusion) to the proof of the theorem.
   The proof of the theorem will consist of "tactics", each on its own line
   indented by two spaces. A tactic is just a command that tells Lean
   how to make progress on the proof.
-* `sorry` is a special tactic which finishes an incomplete proof.
-  Without the `sorry`, there will be an error indicating that the proof is incomplete.
-  With the `sorry`, there is only a warning informing you that the proof uses sorry.
+* `sorry` is a special tactic which aborts an incomplete proof. Without the
+  `sorry`, Lean gives an error indicating that the proof is incomplete. With the
+  `sorry`, Lean only gives a warning informing you that the proof uses `sorry`.
 
-When writing proofs on paper, you must constantly keep track of what your current
-assumptions are and what your current goal is. Every step of the proof will update
-your assumptions and goal, and you have to keep track of these changes in your head.
-
-Lean has an infoview which keeps track of this information for you automatically.
-
-For example, if you put your cursor just before the `sorry`, then the infoview
-will display the following information:
+When writing proofs on paper, you must constantly keep track of what your
+current assumptions are and what your current goal is. Every step of the proof
+will update your assumptions and goal, and you have to keep track of these
+changes in your head. Lean has an infoview which keeps track of this information
+for you automatically. For example, if you put your cursor just before the
+`sorry`, then the infoview will display the following information:
 ```
 P : Prop
 h : P
 ⊢ P
 ```
-The `⊢` symbol indicates the current goal which here is to prove that `P` is true.
-The current assumptions are listed above the goal. Here, `P : Prop` means that `P`
-is a true-false statement, and `h : P` is the hypothesis that `P` is true.
-So right now, this is just a repackaging of the theorem statement.
-But in middle of a long proof, this information will be extremely helpful.
+The `⊢` symbol indicates the goal which here is to prove that `P` is true.
+The current assumptions are listed above the goal. Here, `P : Prop` means that
+`P` is a true-false statement, and `h : P` is the hypothesis that `P` is true.
+So right now at the start of the proof, this is just a repackaging of the
+theorem statement. But in middle of a long proof, this information will be
+extremely helpful.
 
 We are now ready for our first tactic (besides `sorry`).
 The `exact` tactic allows you to say "the goal is exactly this".
 In our case, the goal is to prove that `P` is true, and the fact that
 `P` is true is exactly our hypothesis `h`. So `exact h` will close the goal.
 
-This is an oversimplification of the `exact` tactic.
-A more in-depth explanation will have to wait for our discussion of type theory in lecture 5.
+This is an overly simplistic explanation of the `exact` tactic, but will be
+sufficient for our current purposes. A more complete explanation will have to
+wait for our discussion of type theory in lecture 5.
 -/
 
 example (P : Prop) (h : P) : P := by
@@ -144,7 +146,7 @@ example : P → (Q → P) := by
   exact hP
 
 /-
-On this last example, Lean helpfully notifies us that `intro hP hQ` also works.
+In this last example, Lean helpfully notifies us that `intro hP hQ` also works.
 -/
 
 example : P → (Q → P) := by

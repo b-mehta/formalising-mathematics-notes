@@ -5,7 +5,7 @@ defaultTargets = ["FormalisingMathematics2026"]
 pp.unicode.fun = true
 autoImplicit = false
 relaxedAutoImplicit = false
-weak.linter.style.longLine = true
+weak.linter.mathlibStandardSet = true
 
 [[require]]
 name = "mathlib"
