@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Types and terms &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Equality" href="equality.html" />
+    <link rel="prev" title="Part 1: Lean tips" href="Part_1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Types and terms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sets-and-their-elements">Sets and their elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-universe-of-all-types">The universe of all types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#function-types">Function types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-universe-prop">The universe <cite>Prop</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#p-q-is-p-q"><code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Types and terms</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/typesandterms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="types-and-terms">
+<h1>Types and terms<a class="headerlink" href="#types-and-terms" title="Link to this heading"></a></h1>
+<section id="sets-and-their-elements">
+<h2>Sets and their elements<a class="headerlink" href="#sets-and-their-elements" title="Link to this heading"></a></h2>
+<p>In mathematics you have seen many examples of sets and their elements. For example the real numbers <code class="docutils literal notranslate"><span class="pre">ℝ</span></code> is a set, and it has elements such as <code class="docutils literal notranslate"><span class="pre">37</span></code> and <code class="docutils literal notranslate"><span class="pre">12345</span></code>. It is difficult to give a formal definition of a set. Typically a student thinks of a set as a “collection of things”, and the elements of the set are the things.</p>
+<p>Lean uses something called type theory as a foundation of mathematics rather than set theory. We will not be launching into a deep study of type theory in this course; the idea of this section is to give you a working knowledge of the key differences between type theory and set theory.</p>
+<p>In Lean the <em>type</em> plays the role of the “collection of things”, and the things in the type are called <em>terms</em>. For example, in Lean the real numbers <code class="docutils literal notranslate"><span class="pre">ℝ</span></code> are a type, not a set, and specific real numbers like <code class="docutils literal notranslate"><span class="pre">37</span></code> and <code class="docutils literal notranslate"><span class="pre">12345</span></code> are called terms of this type.</p>
+<p>The notation used is also different to what you have usually seen. In set theory, we write <code class="docutils literal notranslate"><span class="pre">37</span> <span class="pre">∈</span> <span class="pre">ℝ</span></code> to mean that <code class="docutils literal notranslate"><span class="pre">37</span></code> is a real number. More formally we might say “<code class="docutils literal notranslate"><span class="pre">37</span></code> is an element of the set of real numbers”. In type theory the notation is different. In type theory we express the idea that <code class="docutils literal notranslate"><span class="pre">37</span></code> is a real number by writing <code class="docutils literal notranslate"><span class="pre">37</span> <span class="pre">:</span> <span class="pre">ℝ</span></code>, and more formally we would say “<code class="docutils literal notranslate"><span class="pre">37</span></code> is a term of the type of real numbers”. Basically the colon <code class="docutils literal notranslate"><span class="pre">:</span></code> in type theory plays the role of the “is an element of” symbol <code class="docutils literal notranslate"><span class="pre">∈</span></code> in set theory.</p>
+</section>
+<section id="the-universe-of-all-types">
+<h2>The universe of all types<a class="headerlink" href="#the-universe-of-all-types" title="Link to this heading"></a></h2>
+<p>Some of you might know that whilst it’s unproblematic to talk about the set of real numbers in set theory, it <em>is</em> problematic to talk about the set of all sets. Russell’s Paradox is the observation that if <code class="docutils literal notranslate"><span class="pre">X</span></code> is the set of all sets which are not elements of themselves, then <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">∈</span> <span class="pre">X</span></code> if and only if <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">∉</span> <span class="pre">X</span></code>, a contradiction. For similar reasons one cannot expect there to be a type of all types – this type of “self-referentiality” can lead to logical problems. In Lean, there is a <em>universe</em> of all types, and this universe is called <code class="docutils literal notranslate"><span class="pre">Type</span></code>. The statement that the real numbers are a type can be expressed as <code class="docutils literal notranslate"><span class="pre">ℝ</span> <span class="pre">:</span> <span class="pre">Type</span></code>.</p>
+<p>Here is another example. If <code class="docutils literal notranslate"><span class="pre">G</span></code> is a group, and <code class="docutils literal notranslate"><span class="pre">g</span></code> is an element of this group, then in set theory one might say that <code class="docutils literal notranslate"><span class="pre">G</span></code> is a set and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">∈</span> <span class="pre">G</span></code> is an element of the set. In type theory one says instead that <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">:</span> <span class="pre">Type</span></code> and that <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">:</span> <span class="pre">G</span></code>.</p>
+<p>The mental model which you should have in your mind is that in Lean, every object exists at one of three “levels”. There are universes, such as <code class="docutils literal notranslate"><span class="pre">Type</span></code>, there are types such as <code class="docutils literal notranslate"><span class="pre">ℝ</span></code> or <code class="docutils literal notranslate"><span class="pre">G</span></code> and there are terms such as <code class="docutils literal notranslate"><span class="pre">37</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>. Every mathematical object you know fits neatly into this hierarchy. For example rings, fields and topological spaces are all types in Lean, and their elements are terms.</p>
+</section>
+<section id="function-types">
+<h2>Function types<a class="headerlink" href="#function-types" title="Link to this heading"></a></h2>
+<p>Say <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are types. The standard notation which you have seen for a function from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code> is <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">→</span> <span class="pre">Y</span></code>. This is also the notation used in Lean. A mathematician might write <code class="docutils literal notranslate"><span class="pre">Hom(X,Y)</span></code> for the set of all functions from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>. In Lean this set is of course a type, and the notation for this type is <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">→</span> <span class="pre">Y</span></code>. So <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">→</span> <span class="pre">Y</span></code> says that <code class="docutils literal notranslate"><span class="pre">f</span></code> is a term of type <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">→</span> <span class="pre">Y</span></code>, i.e., the type theory version of the idea that <code class="docutils literal notranslate"><span class="pre">f</span></code> is an element of the set <code class="docutils literal notranslate"><span class="pre">Hom(X,Y)</span></code>, or equivalently that <code class="docutils literal notranslate"><span class="pre">f</span></code> is a function from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p>
+</section>
+<section id="the-universe-prop">
+<h2>The universe <cite>Prop</cite><a class="headerlink" href="#the-universe-prop" title="Link to this heading"></a></h2>
+<p>Mathematicians define objects such as the real numbers and groups, but they also prove theorems about these objects. What is a theorem? It has two parts, a <em>statement</em> and a <em>proof</em>. Lean needs to be able to manipulate theorem statements and proofs as well as being able to manipulate objects such as the real numbers and groups. How do theorem statements and theorem proofs fit into the picture?</p>
+<p>The answer to this question is beautifully simple. Lean regards a theorem statement as a type, not living in the <code class="docutils literal notranslate"><span class="pre">Type</span></code> universe, but in another universe called <code class="docutils literal notranslate"><span class="pre">Prop</span></code> – the universe of true-false statements. A true-false statement, otherwise known as a <em>proposition</em> in this course, is a statement such as <code class="docutils literal notranslate"><span class="pre">2+2=4</span></code> or <code class="docutils literal notranslate"><span class="pre">2+2=5</span></code> or the Riemann hypothesis. Note in particular that we are reclaiming the word “proposition” from its traditional usage in other mathematics courses. You might have seen the word “proposition” being used to mean the same thing as “lemma” or “theorem” or “corollary” or “sublemma” or… . We don’t need so many words to express the same idea, so in this course we will use the word “proposition” to mean the same thing as the logicians and the computer scientists: propositions, unlike theorems, can be false! A proposition is the same thing as a true-false statement. The notation <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">:</span> <span class="pre">Prop</span></code> means that  <code class="docutils literal notranslate"><span class="pre">P</span></code> is a proposition. For example <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span> <span class="pre">:</span> <span class="pre">Prop</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">5</span> <span class="pre">:</span> <span class="pre">Prop</span></code>.</p>
+<p>The idea that a proposition can be thought of as a type means in particular that a proposition has somehow got “elements”. This is not the way that true-false statements are usually thought of by mathematicians, but it is a key idea in Lean’s type theory. The “elements” (or, to use Lean’s language, the terms) of a proposition are its proofs! Every proposition in Lean has <em>at most one term</em>. The true propositions have one term, and the false propositions have no terms. To give a concrete example, we have <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span> <span class="pre">:</span> <span class="pre">Prop</span></code>, because 2+2=4 is a true-false statement. we will learn in this course how to make a term <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span></code>; this term <code class="docutils literal notranslate"><span class="pre">h</span></code> should be thought of as a proof that 2+2=4. You could read it as the hypothesis that <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span></code> or however you like, but under the hood what is happening is that <code class="docutils literal notranslate"><span class="pre">h</span></code> is a term of the type <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span></code>.</p>
+<p>We also have the proposition <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">5</span> <span class="pre">:</span> <span class="pre">Prop</span></code>. It is however impossible to make a term whose type is <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">5</span></code>, because 2+2=5 is a false proposition. If you like, you can think of <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span></code> as a set with one element, and <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">5</span></code> as a set with no elements. This is initially a rather bizarre way of thinking about true-false statements, however you will soon get used to it.</p>
+<p>The reason it is important to start thinking of elements of sets and proofs of propositions as “the same sort of thing”, is that when formalising mathematics one frequently runs into things like the type of non-negative real numbers. To give a term of this type is to give a pair <code class="docutils literal notranslate"><span class="pre">(x,h)</span></code> consisting of a real number <code class="docutils literal notranslate"><span class="pre">x</span></code> and a proof <code class="docutils literal notranslate"><span class="pre">h</span></code> that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">≥</span> <span class="pre">0</span></code>, or, to put it in Lean’s language, a term <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">ℝ</span></code> and a term <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">≥</span> <span class="pre">0</span></code>. When doing mathematics like this in Lean, one just gets used to the fact that some variables are representing elements of sets and others are representing proofs of propositions.</p>
+</section>
+<section id="p-q-is-p-q">
+<h2><code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code><a class="headerlink" href="#p-q-is-p-q" title="Link to this heading"></a></h2>
+<p>Here’s an interesting analogy.</p>
+<p>In the usual set-theoretic language which mathematicians use, we might say the following: If <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are sets, then we can consider the set <code class="docutils literal notranslate"><span class="pre">Hom(X,Y)</span></code> of functions from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>, and an element <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">∈</span> <span class="pre">Hom(X,Y)</span></code> is a function from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p>
+<p>In Lean’s type theory we say it like this: if <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are types in the <code class="docutils literal notranslate"><span class="pre">Type</span></code> universe, then we can consider the type <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">→</span> <span class="pre">Y</span></code> of functions from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>, and a term <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">→</span> <span class="pre">Y</span></code> of this type is a function from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p>
+<p>In usual mathematical logic, we might say the following: If <code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code> are true-false statements, then <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is also a true-false statement (for example if <code class="docutils literal notranslate"><span class="pre">P</span></code> is true and <code class="docutils literal notranslate"><span class="pre">Q</span></code> is false, then <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is false). If we have a hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code> that says that <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is true, we might write <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code>.</p>
+<p>In Lean’s type theory we say it like this. If <code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code> are types in the <code class="docutils literal notranslate"><span class="pre">Prop</span></code> universe, i.e., propositions, then we can consider the type <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code> of functions from proofs of <code class="docutils literal notranslate"><span class="pre">P</span></code> to proofs of <code class="docutils literal notranslate"><span class="pre">Q</span></code>. If we have such a function <code class="docutils literal notranslate"><span class="pre">h</span></code>, which takes as input a proof of <code class="docutils literal notranslate"><span class="pre">P</span></code> and spits out a proof of <code class="docutils literal notranslate"><span class="pre">Q</span></code>, then <code class="docutils literal notranslate"><span class="pre">h</span></code> can be thought of as a proof that <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code>. In Lean the function type <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code> lives in the <code class="docutils literal notranslate"><span class="pre">Prop</span></code> universe – it’s also a true-false statement.</p>
+<p>What Lean’s type theory is suggesting here is that an interesting model for a true/false statement is a set with at most one element. If the set has an element, it corresponds to a true statement, and if it has no elements then it corresponds to a false statement.</p>
+<p>As an exercise, imagine that <code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code> are sets with either 0 or 1 element, and try and work out in each of the four cases the size of the set <code class="docutils literal notranslate"><span class="pre">Hom(P,Q)</span></code>, which in Lean we would write as <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code>. The answer you should get is that the size of <code class="docutils literal notranslate"><span class="pre">Hom(P,Q)</span></code> should be either 0 or 1, and it is 0 if <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is false, and 1 if <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is true.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>Types and their terms unify two mathematical concepts: sets and their elements,
+and theorem statements and their proofs. The universe <code class="docutils literal notranslate"><span class="pre">Type</span></code> is where
+the sets/elements types live, and the universe <code class="docutils literal notranslate"><span class="pre">Prop</span></code> is where the
+theorems/proofs types live. An implication <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> can be thought
+of as a function <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code> from proofs of <code class="docutils literal notranslate"><span class="pre">P</span></code> to proofs of <code class="docutils literal notranslate"><span class="pre">Q</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Part_1.html" class="btn btn-neutral float-left" title="Part 1: Lean tips" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="equality.html" class="btn btn-neutral float-right" title="Equality" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

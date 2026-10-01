@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structures &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Classes" href="classes.html" />
+    <link rel="prev" title="Notation and precedence" href="precedence.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#equiv-two-inverse-bijections"><cite>Equiv</cite> – two inverse bijections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Structures</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/structures.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="structures">
+<span id="id1"></span><h1>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h1>
+<p>A lot of the time in this course we are concerned with proving theorems. However sometimes it’s interesting to make a new definition, and then prove theorems about the definition. In section 3 we made things like groups, subgroups, and group homomorphisms from first principles, even though mathlib has them already. We made them using structures and classes.</p>
+<p>Let’s start by talking about the structure <code class="docutils literal notranslate"><span class="pre">Equiv</span> <span class="pre">X</span> <span class="pre">Y</span></code>, with notation <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">≃</span> <span class="pre">Y</span></code>.</p>
+<section id="equiv-two-inverse-bijections">
+<h2><cite>Equiv</cite> – two inverse bijections<a class="headerlink" href="#equiv-two-inverse-bijections" title="Link to this heading"></a></h2>
+<p>Let <cite>X</cite> and <cite>Y</cite> be types. Here’s how <code class="docutils literal notranslate"><span class="pre">mathlib</span></code> defines a type <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">≃</span> <span class="pre">Y</span></code>
+whose elements are bijections from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="sd">/-- `X ≃ Y` is the type of functions from `X` to `Y` with a two-sided inverse. -/</span>
+<span class="kd">structure</span> <span class="n">Equiv</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span>
+  <span class="n">invFun</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span>
+  <span class="n">left_inv</span> <span class="o">:</span> <span class="n">LeftInverse</span> <span class="n">invFun</span> <span class="n">toFun</span>
+  <span class="n">right_inv</span> <span class="o">:</span> <span class="n">RightInverse</span> <span class="n">invFun</span> <span class="n">toFun</span>
+
+<span class="kd">infixl</span><span class="o">:</span><span class="mi">25</span> <span class="s2">&quot; ≃ &quot;</span> <span class="bp">=&gt;</span> <span class="n">Equiv</span>
+</pre></div>
+</div>
+<p>What’s going on here? The actual name of the type is <code class="docutils literal notranslate"><span class="pre">Equiv</span> <span class="pre">X</span> <span class="pre">Y</span></code>, and we set up
+a (left-associative, binding power 25) notation <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">≃</span> <span class="pre">Y</span></code> for it (as a rule of thumb,
+if it’s a funny maths character then it’s notation, and if it’s spelt out in normal
+letters it’s the official name). The line starting with <code class="docutils literal notranslate"><span class="pre">/--</span></code> is the docstring
+for the definition; this ensures that when you hover over <code class="docutils literal notranslate"><span class="pre">Equiv</span></code> you can
+see its definition. Note that every definition you write should have a docstring!</p>
+<p>The structure we’re defining here has four <em>fields</em>: two functions and two proofs.
+To make a term of this type, you have to supply four things:</p>
+<ol class="arabic simple">
+<li><p>a map from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code></p></li>
+<li><p>a map from <code class="docutils literal notranslate"><span class="pre">Y</span></code> to <code class="docutils literal notranslate"><span class="pre">X</span></code></p></li>
+<li><p>a proof that if you do the map from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code> and then the map from <code class="docutils literal notranslate"><span class="pre">Y</span></code> to <code class="docutils literal notranslate"><span class="pre">X</span></code> you get back to where you started;</p></li>
+<li><p>same as (3) but start at <code class="docutils literal notranslate"><span class="pre">Y</span></code> then go to <code class="docutils literal notranslate"><span class="pre">X</span></code> then back to <code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p></li>
+</ol>
+<p>In other words, you need to supply two maps and then a proof that one is the two-sided inverse
+of the other.</p>
+<p>If you have read something about inductive types – <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">≃</span> <span class="pre">Y</span></code> is an inductive type,
+with one constructor (called <code class="docutils literal notranslate"><span class="pre">Equiv.mk</span></code> internally) which takes as inputs the four
+things above, and then outputs a term of type <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">≃</span> <span class="pre">Y</span></code>.</p>
+<p>Let’s let <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> both be the integers, and let’s let the map from <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code>
+send <code class="docutils literal notranslate"><span class="pre">n</span></code> to <code class="docutils literal notranslate"><span class="pre">n+37</span></code>. Then the inverse map sends <code class="docutils literal notranslate"><span class="pre">n</span></code> to <code class="docutils literal notranslate"><span class="pre">n-37</span></code>, and the <code class="docutils literal notranslate"><span class="pre">ring</span></code>
+tactic will be able to prove that <code class="docutils literal notranslate"><span class="pre">(n+37)-37=n</span></code>, so we should be able to make a term
+of type <code class="docutils literal notranslate"><span class="pre">ℤ</span> <span class="pre">≃</span> <span class="pre">ℤ</span></code> using this data. Let’s call it <code class="docutils literal notranslate"><span class="pre">e</span></code>. By the way, I started writing
+this definition by typing <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">ℤ</span> <span class="pre">≃</span> <span class="pre">ℤ</span> <span class="pre">:=</span> <span class="pre">_</span></code> and then clicking on the blue lightbulb
+and selecting the option which mentioned structures.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">e</span> <span class="o">:</span> <span class="n">ℤ</span> <span class="bp">≃</span> <span class="n">ℤ</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">37</span>
+  <span class="n">invFun</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">-</span> <span class="mi">37</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">intro</span> <span class="n">n</span>
+    <span class="c1">-- some messy goal with a bunch of ``fun`` in</span>
+    <span class="n">dsimp</span> <span class="n">only</span> <span class="c1">-- tidy up</span>
+    <span class="c1">-- ⊢ n + 37 - 37 = n</span>
+    <span class="n">ring</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">intro</span> <span class="n">m</span>
+    <span class="n">ring</span> <span class="c1">-- don&#39;t actually need to tidy up</span>
+</pre></div>
+</div>
+<p>You can think of <code class="docutils literal notranslate"><span class="pre">e</span></code> as a 4-tuple: two functions, and two proofs. How do you get this information
+from the term <code class="docutils literal notranslate"><span class="pre">e</span></code>? You can use functions like <code class="docutils literal notranslate"><span class="pre">Equiv.toFun</span></code> etc, which were created under
+the hood when <code class="docutils literal notranslate"><span class="pre">Equiv</span></code> was defined. Here are some examples of how to use the “parts” of <code class="docutils literal notranslate"><span class="pre">e</span></code>.
+Note that because the type of <code class="docutils literal notranslate"><span class="pre">e</span></code> is <code class="docutils literal notranslate"><span class="pre">Equiv</span> <span class="pre">[something]</span></code>, <code class="docutils literal notranslate"><span class="pre">e.toFun</span></code> is short for
+<code class="docutils literal notranslate"><span class="pre">Equiv.toFun</span> <span class="pre">e</span></code>. This is Lean’s <a class="reference internal" href="dot_notation.html#dot-notation"><span class="std std-ref">dot notation</span></a> in action.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Equiv.toFun</span> <span class="n">e</span> <span class="c1">-- ℤ → ℤ</span>
+<span class="k">#check</span> <span class="n">e.toFun</span> <span class="c1">-- ℤ → ℤ</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">e.toFun</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">38</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">e</span><span class="o">]</span> <span class="c1">-- replace ``e`` with its definition</span>
+  <span class="c1">-- ⊢ 1 + 37 = 38</span>
+  <span class="n">norm_num</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">e.invFun</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">-</span> <span class="mi">37</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rfl</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">,</span> <span class="n">e.invFun</span> <span class="o">(</span><span class="n">e.toFun</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+  <span class="n">e.left_inv</span>
+</pre></div>
+</div>
+<p>The final thing I’ll explain is the <em>coercion</em> associated to the bijection. We sometimes want to think of
+<code class="docutils literal notranslate"><span class="pre">e</span></code> as a function from <code class="docutils literal notranslate"><span class="pre">ℤ</span></code> to <code class="docutils literal notranslate"><span class="pre">ℤ</span></code>, and forget the fact that it’s really an <code class="docutils literal notranslate"><span class="pre">Equiv</span></code>. We could
+do this by talking about <code class="docutils literal notranslate"><span class="pre">e.toFun</span></code> all the time, but Lean will just let you use <code class="docutils literal notranslate"><span class="pre">e</span></code> as a function:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">e</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">38</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">e</span><span class="o">]</span>
+  <span class="c1">-- ⊢ 1 + 37 = 38</span>
+  <span class="n">norm_num</span>
+</pre></div>
+</div>
+<p>Lean has things called <a class="reference internal" href="coercions.html#coercions"><span class="std std-ref">coercions</span></a>. This is a way that given a term <code class="docutils literal notranslate"><span class="pre">x</span></code> of one type, you can “pretend” that it has a different type. What is actually happening is that a function which is essentially invisible to mathematicians is being called; it sends a bijection to the associated function! There’s a coercion defined from <code class="docutils literal notranslate"><span class="pre">Equiv</span> <span class="pre">X</span> <span class="pre">Y</span></code>
+to <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">→</span> <span class="pre">Y</span></code> and this coercion is applied automatically when <code class="docutils literal notranslate"><span class="pre">e</span></code> receives the “input” <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="precedence.html" class="btn btn-neutral float-left" title="Notation and precedence" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classes.html" class="btn btn-neutral float-right" title="Classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
