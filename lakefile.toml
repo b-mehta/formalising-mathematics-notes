@@ -5,11 +5,11 @@ defaultTargets = ["FormalisingMathematics2026"]
 pp.unicode.fun = true
 autoImplicit = false
 relaxedAutoImplicit = false
-weak.linter.style.longLine = true
+weak.linter.mathlibStandardSet = true
 
 [[require]]
 name = "mathlib"
-rev = "v4.26.0"
+rev = "v4.32.0"
 git = "https://github.com/leanprover-community/mathlib4.git"
 
 [[lean_lib]]
