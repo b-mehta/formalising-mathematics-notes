@@ -12,7 +12,6 @@ public import Mathlib.Tactic -- imports all of the tactics in Lean's maths libra
 -/
 
 set_option linter.style.longLine.maxLineLength 80 -- for lectures
-set_option linter.unusedVariables false
 
 @[expose] public section
 
@@ -31,19 +30,18 @@ Lean also has `True` and `False` which denote the trivially true proposition
 and the trivially false proposition.
 
 Before getting on to tactics, we should first discuss associativity.
-Implication (`→`) is not associative. The propositions `P → (Q → R)` and
-`(P → Q) → R` are genuinely different. The first says "if `P` is true,
-then if `Q` is also true, then `R` is true". In other words,
-"if `P` and `Q` are both true, then `R` is true". The second says,
-"if it is true that [if `P` is true, then `Q` is true], then `R` is true".
+For implication, the propositions `P → (Q → R)` and `(P → Q) → R` are different.
+The first says "if `P` is true, then if `Q` is also true, then `R` is true".
+In other words, "if `P` and `Q` are both true, then `R` is true". The second
+says, "if it is true that [if `P` is true, then `Q` is true], then `R` is true".
 These are different statements. The first can be true while the second
-remains false (but not the other way around).
+remains false (although not the other way around).
 
-The first version `P → (Q → R)` is more natural, so Lean has decided that
-the implication arrow `→` is right-associative. This means that Lean will
-interpret `P → Q → R` as meaning `P → (Q → R)`. It also means that Lean will
-display `P → Q → R` in place of `P → (Q → R)`. This can be confusing for
-beginners. For example, if you put your cursor just before the following
+The first version `P → (Q → R)` is the more natural of the two, so Lean has
+decided that the implication arrow `→` is right-associative. This means that
+Lean will interpret `P → Q → R` as meaning `P → (Q → R)`. This also means that
+Lean will display `P → Q → R` in place of `P → (Q → R)`. This can be confusing
+for beginners. For example, if you put your cursor just before the following
 `sorry`, then the infoview will display `P → Q → R` instead of `P → (Q → R)`.
 -/
 
@@ -51,23 +49,23 @@ example : P → (Q → R) := by
   sorry
 
 /-
-And (`∧`) and or (`∨`) are associative mathematically, but in Lean this is
-a theorem that needs to be proved. This means that `P ∧ (Q ∧ R)` and
-`(P ∧ Q) ∧ R` are not the same. Lean has decided that `∧` and `∨` are also
-right-associative, like implication, so `P ∧ Q ∧ R` will be interpreted as
-`P ∧ (Q ∧ R)` which will display as `P ∧ Q ∧ R`.
+And (`∧`) and or (`∨`) are associative mathematically, but in Lean this
+is a theorem that needs to be proved. This means that `P ∧ (Q ∧ R)` and
+`(P ∧ Q) ∧ R` are treated as different by Lean. Lean has decided that `∧`
+and `∨` are also right-associative like `→`, so `P ∧ Q ∧ R` will be interpreted
+as meaning `P ∧ (Q ∧ R)`, and `P ∧ (Q ∧ R)` will display as `P ∧ Q ∧ R`.
 
 We can now discuss tactics. For each of the logical building blocks
 (`→`, `∧`, `∨`, `¬`, `True`, `False`), we will need tactics that can work with
-them when they are the goal or a hypothesis.
+them when they appear as the goal or as a hypothesis.
 
 We have already seen that `intro` works when the goal is of the form `P → Q`.
-But we also need to able to handle the situation where a hypothesis is of the
+But we also need to be able to handle the situation where a hypothesis is of the
 form `P → Q`. There are actually multiple different tactics that fit this
 purpose. The first is `apply` which works when one of your assumptions is an
-implication whose conclusion matches the goal. If your goal is `Q` and you have
-a hypothesis `hPQ : P → Q`, then the tactic `apply hPQ` will replace the goal
-with `P`.
+implication whose conclusion matches the goal. For example, if your goal is `Q`
+and you have a hypothesis `hPQ : P → Q`, then the tactic `apply hPQ` will
+replace the goal with `P`.
 -/
 
 example (hPQ : P → Q) (hP : P) : Q := by
@@ -76,9 +74,9 @@ example (hPQ : P → Q) (hP : P) : Q := by
 
 /-
 The second is `specialize` which works when one of your assumptions is an
-implication whose assumption matches another hypothesis. If you have hypotheses
-`hP : P` and `hPQ : P → Q`, then `specialize hPQ hP` will replace `hPQ` with
-`Q`.
+implication whose assumption matches another hypothesis. For example, if you
+have hypotheses `hP : P` and `hPQ : P → Q`, then `specialize hPQ hP` will
+replace hypothesis `hPQ` with `Q`.
 -/
 
 example (hPQ : P → Q) (hP : P) : Q := by
@@ -86,51 +84,76 @@ example (hPQ : P → Q) (hP : P) : Q := by
   exact hPQ
 
 /-
-The difference between `specialize` and `apply` is in forwards reasoning vs
-backwards reasoning. With `specialize`, you are reasoning forward from the
-hypotheses you current have. With `apply`, you are reasoning backwards from
-the goal. Forwards reasoning is more common in regular mathematics, but for
-Lean it is useful to be able to work with both.
+One way of understanding the difference between `specialize` and `apply` is in
+terms of forwards reasoning vs backwards reasoning. With `specialize`, you are
+reasoning forward from the hypotheses you current have. With `apply`, you are
+reasoning backwards from the goal. Forwards reasoning is more common in regular
+mathematics, but for Lean it is useful to be able to work with both.
 
-Another pair of tactics for forwards reasoning and backwards reasoning is
-`have` and `suffices`. Both allow you to specify an intermediate goal.
-With `have`, you first prove the intermediate goal, and then have it available
-in the remaining proof of the original goal. With `suffices`, you first prove
-the original goal from the intermediate goal, and then prove the intermediate
-goal.
+Another pair of tactics that captures forwards reasoning vs backwards reasoning
+is `have` and `suffices`. Both allow you to specify an intermediate goal. With
+`have`, you first prove the intermediate goal, and then have it available to use
+in the proof of the original goal. With `suffices`, you first prove the original
+goal from the intermediate goal, and then prove the intermediate goal.
 -/
 
 example (hPQ : P → Q) (hQR : Q → R) (hP : P) : R := by
   have hQ : Q := by
-    specialize hPQ hP
-    exact hPQ
-  specialize hQR hQ
-  exact hQR
+    sorry
+  sorry
 
 example (hPQ : P → Q) (hQR : Q → R) (hP : P) : R := by
   suffices hQ : Q by
-    apply hQR
-    exact hQ
-  apply hPQ
+    sorry
+  sorry
+
+/-
+When the goal is of the form `P ∨ Q`, the tactic `left` will replace the goal
+with `P`, and the tactic `right` will replace the goal with `Q`.
+-/
+
+example (hP : P) : P ∨ Q := by
+  left
   exact hP
 
-/-
-For `∨` in the goal, the relevant tactics are `left` and `right`.
--/
+example (hQ : Q) : P ∨ Q := by
+  right
+  exact hQ
 
 /-
-For `∧` in the goal, the relevant tactic is `constructor`.
+When the goal is of the form `P ∧ Q`, the tactic `constructor` will split `P`
+and `Q` into separate goals, each of which should be indented with `·`.
 -/
 
-/-
-For `∨` in a hypothesis, the relevant tactic is `rcases`.
--/
+example (hP : P) (hQ : Q) : P ∧ Q := by
+  constructor
+  · exact hP
+  · exact hQ
 
 /-
-For `∧` in a hypothesis, the relevant tactic is again `rcases`, but this time
-with different syntax. Remember this angle bracket syntax, since it will show
-up quite a bit.
+When a hypothesis is of the form `P ∨ Q`, the tactic `rcases` will produce
+two goals, one where `P` is a hypothesis and another where `Q` is a hypothesis.
+Again, these new goals should be indented with `·`.
 -/
+
+example (hP : P ∨ P) : P := by
+  rcases hP with hP | hP
+  · exact hP
+  · exact hP
+
+/-
+When a hypothesis is of the form `P ∧ Q`, the tactic `rcases` will break the
+hypothesis into two hypotheses.
+Remember this angle bracket syntax, since it will show up quite a bit.
+-/
+
+example (hP : P ∧ Q) : P := by
+  rcases hP with ⟨hP, hQ⟩
+  exact hP
+
+example (hP : P ∧ Q) : Q := by
+  rcases hP with ⟨hP, hQ⟩
+  exact hQ
 
 /-
 For `True`, the only relevant tactic is `trivial`.
@@ -209,3 +232,7 @@ example :
     (((P → Q → Q) → (P → Q) → Q) → R) →
       ((((P → P) → Q) → P → P → Q) → R) → (((P → P → Q) → (P → P) → Q) → R) → R := by
   sorry
+
+-- commutativity of ∧
+
+-- commutativity of ∨
