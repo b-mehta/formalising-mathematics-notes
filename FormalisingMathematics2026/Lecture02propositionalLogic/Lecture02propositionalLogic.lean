@@ -52,8 +52,8 @@ example : P → (Q → R) := by
 And (`∧`) and or (`∨`) are associative mathematically, but in Lean this
 is a theorem that needs to be proved. This means that `P ∧ (Q ∧ R)` and
 `(P ∧ Q) ∧ R` are treated as different by Lean. Lean has decided that `∧`
-and `∨` are also right-associative like `→`, so `P ∧ Q ∧ R` will be interpreted
-as meaning `P ∧ (Q ∧ R)`, and `P ∧ (Q ∧ R)` will display as `P ∧ Q ∧ R`.
+and `∨` are also right-associative like `→`, so `P ∧ Q ∧ R` is interpreted
+as meaning `P ∧ (Q ∧ R)`, and `P ∧ (Q ∧ R)` displays as `P ∧ Q ∧ R`.
 
 We can now discuss tactics. For each of the logical building blocks
 (`→`, `∧`, `∨`, `¬`, `True`, `False`), we will need tactics that can work with
@@ -62,7 +62,7 @@ them when they appear as the goal or as a hypothesis.
 We have already seen that `intro` works when the goal is of the form `P → Q`.
 But we also need to be able to handle the situation where a hypothesis is of the
 form `P → Q`. There are actually multiple different tactics that fit this
-purpose. The first is `apply` which works when one of your assumptions is an
+purpose. The first is `apply` which works when one of your hypotheses is an
 implication whose conclusion matches the goal. For example, if your goal is `Q`
 and you have a hypothesis `hPQ : P → Q`, then the tactic `apply hPQ` will
 replace the goal with `P`.
@@ -73,10 +73,10 @@ example (hPQ : P → Q) (hP : P) : Q := by
   exact hP
 
 /-
-The second is `specialize` which works when one of your assumptions is an
+The second is `specialize` which works when one of your hypotheses is an
 implication whose assumption matches another hypothesis. For example, if you
 have hypotheses `hP : P` and `hPQ : P → Q`, then `specialize hPQ hP` will
-replace hypothesis `hPQ` with `Q`.
+replace the hypothesis `hPQ` with `Q`.
 -/
 
 example (hPQ : P → Q) (hP : P) : Q := by
@@ -86,7 +86,7 @@ example (hPQ : P → Q) (hP : P) : Q := by
 /-
 One way of understanding the difference between `specialize` and `apply` is in
 terms of forwards reasoning vs backwards reasoning. With `specialize`, you are
-reasoning forward from the hypotheses you current have. With `apply`, you are
+reasoning forward from the hypotheses you currently have. With `apply`, you are
 reasoning backwards from the goal. Forwards reasoning is more common in regular
 mathematics, but for Lean it is useful to be able to work with both.
 
@@ -108,8 +108,10 @@ example (hPQ : P → Q) (hQR : Q → R) (hP : P) : R := by
   sorry
 
 /-
-When the goal is of the form `P ∨ Q`, the tactic `left` will replace the goal
-with `P`, and the tactic `right` will replace the goal with `Q`.
+When the goal is of the form `P ∨ Q`, you can choose between proving `P` and
+proving `Q`. Once you know which side you want to prove, you can lock in your
+decision with the tactics `left` and `right`. The tactic `left` will replace
+the goal with `P`, and the tactic `right` will replace the goal with `Q`.
 -/
 
 example (hP : P) : P ∨ Q := by
@@ -121,8 +123,9 @@ example (hQ : Q) : P ∨ Q := by
   exact hQ
 
 /-
-When the goal is of the form `P ∧ Q`, the tactic `constructor` will split `P`
-and `Q` into separate goals, each of which should be indented with `·`.
+When the goal is of the form `P ∧ Q`, you must prove both `P` and `Q`.
+The tactic `constructor` will split `P` and `Q` into separate goals,
+each of which should be indented with `·`.
 -/
 
 example (hP : P) (hQ : Q) : P ∧ Q := by
