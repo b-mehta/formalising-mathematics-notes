@@ -109,8 +109,8 @@ that build on each other to eventually reach hard mathematics.
 
 We have actually already seen an example of a named `theorem`. If you
 control-click on `trivial`, you will see `theorem trivial : True := ⟨⟩`.
-Even though we do not yet understand this mysterious two character proof,
-we are still able invoke this theorem when we write `exact trivial`.
+When we write `exact trivial`, we are asking Lean to invoke this theorem
+(even though we do not yet understand the mysterious two character proof).
 -/
 
 #check trivial
@@ -149,8 +149,7 @@ example : ∀ x, x - 1 < x := by
 /-
 We will only need to learn one new tactic to be able to work with `∀` and `∃`.
 When a goal is of the form `∃ a : α, ...` and you are able to write down a
-specific `a : α`, the tactic `use a` will plug that specific `a` into the goal,
-dropping the existential quantifier `∃`.
+specific `a : α`, the tactic `use a` will plug that specific `a` into the goal.
 -/
 
 example : ∃ P : Prop, ¬ P → P := by
@@ -198,7 +197,7 @@ arbitrary `a : α` as an assumption, and replace the goal with `P a`.
 
 Likewise, when a hypothesis is of the form `hP : ∀ a : a, P a` and you are able
 to write down a specific `a : α`, the tactic `specialize hP a` will plug that
-specific `a` into the goal, dropping the universal quantifier `∀`.
+specific `a` into the hypothesis.
 -/
 
 example (α : Type*) (P Q : α → Prop) (hPQ : ∀ a, P a → Q a) (hP : ∀ a, P a) :
