@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing Lean" href="install.html" />
+    <link rel="prev" title="Formalising Mathematics" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aims-and-objectives">Aims and objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-formalise">Why formalise?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-lean-theorem-prover">The Lean Theorem Prover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-read-this-document">How to read this document</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing Lean</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_1/Part_1.html">Part 1: Lean tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Introduction/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<span id="id1"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>These are the notes for a course which is delivered to final year undergraduates and MSc students in
+the mathematics department at Imperial College London. I hope that they will also be useful to other
+mathematicians.</p>
+<section id="aims-and-objectives">
+<h2>Aims and objectives<a class="headerlink" href="#aims-and-objectives" title="Link to this heading"></a></h2>
+<p>The aim of the course is to teach people how to <em>formalise</em> undergraduate and MSc level mathematics
+in a <em>computer proof assistant</em>. A computer proof assistant is a computer program which knows the
+axioms of mathematics and is capable of understanding and checking mathematical proofs. To formalise
+mathematics means to type it into a computer proof assistant.</p>
+<p>Another way of looking at it is that a computer proof assistant turns the statement of a theorem of
+mathematics into a level of a puzzle game, and proving the theorem corresponds to solving the level.
+Hence another way of thinking about the aims and objectives of this course are that I am teaching
+you how to set and how to solve levels of a computer puzzle game.</p>
+<p>The methods used in this course are extremely “hands-on”. You will be learning by doing. Every topic
+will be introduced via examples and you will be expected to learn it by solving problems.</p>
+</section>
+<section id="why-formalise">
+<h2>Why formalise?<a class="headerlink" href="#why-formalise" title="Link to this heading"></a></h2>
+<p>My personal belief is the following. Software of this nature will become more normalised in
+mathematics departments, and libraries of formalised theorems will begin to grow quite large.
+Computer theorem provers will ultimately give rise to tools which will help humans to learn and to
+do mathematics, from undergraduate level to the <a class="reference external" href="https://github.com/teorth/pfr">frontiers of modern research</a>. Complex tactics, perhaps backed by AI, will in the future start
+to help human researchers. PhD students will be able to search these libraries to get hints on how
+to proceed, or find references for claims which they hope are true. Other applications will appear
+as mathematicians begin to understand the potential of formalised libraries of mathematics and of
+computer programs which can understand them.</p>
+</section>
+<section id="the-lean-theorem-prover">
+<h2>The Lean Theorem Prover<a class="headerlink" href="#the-lean-theorem-prover" title="Link to this heading"></a></h2>
+<p>There are many computer proof assistants out there; the one we shall be using is called
+<a class="reference external" href="https://lean-fro.org/">Lean</a>. We will be using not just Lean, but also Lean’s <a class="reference external" href="https://github.com/leanprover-community/mathlib4/">mathematics
+library</a>, <code class="docutils literal notranslate"><span class="pre">mathlib</span></code>, which contains a
+substantial number of proofs of mathematical theorems already, as well as many high-powered
+<em>tactics</em>, tools which make theorem proving easier. There are many other theorem provers out
+there; Isabelle/HOL and Coq are two other provers which have also been used to formalise a
+substantial amount of mathematics. The reason we are using Lean is simply that it is the prover
+which I myself am most familiar with; I do not see any obstruction in theory to porting this entire
+course over to another theorem prover.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Experience has shown that trying to teach people new mathematics at the same time as teaching them
+Lean is asking too much from most people. I will hence be assuming that the reader/player is
+comfortable with the material covered in the first and second year of a traditional mathematics
+degree. Later on, when the reader is more familiar with Lean I will introduce more mathematically
+challenging material.</p>
+<p>This course is focussed on mathematics, or to be more precise, classical mathematics. We will not be
+concentrating on the non-mathematical side of the story. Examples of topics we will say very little
+about are: type theories, functional programming, the lambda calculus, and constructivism.</p>
+</section>
+<section id="how-to-read-this-document">
+<h2>How to read this document<a class="headerlink" href="#how-to-read-this-document" title="Link to this heading"></a></h2>
+<p>These notes comes in two parts: Part 1, Part 2.</p>
+<p>Part 1 is the non-mathematical background which you will find helpful in order to make sense of what
+is going on. It covers basic material of a more “computer-science” nature. I will flag in the
+exercises the time when it might be helpful to read sections from this part.</p>
+<p>Part 2 is a glossary of many common tactics. The problem sheets in the course repository will flag
+which tactics you need to learn about and when.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Formalising Mathematics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installing Lean" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

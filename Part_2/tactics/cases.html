@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cases &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="change" href="change.html" />
+    <link rel="prev" title="by_contra" href="by_contra.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_1/Part_1.html">Part 1: Lean tips</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Part_2.html">Part 2: Tactics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet.html">Tactic cheatsheet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tactics.html">Tactic documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="apply.html">apply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assumption.html">assumption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="by_cases.html">by_cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="by_contra.html">by_contra</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#further-notes">Further notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="change.html">change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="choose.html">choose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constructor.html">constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="convert.html">convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exact.html">exact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exfalso.html">exfalso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ext.html">ext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="have.html">have</a></li>
+<li class="toctree-l3"><a class="reference internal" href="induction.html">induction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html">intro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intros.html">intros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="left.html">left</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linarith.html">linarith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlinarith.html">nlinarith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="norm_num.html">norm_num</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nth_rw.html">nth_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obtain.html">obtain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="positivity.html">positivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcases.html">rcases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refine.html">refine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfl.html">rfl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="right.html">right</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ring.html">ring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rintro.html">rintro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rw.html">rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simp.html">simp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simpa.html">simpa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specialize.html">specialize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use.html">use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Part_2.html">Part 2: Tactics</a></li>
+          <li class="breadcrumb-item"><a href="tactics.html">Tactic documentation</a></li>
+      <li class="breadcrumb-item active">cases</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Part_2/tactics/cases.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cases">
+<span id="tac-cases"></span><h1>cases<a class="headerlink" href="#cases" title="Link to this heading"></a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cases</span></code> is a general-purpose tactic for “deconstructing” hypotheses. If <code class="docutils literal notranslate"><span class="pre">h</span></code> is a hypothesis which somehow “bundles up” some pieces of information, then <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">h1</span> <span class="pre">h2</span></code> (note the dash!) will make hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code> vanish and will replace it with the two “components” which made the proof of <code class="docutils literal notranslate"><span class="pre">h</span></code> in the first place. Variants are <code class="docutils literal notranslate"><span class="pre">cases</span></code> (which does the same thing but with a different syntax) and <code class="docutils literal notranslate"><span class="pre">rcases</span></code> (which is “recursive <code class="docutils literal notranslate"><span class="pre">cases</span></code>” and which has its own page here: <a class="reference internal" href="rcases.html#tac-rcases"><span class="std std-ref">rcases</span></a> )</p>
+<p>Here are four ways they might look for deconstructing <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">∧</span> <span class="pre">Q</span></code>. In each example, this removes the hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code> and replaces it with two hypotheses <code class="docutils literal notranslate"><span class="pre">hP</span> <span class="pre">:</span> <span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">hQ</span> <span class="pre">:</span> <span class="pre">Q</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">cases&#39;</span> <span class="n">h</span> <span class="k">with</span> <span class="n">hP</span> <span class="n">hQ</span>
+
+<span class="n">cases</span> <span class="n">h</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="n">hP</span> <span class="n">hQ</span> <span class="bp">=&gt;</span>
+
+<span class="n">cases</span> <span class="n">h</span>
+<span class="n">case</span> <span class="n">intro</span> <span class="n">hP</span> <span class="n">hQ</span> <span class="bp">=&gt;</span>
+
+<span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="o">⟨</span><span class="n">hP</span><span class="o">,</span> <span class="n">hQ</span><span class="o">⟩</span>
+</pre></div>
+</div>
+<p>And here are four ways they might look for <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">∨</span> <span class="pre">Q</span></code>. In each example, this removes the hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code> and replaces it either hypotheses <code class="docutils literal notranslate"><span class="pre">hP</span> <span class="pre">:</span> <span class="pre">P</span></code> or <code class="docutils literal notranslate"><span class="pre">hQ</span> <span class="pre">:</span> <span class="pre">Q</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">cases&#39;</span> <span class="n">h</span> <span class="k">with</span> <span class="n">hP</span> <span class="n">hQ</span>
+
+<span class="n">cases</span> <span class="n">h</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">inl</span> <span class="n">hP</span> <span class="bp">=&gt;</span>
+<span class="bp">|</span> <span class="n">inr</span> <span class="n">hQ</span> <span class="bp">=&gt;</span>
+
+<span class="n">cases</span> <span class="n">h</span>
+<span class="n">case</span> <span class="n">inl</span> <span class="n">hP</span> <span class="bp">=&gt;</span>
+<span class="n">case</span> <span class="n">inr</span> <span class="n">hQ</span> <span class="bp">=&gt;</span>
+
+<span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">hP</span> <span class="bp">|</span> <span class="n">hQ</span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>The way to make a proof of <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">∧</span> <span class="pre">Q</span></code> is to use a proof of <code class="docutils literal notranslate"><span class="pre">P</span></code> and a proof of <code class="docutils literal notranslate"><span class="pre">Q</span></code>. If you have a hypothesis <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">∧</span> <span class="pre">Q</span></code>, then <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span></code> will delete the hypothesis and replace it with hypotheses <code class="docutils literal notranslate"><span class="pre">left✝</span> <span class="pre">:</span> <span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">right✝</span> <span class="pre">:</span> <span class="pre">Q</span></code>. That weird dagger symbol in those names means that you can’t use these hypotheses explicitly! It’s better to type <code class="docutils literal notranslate"><span class="pre">cases</span> <span class="pre">h'</span> <span class="pre">with</span> <span class="pre">hP</span> <span class="pre">hQ</span></code>.</p></li>
+<li><p>The way to make a proof of <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">↔</span> <span class="pre">Q</span></code> is to prove <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span> <span class="pre">→</span> <span class="pre">P</span></code>. So faced with <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">↔</span> <span class="pre">Q</span></code> one thing you can do is <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">hPQ</span> <span class="pre">hQP</span></code> which removes <code class="docutils literal notranslate"><span class="pre">h</span></code> and replaces it with <code class="docutils literal notranslate"><span class="pre">hPQ:</span> <span class="pre">P</span> <span class="pre">→</span> <span class="pre">Q</span></code> and <code class="docutils literal notranslate"><span class="pre">hQP:</span> <span class="pre">Q</span> <span class="pre">→</span> <span class="pre">P</span></code>. Note however that this might not be the best way to proceed; whilst you can <code class="docutils literal notranslate"><span class="pre">apply</span> <span class="pre">hPQ</span></code> and <code class="docutils literal notranslate"><span class="pre">hQP</span></code>, you lose the ability to rewrite <code class="docutils literal notranslate"><span class="pre">h</span></code> with <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">h</span></code>. If you really want to deconstruct <code class="docutils literal notranslate"><span class="pre">h</span></code> but also want to keep a copy around for rewriting later, you could always try <code class="docutils literal notranslate"><span class="pre">have</span> <span class="pre">h2</span> <span class="pre">:=</span> <span class="pre">h</span></code> then <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">hPQ</span> <span class="pre">hQP</span></code>.</p></li>
+<li><p>There are two ways to make a proof of <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">∨</span> <span class="pre">Q</span></code>. You either use a proof of <code class="docutils literal notranslate"><span class="pre">P</span></code>, or a proof of <code class="docutils literal notranslate"><span class="pre">Q</span></code>. So if <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">∨</span> <span class="pre">Q</span></code> then <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">hP</span> <span class="pre">hQ</span></code> has a different effect to the first two examples; after the tactic you will be left with <em>two</em> goals, one with a new hypothesis <code class="docutils literal notranslate"><span class="pre">hP</span> <span class="pre">:</span> <span class="pre">P</span></code> and the other with <code class="docutils literal notranslate"><span class="pre">hQ</span> <span class="pre">:</span> <span class="pre">Q</span></code>. One way of understanding why this happens is that the <a class="reference internal" href="../../Part_1/threekindsoftypes.html#ind-types"><span class="std std-ref">inductive type</span></a> <code class="docutils literal notranslate"><span class="pre">Or</span></code> has two constructors, whereas <code class="docutils literal notranslate"><span class="pre">And</span></code> only has one.</p></li>
+<li><p>There are two ways to make a natural number <code class="docutils literal notranslate"><span class="pre">n</span></code>. Every natural number is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">m</span></code> for some natural number <code class="docutils literal notranslate"><span class="pre">m</span></code>. So if <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">:</span> <span class="pre">ℕ</span></code> then <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">m</span></code> gives two goals; one where <code class="docutils literal notranslate"><span class="pre">n</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">0</span></code> and the other where it is replaced by <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">m</span> <span class="pre">``.</span> <span class="pre">Note</span> <span class="pre">that</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">strictly</span> <span class="pre">weaker</span> <span class="pre">version</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">``induction</span></code> tactic, because <code class="docutils literal notranslate"><span class="pre">cases'</span></code> does not give us the inductive hypothesis.</p></li>
+<li><p>If you have a hypothesis <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">∃</span> <span class="pre">a,</span> <span class="pre">a^3</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">37</span></code> then <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">x</span> <span class="pre">hx</span></code> will give you a number <code class="docutils literal notranslate"><span class="pre">x</span></code> and a proof <code class="docutils literal notranslate"><span class="pre">hx</span> <span class="pre">:</span> <span class="pre">x^3</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">37</span></code>.</p></li>
+</ol>
+</section>
+<section id="further-notes">
+<h2>Further notes<a class="headerlink" href="#further-notes" title="Link to this heading"></a></h2>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">∧</span></code> is right associative: <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">∧</span> <span class="pre">Q</span> <span class="pre">∧</span> <span class="pre">R</span></code> means <code class="docutils literal notranslate"><span class="pre">``P</span> <span class="pre">∧</span> <span class="pre">(Q</span> <span class="pre">∧</span> <span class="pre">R)</span></code>. So if <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">∧</span> <span class="pre">Q</span> <span class="pre">∧</span> <span class="pre">R</span></code> then <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">h1</span> <span class="pre">h2</span></code> will give you <code class="docutils literal notranslate"><span class="pre">h1</span> <span class="pre">:</span> <span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">h2</span> <span class="pre">:</span> <span class="pre">Q</span> <span class="pre">∧</span> <span class="pre">R</span></code> and then you have to do <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h2</span></code> to get to the proofs of <code class="docutils literal notranslate"><span class="pre">Q</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code>. The syntax <code class="docutils literal notranslate"><span class="pre">cases'</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">h1</span> <span class="pre">h2</span> <span class="pre">h3</span></code> doesn’t work (<code class="docutils literal notranslate"><span class="pre">h3</span></code> just gets ignored). A more refined version of the <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic is the <a class="reference internal" href="rcases.html#tac-rcases"><span class="std std-ref">rcases</span></a> tactic (although the syntax is slightly different; you need to use pointy brackets <code class="docutils literal notranslate"><span class="pre">⟨,⟩</span></code> with <code class="docutils literal notranslate"><span class="pre">rcases</span></code>). For example if <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">∧</span> <span class="pre">Q</span> <span class="pre">∧</span> <span class="pre">R</span></code> then you can do <code class="docutils literal notranslate"><span class="pre">rcases</span> <span class="pre">h</span> <span class="pre">with</span> <span class="pre">⟨hP,</span> <span class="pre">hQ,</span> <span class="pre">hR⟩</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="by_contra.html" class="btn btn-neutral float-left" title="by_contra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="change.html" class="btn btn-neutral float-right" title="change" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
