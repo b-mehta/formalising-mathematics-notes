@@ -2,7 +2,7 @@ Installing Lean
 ===============
 
 Here's an example of a simple logic proof in Lean.
-It's a proof that that if ``P`` and ``Q`` are propositions
+It's a proof that if ``P`` and ``Q`` are propositions
 (that is, true/false statements), and if ``P``
 is true and ``P ⇒ Q`` is true, then ``Q`` is true.
 
@@ -52,7 +52,7 @@ click on "Project: Download project", and then in the text box type
 ``https://github.com/b-mehta/formalising-mathematics-notes``.
 Navigate to the directory where you want to put the course repository,
 type in a name (e.g. ``formalising-mathematics``), click on "Create project folder",
-and then for a minute or two for everything to download.
+and then wait for a minute or two for everything to download.
 
 You can now use VS Code's "open folder" functionality to open the
 course repository and it should all work fine.
@@ -71,8 +71,8 @@ with either of the two approaches below.
 Browser approach 1: via gitpod.
 -------------------------------
 
-Right click here
-<https://gitpod.io/#/https://github.com/b-mehta/formalising-mathematics-notes>`_
+`Right click here
+<https://gitpod.io/#/https://github.com/b-mehta/formalising-mathematics-notes>`__
 and "open link in new tab" to access the repository using Gitpod. At some point it will give
 you some options and ask you to continue; accepting the default options is fine.
 I strongly recommend that you do not do *anything* until all the downloading has finished
@@ -80,7 +80,7 @@ and the output in the terminal window has completely stopped; this may take seve
 When it's done, you should see a VS Code session in your browser, and the output
 should end with something like ``Decompressing 4053 file(s)``
 and ``unpacked in 21359 ms`` as the last couple of lines. Open the
-file `FormalisingMathematics2026/Section01logic/Sheet1.lean` to check it's working.
+file ``FormalisingMathematics2026/Section01logic/Sheet1.lean`` to check it's working.
 Wait to check that the orange bars disappear and the infoview responds as you click
 between the different examples in the file.
 
@@ -91,10 +91,10 @@ on github.com
 Browser approach 2: via Codespaces
 ----------------------------------
 
-Right click here
-<https://github.com/b-mehta/formalising-mathematics-notes>`_
-and "open link in new tab" to go to the github page where the course
-repository is stored. I think that you'll need to have an account on github
+`Right click here
+<https://github.com/b-mehta/formalising-mathematics-notes>`__
+and "open link in new tab" to go to the GitHub page where the course
+repository is stored. I think that you'll need to have an account on GitHub
 for this to work? Click on the green "Code" button and then click on
 "Codespaces". Then click on the green "Create codespace on main".
 Again, wait for several minutes until everything is completely finished. Open the
