@@ -132,3 +132,32 @@ and `right` is equivalent to `refine Or.inr ?_`.
 
 #check Or.inl
 #check Or.inr
+
+/-
+## Examples for you to try
+
+Use the "refine dictionary" to produce term-mode proofs of the following propositions.
+-/
+
+variable (P Q R : Prop)
+
+example : P → (P → Q) → Q :=
+  sorry
+
+example : (P → Q) → (Q → R) → P → R :=
+  sorry
+
+example : (P → Q → R) → (P → Q) → P → R :=
+  sorry
+
+example : (P → Q) → ((P → Q) → P) → Q :=
+  sorry
+
+example : ((P → Q) → R) → ((Q → R) → P) → ((R → P) → Q) → P :=
+  sorry
+
+example : ((Q → P) → P) → (Q → R) → (R → P) → P :=
+  sorry
+
+example (α : Type*) (P : α → Prop) (h : ¬ ∃ a : α, P a) : ∀ a : α, ¬ P a := by
+  sorry
