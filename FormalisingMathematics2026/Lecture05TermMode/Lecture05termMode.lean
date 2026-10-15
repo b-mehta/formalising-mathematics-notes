@@ -8,7 +8,7 @@ module
 public import Mathlib.Tactic -- imports all of the tactics in Lean's maths library
 
 /-!
-# Lecture 4: Equality
+# Lecture 5: Term Mode
 -/
 
 set_option linter.style.longLine.maxLineLength 80 -- for lectures
