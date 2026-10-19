@@ -8,7 +8,7 @@ module
 public import Mathlib.Tactic -- imports all of the tactics in Lean's maths library
 
 /-!
-# Lecture 4: Equality
+# Lecture 5: Term Mode
 -/
 
 set_option linter.style.longLine.maxLineLength 80 -- for lectures
@@ -136,7 +136,7 @@ and `right` is equivalent to `refine Or.inr ?_`.
 /-
 ## Examples for you to try
 
-Use the "refine dictionary" to produce term-mode proofs of the following propositions.
+Use refine to produce term-mode proofs of the following propositions.
 -/
 
 variable (P Q R : Prop)
