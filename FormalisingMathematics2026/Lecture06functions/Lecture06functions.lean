@@ -103,18 +103,30 @@ tactics as long as we can remember the following definitional equalities:
 `a ∈ ∅` is definitionally equal to `False`
 `a ∈ Set.univ` is definitionally equal to `True`.
 `a ∈ sᶜ` is definitionally equal to `a ∉ s` (notation for `¬ a ∈ s`).
-`a ∈ f '' s` is definitionally equal to `∃ b, f b = a`.
+`b ∈ f '' s` is definitionally equal to `∃ a : α, a ∈ s ∧ f a = b`.
 `a ∈ f⁻¹' s` is definitionally equal to `f a ∈ s`.
 
 To prove that two sets `s t : Set α` are equal, the tactic `ext a` will add an
 arbitrary `a : α` as an assumption and replace the goal with `a ∈ s ↔ a ∈ t`.
 -/
 
-example (α : Type*) (s t : Set α) : s ∩ t ⊆ s ∪ t := by
+example (s t : Set α) : s ∩ t ⊆ s ∪ t := by
   intro a ha
   rcases ha with ⟨has, hat⟩
   left
   exact has
+
+/-
+One point of subtlety is that even though `s ⊆ t` is definitionally equal to
+`∀ a, a ∈ s → a ∈ t`, the actual definition in mathlib is `∀ ⦃a⦄, a ∈ s → a ∈ t`
+with strange braces `⦃a⦄` around the `a`. In practice, what this means is that
+you cannot directly plug in an `a : s` (e.g., with `specialize`).
+Instead, you must immediately plug in `hs : a ∈ s` and let Lean infer `a`.
+-/
+
+example (s t : Set α) (hst : s ⊆ t) (a : α) (has : a ∈ s) : a ∈ t := by
+  specialize hst has
+  exact hst
 
 /-
 In pratice, when dealing with sets, many basic properties already exist as
