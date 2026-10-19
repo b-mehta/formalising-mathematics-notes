@@ -136,7 +136,7 @@ and `right` is equivalent to `refine Or.inr ?_`.
 /-
 ## Examples for you to try
 
-Use the "refine dictionary" to produce term-mode proofs of the following propositions.
+Use refine to produce term-mode proofs of the following propositions.
 -/
 
 variable (P Q R : Prop)
