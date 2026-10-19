@@ -103,7 +103,7 @@ tactics as long as we can remember the following definitional equalities:
 `a ∈ ∅` is definitionally equal to `False`
 `a ∈ Set.univ` is definitionally equal to `True`.
 `a ∈ sᶜ` is definitionally equal to `a ∉ s` (notation for `¬ a ∈ s`).
-`a ∈ f '' s` is definitionally equal to `∃ b ∈ s, f b = a`.
+`b ∈ f '' s` is definitionally equal to `∃ a : α, a ∈ s ∧ f a = b`.
 `a ∈ f⁻¹' s` is definitionally equal to `f a ∈ s`.
 
 To prove that two sets `s t : Set α` are equal, the tactic `ext a` will add an
