@@ -57,7 +57,7 @@ to unfold it. If API is comprehensive and well written, then later code
 referring to the definition may never have to unfold the definition directly,
 but can instead reason purely from the API lemmas about the definition.
 
-API is often updated as additional code revelas gaps in the existing API.
+API is often updated as additional code reveals gaps in the existing API.
 -/
 
 theorem injective_id : Injective (id : α → α) := by
