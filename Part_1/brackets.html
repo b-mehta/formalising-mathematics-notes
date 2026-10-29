@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brackets in function inputs &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Notation and precedence" href="precedence.html" />
+    <link rel="prev" title="The three kinds of types" href="threekindsoftypes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Brackets in function inputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#brackets"><code class="docutils literal notranslate"><span class="pre">()</span></code> brackets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#and-brackets"><code class="docutils literal notranslate"><span class="pre">{}</span></code> and <code class="docutils literal notranslate"><span class="pre">⦃⦄</span></code> brackets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">[]</span></code> brackets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overriding-brackets">Overriding brackets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Brackets in function inputs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/brackets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="brackets-in-function-inputs">
+<h1>Brackets in function inputs<a class="headerlink" href="#brackets-in-function-inputs" title="Link to this heading"></a></h1>
+<p>This is about the different types of brackets which we see in Lean’s functions.</p>
+<p>If we type <code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">mul_assoc</span></code> into Lean (assuming we’ve done <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">Mathlib.Tactic</span></code> or some other import which imports some group theory) then we get the following output:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">mul_assoc.</span><span class="o">{</span><span class="n">u_1</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">[</span><span class="n">inst</span><span class="bp">✝</span> <span class="o">:</span> <span class="n">Semigroup</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>At first glance, this makes some kind of sense: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> means by definition <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">*</span> <span class="pre">b)</span> <span class="pre">*</span> <span class="pre">c</span></code> so we can see that this is some sort of claim that multiplication is associative. Looking more carefully, what is going on is that <code class="docutils literal notranslate"><span class="pre">mul_assoc</span></code> is a function, which takes as input a type <code class="docutils literal notranslate"><span class="pre">G</span></code>, a semigroup structure with the weird name <code class="docutils literal notranslate"><span class="pre">inst✝</span></code> on <code class="docutils literal notranslate"><span class="pre">G</span></code> and three terms <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code> of <code class="docutils literal notranslate"><span class="pre">G</span></code>, and returns a proof that <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">*</span> <span class="pre">b)</span> <span class="pre">*</span> <span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code>. But what’s with all the different kinds of brackets? We can see <cite>{}</cite>, <cite>[]</cite> and <cite>()</cite>. There’s even a fourth kind, although it’s rarer: try <code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">DirectSum.linearMap_ext</span></code> to even see some <code class="docutils literal notranslate"><span class="pre">⦃⦄</span></code> brackets. These are the four kinds of brackets which you can use for function input variables. Here’s a simple explanation of what they all mean.</p>
+<section id="brackets">
+<h2><code class="docutils literal notranslate"><span class="pre">()</span></code> brackets<a class="headerlink" href="#brackets" title="Link to this heading"></a></h2>
+<p>These brackets are the easiest to explain. An input to a function in <code class="docutils literal notranslate"><span class="pre">()</span></code> brackets is an input which the user is expected to apply. For example, if we have a theorem <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">(x</span> <span class="pre">:</span> <span class="pre">ℕ)</span> <span class="pre">:</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span></code> then <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">37</span></code> is the theorem that <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">37</span> <span class="pre">=</span> <span class="pre">37</span> <span class="pre">+</span> <span class="pre">37</span></code>.</p>
+</section>
+<section id="and-brackets">
+<h2><code class="docutils literal notranslate"><span class="pre">{}</span></code> and <code class="docutils literal notranslate"><span class="pre">⦃⦄</span></code> brackets<a class="headerlink" href="#and-brackets" title="Link to this heading"></a></h2>
+<p>These brackets exist because Lean’s type theory is dependent type theory, meaning that some inputs to functions can be completely determined by other inputs.</p>
+<p>For example, the term <code class="docutils literal notranslate"><span class="pre">Subgroup.mul_mem</span></code> is a proof of the theorem stating that if two elements of a group are in a given subgroup, then their product is also in this subgroup. The type of this term is the following:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">Subgroup.mul_mem.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">inst</span><span class="bp">✝</span> <span class="o">:</span> <span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">H</span>
+</pre></div>
+</div>
+<p>So <code class="docutils literal notranslate"><span class="pre">subgroup.mul_mem</span></code> takes as input the following rather long list of things. First it wants a type <code class="docutils literal notranslate"><span class="pre">G</span></code> (the <cite>u</cite> is a universe – ignore it). Then it wants a group structure on <code class="docutils literal notranslate"><span class="pre">G</span></code>. Next it wants a subgroup <code class="docutils literal notranslate"><span class="pre">H</span></code> of <code class="docutils literal notranslate"><span class="pre">G</span></code>, then two elements <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> of <code class="docutils literal notranslate"><span class="pre">G</span></code>, and finally two proofs; first a proof that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">∈</span> <span class="pre">H</span></code> and second a proof that <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">∈</span> <span class="pre">H</span></code>. Given all of these inputs, it then outputs a proof that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span> <span class="pre">∈</span> <span class="pre">H</span></code>.</p>
+<p>Now let’s imagine we’re actually going to use this proof-emitting function to prove some explicit statement. We have some explicit group, for example the symmetric group <span class="math notranslate nohighlight">\(S_5\)</span>, and some explicit subgroup <cite>H</cite> and some explicit permutations <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> in <span class="math notranslate nohighlight">\(S_5\)</span>, and proofs <code class="docutils literal notranslate"><span class="pre">hx</span></code> and <code class="docutils literal notranslate"><span class="pre">hy</span></code> that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">∈</span> <span class="pre">H</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">∈</span> <span class="pre">H</span></code>. At the point where we feed in the input <code class="docutils literal notranslate"><span class="pre">hx</span></code> into <code class="docutils literal notranslate"><span class="pre">subgroup.mul_mem</span></code>, Lean can look at <code class="docutils literal notranslate"><span class="pre">hx</span></code> and see immediately what <code class="docutils literal notranslate"><span class="pre">x</span></code> is (by looking at the type of <code class="docutils literal notranslate"><span class="pre">hx</span></code>) and what <code class="docutils literal notranslate"><span class="pre">G</span></code> is (by looking at the type of <code class="docutils literal notranslate"><span class="pre">x</span></code>). So, when you think about it, it’s a bit pointless asking the <em>user</em> to explicitly supply
+<code class="docutils literal notranslate"><span class="pre">G</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> as inputs, even though the function needs them as inputs, because actually the type of the input <code class="docutils literal notranslate"><span class="pre">hx</span></code> (namely <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">∈</span> <span class="pre">H</span></code>) contains enough information to uniquely determine them.</p>
+<p>Calculations like are what Lean’s <em>unifier</em> does, and the <code class="docutils literal notranslate"><span class="pre">{}</span></code> and <code class="docutils literal notranslate"><span class="pre">⦃⦄</span></code> brackets are for this purpose; they mean that they are inputs to the function which the user need not actually supply at all; Lean will figure them out.</p>
+<p>Technical note: The difference between <code class="docutils literal notranslate"><span class="pre">{}</span></code> and <code class="docutils literal notranslate"><span class="pre">⦃⦄</span></code> is that one is more <em>eager</em> than the other; this is all about the exact timing of the unifier. Basically if you have <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">(a</span> <span class="pre">:</span> <span class="pre">X)</span> <span class="pre">{b</span> <span class="pre">:</span> <span class="pre">Y}</span> <span class="pre">(c</span> <span class="pre">:</span> <span class="pre">Z)</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">(a</span> <span class="pre">:</span> <span class="pre">X)</span> <span class="pre">⦃b</span> <span class="pre">:</span> <span class="pre">Y⦄</span> <span class="pre">(c</span> <span class="pre">:</span> <span class="pre">Z)</span></code> then the unifier will attempt to figure out <code class="docutils literal notranslate"><span class="pre">b</span></code> in <code class="docutils literal notranslate"><span class="pre">f</span></code> the moment you have given it <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">a</span></code>, but it will only start worrying about <code class="docutils literal notranslate"><span class="pre">b</span></code> in <code class="docutils literal notranslate"><span class="pre">g</span></code> when you have given it <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">a</span> <span class="pre">c</span></code>. For an example where this matters, see <a class="reference external" href="https://lean-lang.org/theorem_proving_in_lean4/interacting_with_lean.html#more-on-implicit-arguments">section 6.5 of Theorem Proving In Lean</a> . If you want a rule of thumb: use <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
+</section>
+<section id="id1">
+<h2><code class="docutils literal notranslate"><span class="pre">[]</span></code> brackets<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Like <code class="docutils literal notranslate"><span class="pre">{}</span></code> brackets, these square brackets are inputs which the user does not supply, but which the system is going to figure out by itself. The <code class="docutils literal notranslate"><span class="pre">{}</span></code> brackets above were figured out by Lean’s unification system. The <code class="docutils literal notranslate"><span class="pre">[]</span></code> brackets in this section are figured out by Lean’s type class inference system.</p>
+<p>Lean’s type class inference system is a big list of facts. For example Lean knows that the reals are a field, that the natural numbers are an additive monoid, that the rationals have a 0 and a 1, etc etc. Which facts does this system know? The facts it knows are “instances of classes”, or “instances of typeclasses” to give them their full name.</p>
+<p>Let’s take a look at <code class="docutils literal notranslate"><span class="pre">add_comm</span></code>, the proof that addition is commutative. You can see its type with <code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">add_comm</span></code>. Its type is this:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">add_comm.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">inst</span><span class="bp">✝</span> <span class="o">:</span> <span class="n">AddCommMagma</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>An <code class="docutils literal notranslate"><span class="pre">AddCommMagma</span></code> is something a bit weaker than an additive commutative group; any abelian group with group law <code class="docutils literal notranslate"><span class="pre">+</span></code> is an <code class="docutils literal notranslate"><span class="pre">AddCommMagma</span></code>.</p>
+<p>The only inputs in round brackets to this proof are <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>. Here’s a short script which gives <code class="docutils literal notranslate"><span class="pre">add_comm</span></code> all the inputs it needs.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">def</span> <span class="n">a</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="mi">37</span>
+<span class="kd">def</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="mi">42</span>
+
+<span class="k">#check</span> <span class="n">add_comm</span> <span class="n">a</span> <span class="n">b</span> <span class="c1">-- add_comm a b : a + b = b + a</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">add_comm</span></code> function was given <code class="docutils literal notranslate"><span class="pre">a</span></code>, and Lean knows that <code class="docutils literal notranslate"><span class="pre">a</span></code> has type <code class="docutils literal notranslate"><span class="pre">ℝ</span></code> because that’s part of the definition of <code class="docutils literal notranslate"><span class="pre">a</span></code>. So the unifier figures out that <code class="docutils literal notranslate"><span class="pre">G</span></code> must be <code class="docutils literal notranslate"><span class="pre">ℝ</span></code>. The one remaining input to the function is a variable with the weird name of <code class="docutils literal notranslate"><span class="pre">inst✝</span></code>, whose type is <code class="docutils literal notranslate"><span class="pre">AddCommMagma</span> <span class="pre">ℝ</span></code>; you can think of it as “a proof that the reals are an additive commutative magma” but it’s actually more than just a proof – it’s the data of the addition as well; the functions and constants as well as the proofs. Where does Lean get this variable <code class="docutils literal notranslate"><span class="pre">inst✝</span></code> from?</p>
+<p>The answer is that in <code class="docutils literal notranslate"><span class="pre">mathlib</span></code> somewhere, someone proved that the real numbers were a field, and they tagged that result with the <code class="docutils literal notranslate"><span class="pre">&#64;[instance]</span></code> attribute, meaning that the typeclass inference system now knows about it. The typeclass inference system knows that every field is an additive commutative group, and that every additive commutative group is an additive commutative magma. So the system throws this package together and fills in the <code class="docutils literal notranslate"><span class="pre">inst✝</span></code> input automatically for you. Basically this system is in charge of keeping all the group and ring proofs which we don’t want to bother about ourselves.</p>
+<p>You can add new facts into the typeclass system. Here’s a way of telling Lean that you want to work with an abstract additive commutative group <code class="docutils literal notranslate"><span class="pre">G</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">variable</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">AddCommGroup</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">add_comm</span> <span class="n">x</span> <span class="n">y</span> <span class="c1">-- add_comm x y : x + y = y + x</span>
+</pre></div>
+</div>
+<p>Instead of using concrete types like the reals, we make a new abstract type <code class="docutils literal notranslate"><span class="pre">G</span></code>, give it the structure of an additive commutative group, and let <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> be abstract elements of <code class="docutils literal notranslate"><span class="pre">G</span></code> (or more precisely terms of type <code class="docutils literal notranslate"><span class="pre">G</span></code>). The <code class="docutils literal notranslate"><span class="pre">variable</span></code> line has square brackets in too – this means “add the fact that <code class="docutils literal notranslate"><span class="pre">G</span></code> is an additive commutative group to the typeclass system”. Then when <code class="docutils literal notranslate"><span class="pre">add_comm</span></code> runs, the system will supply the proof that <code class="docutils literal notranslate"><span class="pre">G</span></code> is an additive commutative magma, so the function <code class="docutils literal notranslate"><span class="pre">add_comm</span> <span class="pre">x</span> <span class="pre">y</span></code> runs successfully and outputs a proof that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">y</span> <span class="pre">+</span> <span class="pre">x</span></code>.</p>
+</section>
+<section id="overriding-brackets">
+<h2>Overriding brackets<a class="headerlink" href="#overriding-brackets" title="Link to this heading"></a></h2>
+<p>You may well never need to do this in this course, but I put it here for completeness.</p>
+<p>Sometimes the system goes wrong, and Lean cannot figure out the inputs it was supposed to figure out by itself. If this happens, you can override the system like this:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="c">/-</span>
+<span class="cm">add_comm {G : Type} [inst✝ : AddCommMagma G] (a b : G) : a + b = b + a</span>
+<span class="cm">-/</span>
+
+<span class="c1">-- override `{}` input</span>
+<span class="k">#check</span> <span class="n">add_comm</span> <span class="o">(</span><span class="n">G</span> <span class="o">:=</span> <span class="n">ℝ</span><span class="o">)</span> <span class="c1">-- add_comm : ∀ (a b : ℝ), a + b = b + a</span>
+</pre></div>
+</div>
+<p>Alternatively, you can write <cite>&#64;add_comm</cite>, and then every bracket will be treated as if it’s <cite>()</cite>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="threekindsoftypes.html" class="btn btn-neutral float-left" title="The three kinds of types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="precedence.html" class="btn btn-neutral float-right" title="Notation and precedence" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>norm_num &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nth_rw" href="nth_rw.html" />
+    <link rel="prev" title="nlinarith" href="nlinarith.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_1/Part_1.html">Part 1: Lean tips</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Part_2.html">Part 2: Tactics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet.html">Tactic cheatsheet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tactics.html">Tactic documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="apply.html">apply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assumption.html">assumption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="by_cases.html">by_cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="by_contra.html">by_contra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cases.html">cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="change.html">change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="choose.html">choose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constructor.html">constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="convert.html">convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exact.html">exact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exfalso.html">exfalso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ext.html">ext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="have.html">have</a></li>
+<li class="toctree-l3"><a class="reference internal" href="induction.html">induction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html">intro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intros.html">intros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="left.html">left</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linarith.html">linarith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlinarith.html">nlinarith</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">norm_num</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#note">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nth_rw.html">nth_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obtain.html">obtain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="positivity.html">positivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcases.html">rcases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refine.html">refine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfl.html">rfl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="right.html">right</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ring.html">ring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rintro.html">rintro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rw.html">rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simp.html">simp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simpa.html">simpa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specialize.html">specialize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use.html">use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Part_2.html">Part 2: Tactics</a></li>
+          <li class="breadcrumb-item"><a href="tactics.html">Tactic documentation</a></li>
+      <li class="breadcrumb-item active">norm_num</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Part_2/tactics/norm_num.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="norm-num">
+<span id="tac-norm-num"></span><h1>norm_num<a class="headerlink" href="#norm-num" title="Link to this heading"></a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">norm_num</span></code> tactic solves equalities and inequalities which involve only normalised numerical expressions. It doesn’t deal with variables, but it will prove things like <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">≤</span> <span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">&lt;</span> <span class="pre">15/2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">≠</span> <span class="pre">4</span></code>. We emphasize that this is a tool which closes goals involving <em>numbers</em>.</p>
+</section>
+<section id="note">
+<h2>Note<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
+<p>I often see students misusing this tactic. If your goal has a variable like <cite>x</cite> in, then
+<cite>norm_num</cite> is not the tactic you should be using. Note that <cite>norm_num</cite> calls <cite>simp</cite>
+under the hood so it might solve a goal like <cite>(x : ℝ) + 0 = x</cite> anyway – but this is not
+the correct usage of <cite>norm_num</cite> – all that’s happening here is that it is solving the
+goal using <cite>simp</cite> but taking longer to do so.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>(with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">Mathlib.Tactic</span></code> imported)</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">norm_num</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="mi">3</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">norm_num</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="mi">4</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">norm_num</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">≠</span> <span class="mi">5</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">norm_num</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">≠</span> <span class="mi">6</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">norm_num</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">3</span><span class="bp">.</span><span class="mi">141</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">2</span><span class="bp">.</span><span class="mi">718</span> <span class="bp">=</span> <span class="mi">5</span><span class="bp">.</span><span class="mi">859</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">norm_num</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">norm_num</span></code> also knows about a few other things; for example it seems to know about the absolute value on the real numbers.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">|</span><span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">7</span><span class="bp">|</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">norm_num</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nlinarith.html" class="btn btn-neutral float-left" title="nlinarith" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nth_rw.html" class="btn btn-neutral float-right" title="nth_rw" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notation and precedence &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Structures" href="structures.html" />
+    <link rel="prev" title="Brackets in function inputs" href="brackets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equality.html">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Notation and precedence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functions-and-brackets">Functions and brackets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions-are-greedy">Functions are greedy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions-vs-notation">Functions vs notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples-of-binding-power">Examples of binding power</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Notation and precedence</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/precedence.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="notation-and-precedence">
+<h1>Notation and precedence<a class="headerlink" href="#notation-and-precedence" title="Link to this heading"></a></h1>
+<p>This is about why <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c</span></code> means <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b)</span> <span class="pre">+</span> <span class="pre">c</span></code> but why <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> means <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code> in Lean.</p>
+<section id="functions-and-brackets">
+<h2>Functions and brackets<a class="headerlink" href="#functions-and-brackets" title="Link to this heading"></a></h2>
+<p>As you might have spotted, functions in Lean don’t need brackets for their inputs.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>In fact Lean is keen to drop brackets wherever they are not required: if you look at the goal before <code class="docutils literal notranslate"><span class="pre">rfl</span></code> in the proof above it says <code class="docutils literal notranslate"><span class="pre">⊢</span> <span class="pre">f</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">a</span></code>. Similarly if you check that multiplication is associative on the naturals:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ring</span>
+</pre></div>
+</div>
+<p>then the goal before <code class="docutils literal notranslate"><span class="pre">ring</span></code> is displayed as <code class="docutils literal notranslate"><span class="pre">⊢</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code>, with <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> instead of <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">*</span> <span class="pre">b)</span> <span class="pre">*</span> <span class="pre">c</span></code>. What’s going on here?</p>
+<p>Lean’s <cite>parser</cite> has the job of changing human input (strings) into abstract Lean terms, and for reasons we’ll get to later, it parses <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> as <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">*</span> <span class="pre">b)</span> <span class="pre">*</span> <span class="pre">c</span></code>. Lean’s <em>pretty printer</em> has the job of changing Lean terms back into strings so that the tactic state can be displayed on the screen, and it will drop brackets wherever possible, so it will change <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">*</span> <span class="pre">b)</span> <span class="pre">*</span> <span class="pre">c</span></code> back into <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code>. If you try the above example in VS Code and hover over each of the <code class="docutils literal notranslate"><span class="pre">*</span></code> s in the infoview (the tactic state), you will see a way of figuring out where Lean internally puts the brackets (try it to see what I mean).</p>
+<p>So what is going on here? When are brackets needed, and where does Lean put them?</p>
+</section>
+<section id="functions-are-greedy">
+<h2>Functions are greedy<a class="headerlink" href="#functions-are-greedy" title="Link to this heading"></a></h2>
+<p>Lots of things in Lean are functions (in fact probably more things than you expect are functions). And in Lean, functions are <em>greedy</em> – they will eat the next thing they see. So here is an example where one pair of brackets are needed:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">Z</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">Z</span> <span class="o">:=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>If you just write <cite>g f x</cite> then <cite>g</cite> will eat <cite>f</cite> instead of <cite>f x</cite>, and then it will complain that what it ate didn’t have the right flavour, i.e. the right type. Try the example above in Lean, and then remove the brackets and read the error message – this is an error message you will see a lot as you’re learning Lean, so it’s a good one to understand.</p>
+<p>Of course it’s fine to put in too many brackets: Lean will be happy with <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">(f</span> <span class="pre">(x))</span></code>, it’s just that the brackets around the <code class="docutils literal notranslate"><span class="pre">x</span></code> are not necessary.</p>
+</section>
+<section id="functions-vs-notation">
+<h2>Functions vs notation<a class="headerlink" href="#functions-vs-notation" title="Link to this heading"></a></h2>
+<p>In Lean <code class="docutils literal notranslate"><span class="pre">+</span></code> is a thing, but it’s not actually the name of a function. There is no <code class="docutils literal notranslate"><span class="pre">definition</span> <span class="pre">+</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">→</span> <span class="pre">X</span> <span class="pre">→</span> <span class="pre">X</span></code> anywhere in Lean because <code class="docutils literal notranslate"><span class="pre">+</span></code> is just <em>notation</em>. The actual function is called <code class="docutils literal notranslate"><span class="pre">hAdd</span></code> (or, to be completely pedantic, <code class="docutils literal notranslate"><span class="pre">HAdd.hAdd</span></code>), and then somewhere in core Lean there is the line</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">infixl</span><span class="o">:</span><span class="mi">65</span> <span class="s2">&quot; + &quot;</span>   <span class="bp">=&gt;</span> <span class="n">HAdd.hAdd</span>
+</pre></div>
+</div>
+<p>which assigns <em>notation</em> to the <code class="docutils literal notranslate"><span class="pre">hAdd</span></code> function. Basically this just means that if the parser sees <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> it will parse it as <code class="docutils literal notranslate"><span class="pre">hAdd</span> <span class="pre">a</span> <span class="pre">b</span></code> (or, to be completely pedantic, <code class="docutils literal notranslate"><span class="pre">HAdd.hAdd</span> <span class="pre">a</span> <span class="pre">b</span></code>). Now all functions are equally greedy – but notation is not. Both addition and multiplication are functions, but as we know from BIDMAS, we want Lean to parse multiplication before addition, so the system will somehow need to know that notation for multiplication has a higher “score” than notation for addition. And if we look in core Lean, in the file <cite>Notation.lean</cite>, just below the definition of <cite>+</cite> we see</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">infixl</span><span class="o">:</span><span class="mi">70</span> <span class="s2">&quot; * &quot;</span>   <span class="bp">=&gt;</span> <span class="n">HMul.hMul</span>
+</pre></div>
+</div>
+<p>which should give you a clue. The <em>binding power</em> of a notation is a number associated to it when the notation is defined, and the larger the number, the more tightly the notation binds. Functions are greedy – function application has binding power 1024. Because <code class="docutils literal notranslate"><span class="pre">1024</span> <span class="pre">&gt;</span> <span class="pre">70</span> <span class="pre">&gt;</span> <span class="pre">65</span></code>, this is why Lean’s parser parses <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code> as <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">*</span> <span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code>. Also the <code class="docutils literal notranslate"><span class="pre">l</span></code> in <code class="docutils literal notranslate"><span class="pre">infixl</span></code> means “make this notation left associative”; compare this to</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">infixr</span><span class="o">:</span><span class="mi">80</span> <span class="s2">&quot; ^ &quot;</span>   <span class="bp">=&gt;</span> <span class="n">HPow.hPow</span>
+</pre></div>
+</div>
+<p>which makes exponentiation right associative (the reason for this is that <code class="docutils literal notranslate"><span class="pre">(a^b)^c</span></code> can be simplified to <code class="docutils literal notranslate"><span class="pre">a^(b*c)</span></code> so is not as useful as <code class="docutils literal notranslate"><span class="pre">a^(b^c))</span></code>.</p>
+</section>
+<section id="examples-of-binding-power">
+<h2>Examples of binding power<a class="headerlink" href="#examples-of-binding-power" title="Link to this heading"></a></h2>
+<p>As we’ve seen, <code class="docutils literal notranslate"><span class="pre">+</span></code> has binding power 65, and binary <code class="docutils literal notranslate"><span class="pre">-</span></code> (that is, the function which takes two variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> and returns <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span></code>) also has binding power 65. There is also unary <code class="docutils literal notranslate"><span class="pre">-</span></code>, which is notation for the function which takes one variable <code class="docutils literal notranslate"><span class="pre">a</span></code> and returns <code class="docutils literal notranslate"><span class="pre">-a</span></code>, and this has binding power 75. Multiplication and division have binding power 70. As a result, <code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">/</span> <span class="pre">c</span></code> means <code class="docutils literal notranslate"><span class="pre">(-b)</span> <span class="pre">/</span> <span class="pre">c</span></code> but <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">/</span> <span class="pre">c</span></code> means <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">(b</span> <span class="pre">/</span> <span class="pre">c)</span></code>.</p>
+<p>All notation has a binding power! Lean’s version of BIDMAS does not just work for arithmetic operators like <cite>+</cite> and <cite>*</cite>, notation like <cite>∧</cite> and even <cite>=</cite> has a binding power.
+Here are some examples of binding powers:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="bp">∨</span> <span class="o">:</span> <span class="mi">30</span>
+<span class="bp">∧</span> <span class="o">:</span> <span class="mi">35</span>
+<span class="bp">¬</span> <span class="o">:</span> <span class="mi">40</span>
+<span class="bp">=</span> <span class="o">:</span> <span class="mi">50</span>
+<span class="bp">+</span> <span class="o">:</span> <span class="mi">65</span>
+<span class="bp">-</span> <span class="o">:</span> <span class="mi">65</span> <span class="o">(</span><span class="n">binary</span><span class="o">)</span>
+<span class="bp">*</span> <span class="o">:</span> <span class="mi">70</span>
+<span class="bp">/</span> <span class="o">:</span> <span class="mi">70</span>
+<span class="bp">-</span> <span class="o">:</span> <span class="mi">75</span> <span class="o">(</span><span class="n">unary</span><span class="o">)</span>
+<span class="bp">^</span> <span class="o">:</span> <span class="mi">80</span>
+<span class="bp">⁻¹</span> <span class="o">:</span> <span class="mi">1024</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="brackets.html" class="btn btn-neutral float-left" title="Brackets in function inputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="structures.html" class="btn btn-neutral float-right" title="Structures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
