@@ -41,7 +41,7 @@ number into this definition because there is no coercion `ℚ → {t : ℚ // t 
 Another way would be to add hypotheses to the definitions.
 -/
 
-def div_hypothesis (x : ℚ) (y : ℚ) (hy : y ≠ 0) : ℝ :=
+def div_hypothesis (x : ℚ) (y : ℚ) (hy : y ≠ 0) : ℚ :=
   sorry
 
 /-
@@ -128,7 +128,7 @@ noncomputable def infDist (x : X) (s : Set X) : ℝ :=
 
 /-
 The issue is that `⨅ y ∈ s, dist x y` actually parses as a nested infimum
-`⨅ y : ℝ, ⨅ (_ : y ∈ s), dist x y` where the inner infimum will have
+`⨅ y : X, ⨅ (_ : y ∈ s), dist x y` where the inner infimum will have
 junk value zero when the indexing type `y ∈ s` is empty.
 
 Mathlib solves this by first defining an `ENNReal` version of `infDist`.
