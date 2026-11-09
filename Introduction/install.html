@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installing Lean &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Part 1: Lean tips" href="../Part_1/Part_1.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Lean</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-best-way-install-lean-on-your-computer">The best way: install Lean on your computer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lean-in-a-web-browser">Lean in a web browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#browser-approach-1-via-gitpod">Browser approach 1: via gitpod.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#browser-approach-2-via-codespaces">Browser approach 2: via Codespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_1/Part_1.html">Part 1: Lean tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installing Lean</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Introduction/install.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installing-lean">
+<h1>Installing Lean<a class="headerlink" href="#installing-lean" title="Link to this heading"></a></h1>
+<p>Here’s an example of a simple logic proof in Lean.
+It’s a proof that that if <code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code> are propositions
+(that is, true/false statements), and if <code class="docutils literal notranslate"><span class="pre">P</span></code>
+is true and <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">⇒</span> <span class="pre">Q</span></code> is true, then <code class="docutils literal notranslate"><span class="pre">Q</span></code> is true.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">example (P Q : Prop) (h1 : P) (h2 : P → Q) : Q := by</span>
+<span class="go">  apply h2 at h1</span>
+<span class="go">  exact h1</span>
+</pre></div>
+</div>
+<p>The first line of the code states the theorem. Hypothesis
+<code class="docutils literal notranslate"><span class="pre">h1</span></code> is that <code class="docutils literal notranslate"><span class="pre">P</span></code> is true, and hypothesis <code class="docutils literal notranslate"><span class="pre">h2</span></code> is
+that <code class="docutils literal notranslate"><span class="pre">P</span></code> implies <code class="docutils literal notranslate"><span class="pre">Q</span></code> (note that Lean uses a regular
+arrow for implication rather than the more common <code class="docutils literal notranslate"><span class="pre">⇒</span></code>
+sign). The conclusion, after the colon,
+is that <code class="docutils literal notranslate"><span class="pre">Q</span></code> is true. The proof is after the <code class="docutils literal notranslate"><span class="pre">by</span></code>,
+which puts Lean into “tactic mode” (<code class="docutils literal notranslate"><span class="pre">apply</span></code> and <code class="docutils literal notranslate"><span class="pre">exact</span></code> are tactics),
+and it’s clear that it somehow uses
+both hypothesis <code class="docutils literal notranslate"><span class="pre">h1</span></code> and hypothesis <code class="docutils literal notranslate"><span class="pre">h2</span></code>. But
+just reading the proof, it’s hard to see exactly what
+is going on. We can’t learn Lean this way.</p>
+<p>The whole point of using a theorem prover is that it makes
+proofs like this <em>interactive</em>. So, before we get going,
+we need to get this and other proofs running on your computer somehow.
+There are several ways to do it.</p>
+<section id="the-best-way-install-lean-on-your-computer">
+<h2>The best way: install Lean on your computer<a class="headerlink" href="#the-best-way-install-lean-on-your-computer" title="Link to this heading"></a></h2>
+<p>If you are doing this course in 2026 at Imperial, and your computer
+is powerful enough to run Lean reasonably quickly, and you have about 4.5
+gigabytes of space available to install Lean and the course repository, then I recommend
+this method.</p>
+<p>You will first need to install Lean, and then you’ll need to
+install the course repository.</p>
+<p>Instructions on how to get Lean installed on your computer
+are <a class="reference external" href="https://leanprover-community.github.io/get_started.html">here</a>
+(right click and open in new tab if you don’t want to lose your place).</p>
+<p>Once you have Lean up and running, you can install the repository
+<code class="docutils literal notranslate"><span class="pre">b-mehta/formalising-mathematics-notes</span></code> associated with this
+course. Fire up VS Code, click on the upside-down <cite>A</cite> in the bar at the top,
+hover on “Open Project”,
+click on “Project: Download project”, and then in the text box type
+<code class="docutils literal notranslate"><span class="pre">https://github.com/b-mehta/formalising-mathematics-notes</span></code>.
+Navigate to the directory where you want to put the course repository,
+type in a name (e.g. <code class="docutils literal notranslate"><span class="pre">formalising-mathematics</span></code>), click on “Create project folder”,
+and then for a minute or two for everything to download.</p>
+<p>You can now use VS Code’s “open folder” functionality to open the
+course repository and it should all work fine.</p>
+</section>
+<section id="lean-in-a-web-browser">
+<h2>Lean in a web browser<a class="headerlink" href="#lean-in-a-web-browser" title="Link to this heading"></a></h2>
+<p>If your computer is too slow to run Lean satisfactorily, or you don’t have enough
+space on your computer, you can use Lean via a web browser. Note: I am not in any
+position to guarantee that with either of the approaches below, any code you write
+will survive between browser sessions. I recommend that if you write your course
+projects using a browser approach then you <em>save all your work locally</em>.
+You will probably need to register an account of some form (for example a GitHub account)
+with either of the two approaches below.</p>
+</section>
+<section id="browser-approach-1-via-gitpod">
+<h2>Browser approach 1: via gitpod.<a class="headerlink" href="#browser-approach-1-via-gitpod" title="Link to this heading"></a></h2>
+<p>Right click here
+&lt;<a class="reference external" href="https://gitpod.io/#/https://github.com/b-mehta/formalising-mathematics-notes">https://gitpod.io/#/https://github.com/b-mehta/formalising-mathematics-notes</a>&gt;`_
+and “open link in new tab” to access the repository using Gitpod. At some point it will give
+you some options and ask you to continue; accepting the default options is fine.
+I strongly recommend that you do not do <em>anything</em> until all the downloading has finished
+and the output in the terminal window has completely stopped; this may take several minutes.
+When it’s done, you should see a VS Code session in your browser, and the output
+should end with something like <code class="docutils literal notranslate"><span class="pre">Decompressing</span> <span class="pre">4053</span> <span class="pre">file(s)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">unpacked</span> <span class="pre">in</span> <span class="pre">21359</span> <span class="pre">ms</span></code> as the last couple of lines. Open the
+file <cite>FormalisingMathematics2026/Section01logic/Sheet1.lean</cite> to check it’s working.
+Wait to check that the orange bars disappear and the infoview responds as you click
+between the different examples in the file.</p>
+<p>Note: I believe there is some time limit for the amount that you can use gitpod
+for free. You might find that you can extend this limit by registering as a student
+on github.com</p>
+</section>
+<section id="browser-approach-2-via-codespaces">
+<h2>Browser approach 2: via Codespaces<a class="headerlink" href="#browser-approach-2-via-codespaces" title="Link to this heading"></a></h2>
+<p>Right click here
+&lt;<a class="reference external" href="https://github.com/b-mehta/formalising-mathematics-notes">https://github.com/b-mehta/formalising-mathematics-notes</a>&gt;`_
+and “open link in new tab” to go to the github page where the course
+repository is stored. I think that you’ll need to have an account on github
+for this to work? Click on the green “Code” button and then click on
+“Codespaces”. Then click on the green “Create codespace on main”.
+Again, wait for several minutes until everything is completely finished. Open the
+file <cite>FormalisingMathematics2026/Section01logic/Sheet1.lean</cite> to check it’s working.
+Wait to check that the orange bars disappear and the infoview responds as you click
+between the different examples in the file.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Part_1/Part_1.html" class="btn btn-neutral float-right" title="Part 1: Lean tips" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

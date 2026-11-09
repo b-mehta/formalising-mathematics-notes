@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equality &mdash; Formalising Mathematics 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The three kinds of types" href="threekindsoftypes.html" />
+    <link rel="prev" title="Types and terms" href="typesandterms.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Formalising Mathematics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/install.html">Installing Lean</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Part_1.html">Part 1: Lean tips</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typesandterms.html">Types and terms</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Equality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#syntactic-equality">Syntactic equality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitional-equality">Definitional equality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#propositional-equality">Propositional equality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#appendix-syntactic-equality-again">Appendix: syntactic equality again</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="threekindsoftypes.html">The three kinds of types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brackets.html">Brackets in function inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="precedence.html">Notation and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structures.html">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dot_notation.html">Dot notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coercions.html">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_axiom_of_choice.html">The axiom of choice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="well_formatted_code.html">How to format your code well</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_2/Part_2.html">Part 2: Tactics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Formalising Mathematics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Part_1.html">Part 1: Lean tips</a></li>
+      <li class="breadcrumb-item active">Equality</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Part_1/equality.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="equality">
+<h1>Equality<a class="headerlink" href="#equality" title="Link to this heading"></a></h1>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>“Syntactic equality is they look identical, definitional equality is they are the same, propositional equality is they turn out to be the same.”</p>
+</div>
+<p>As mathematicians we tend not to fuss too much about equality, at least at undergraduate level. When formalising mathematics in Lean’s type theory, it turns out that one has to think a bit more carefully about what is going on. In Lean there are three different kinds of equality which one has to be aware of, and the differences between them are “non-mathematical”. The strongest kind of equality is syntactic equality; this is the kind of equality that tactics like <code class="docutils literal notranslate"><span class="pre">rw</span></code> and <code class="docutils literal notranslate"><span class="pre">simp</span></code> care about. Then there is definitional equality; this is he kind of equality that tactics like <code class="docutils literal notranslate"><span class="pre">exact</span></code> and <code class="docutils literal notranslate"><span class="pre">intro</span></code> and <code class="docutils literal notranslate"><span class="pre">rfl</span></code> care about. Finally, there is propositional equality; this is the “usual” kind of equality as understood by mathematicians.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>To give you a flavour of what this document is about, and in particular to indicate that these refined notions of equality are in some sense not “mathematical”, here is an example. Let <code class="docutils literal notranslate"><span class="pre">x</span></code> be a natural number. As mathematicians we would all agree that <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span> <span class="pre">=</span> <span class="pre">x</span></code>. Both of these are propositional equalities. However only one is a definitional equality, and neither of them are syntactic equalities.</p>
+</section>
+<section id="syntactic-equality">
+<span id="syneq"></span><h2>Syntactic equality<a class="headerlink" href="#syntactic-equality" title="Link to this heading"></a></h2>
+<p>Syntactic equality is the strongest kind of equality there is. Two expressions are <em>syntactically equal</em> if they are literally made by pressing the same keys on your keyboard in the same order.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> are syntactically equal.</p>
+<p>Non-example: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> are not syntactically equal (even though they are mathematically equal).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">rewrite</span></code> tactic works at the syntactic equality level. For example, let’s say that your tactic state looks like this:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℕ</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">a</span>
+<span class="bp">⊢</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Then <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[h]</span></code> will <em>fail</em>, even though <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span> <span class="pre">=</span> <span class="pre">x</span></code>. The reason it will fail is that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> are not <em>syntactically</em> equal, so the <code class="docutils literal notranslate"><span class="pre">rw</span></code> tactic will fail to find the left hand side of <code class="docutils literal notranslate"><span class="pre">h</span></code> in the goal.</p>
+</section>
+<section id="definitional-equality">
+<span id="defeq"></span><h2>Definitional equality<a class="headerlink" href="#definitional-equality" title="Link to this heading"></a></h2>
+<p>Definitional equality is a weaker kind of equality than syntactic equality – two things can sometimes be definitionally equal without being syntactically equal. A simple example is the following. In Lean, <code class="docutils literal notranslate"><span class="pre">¬P</span></code> is notation for <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">P</span></code>, and <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">P</span></code> is <em>defined</em> to mean <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">False</span></code>. So whilst <code class="docutils literal notranslate"><span class="pre">¬P</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">False</span></code> are not syntactically equal, they are definitionally equal.</p>
+<p>As the name suggests, definitional equality depends on definitions, and in particular depends on implementation details (that is, on exactly how things are defined under the hood). As such, definitional equality is in some sense “not a mathematical concept”. Here is an example to show you what I mean.</p>
+<p>Addition on the natural numbers is defined “by induction”, or, more precisely, by recursion. If <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are natural numbers, then in the definition of <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code> we have to choose which one to induct on. The designers of Lean chose to induct on <code class="docutils literal notranslate"><span class="pre">y</span></code>. This means that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> is <em>defined</em> to be <code class="docutils literal notranslate"><span class="pre">x</span></code>, and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">succ(y)</span></code> is <em>defined</em> to be <code class="docutils literal notranslate"><span class="pre">succ(x</span> <span class="pre">+</span> <span class="pre">y)</span></code>.</p>
+<p>This means that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> are equal by the very definition of <code class="docutils literal notranslate"><span class="pre">+</span></code>. To put it another way, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> are <em>definitionally equal</em>.</p>
+<p>However, players of the <a class="reference external" href="https://adam.math.hhu.de/">Natural number game</a> will know, if we use this as the definition of addition, then to prove that <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span></code> we need to use induction. The problem is that we cannot “unfold” the definition of <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span></code> any further; the definition of <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span></code> depends on whether <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">succ</span> <span class="pre">y</span></code> for some <code class="docutils literal notranslate"><span class="pre">y</span></code>, so to make any progress in the proof of <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span></code> we need to use more than just unfolding definitions; we need to use induction (to split into the cases <code class="docutils literal notranslate"><span class="pre">x=0</span></code> and <code class="docutils literal notranslate"><span class="pre">x=succ</span> <span class="pre">y</span></code>, when we can start simplifying <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span></code>). As a result, although <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span></code> is true, it is not <em>definitionally</em> true.</p>
+<p>The fact that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span> <span class="pre">=</span> <span class="pre">x</span></code> is a definitional equality, but <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span></code> is not, means that definitional equality is in some sense not a mathematical concept. Furthermore, if the designers of Lean had decided to define addition by recursion on the first variable instead of the second, then of course our conclusions would be the other way around.</p>
+<p>Note also: the fact that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> are definitionally equal is specific to the natural numbers. Addition of real numbers is not defined by induction, it is defined in a far more complicated way using Cauchy sequences and quotients, and if <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">:</span> <span class="pre">ℝ</span></code> then none of <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">+</span> <span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">r</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">r</span></code> are definitionally equal to each other.</p>
+<p>Tactics like <code class="docutils literal notranslate"><span class="pre">exact</span></code> and <code class="docutils literal notranslate"><span class="pre">rfl</span></code> work up to definitional equality. For example, the following proof works in Lean:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">example (x : ℕ) : x + 0 = x := by</span>
+<span class="go">  rfl</span>
+</pre></div>
+</div>
+<p>which is perhaps not what you would expect if you have played the natural number game; I explicitly disabled this hack there. However the following does not work:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">example (x : ℕ) : 0 + x = x := by</span>
+<span class="go">  rfl -- type mismatch</span>
+</pre></div>
+</div>
+<p>Similarly, this code works:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">example (x y : ℕ) (h : x + 0 = y) : x = y := by</span>
+<span class="go">  exact h</span>
+</pre></div>
+</div>
+<p>because hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code> is definitionally equal to the goal <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">intro</span></code> is another tactic which works up to definitional equality. If
+<code class="docutils literal notranslate"><span class="pre">P</span></code> is a proposition, then <code class="docutils literal notranslate"><span class="pre">¬</span> <span class="pre">P</span></code> is notation for <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">P</span></code>, and the
+<em>definition</em> of <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">P</span></code> is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">→</span> <span class="pre">False</span></code>, so the <code class="docutils literal notranslate"><span class="pre">intro</span></code> tactic
+works here:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">example (P : Prop) : ¬ P := by</span>
+<span class="go">  intro h</span>
+<span class="go">  /-</span>
+<span class="go">  tactic state now</span>
+
+<span class="go">  P : Prop</span>
+<span class="go">  h : P</span>
+<span class="go">  ⊢ False</span>
+<span class="go">  -/</span>
+<span class="go">  sorry</span>
+</pre></div>
+</div>
+<p>(although the goal is of course not provable).</p>
+</section>
+<section id="propositional-equality">
+<h2>Propositional equality<a class="headerlink" href="#propositional-equality" title="Link to this heading"></a></h2>
+<p>This is the weakest kind of equality, and the kind most familiar to mathematicians. Two terms <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are <em>propositionally equal</em> if you can prove <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code>, or equivalently if you can construct a term <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code> of type <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code>. For example, if <code class="docutils literal notranslate"><span class="pre">x</span></code> is a natural then <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">-</span> <span class="pre">3</span></code> are all propositionally equal.</p>
+</section>
+<section id="appendix-syntactic-equality-again">
+<h2>Appendix: syntactic equality again<a class="headerlink" href="#appendix-syntactic-equality-again" title="Link to this heading"></a></h2>
+<p>What I said about syntactic equality is not strictly speaking true. The below paragraph fixes it, but can be ignored by everyone other then pedants.</p>
+<p>There are actually a couple of ways that things can be syntactically equal without literally being made by pressing the same keys in the same order. Firstly, <em>notation</em> can be unfolded without breaking syntactic equality. For example the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign in <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code> is actually notation for the <code class="docutils literal notranslate"><span class="pre">eq</span></code> function, and the terms <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">eq</span> <span class="pre">x</span> <span class="pre">y</span></code> are syntactically equal. Secondly, the names of globally quantified variables can change without breaking syntactical equality; for example <code class="docutils literal notranslate"><span class="pre">∃</span> <span class="pre">x,</span> <span class="pre">x^2</span> <span class="pre">=</span> <span class="pre">4</span></code> and <code class="docutils literal notranslate"><span class="pre">∃</span> <span class="pre">y,</span> <span class="pre">y^2</span> <span class="pre">=</span> <span class="pre">4</span></code> are syntactically equal. This is because Lean “uses de Bruijn indices” under the hood, something we won’t
+be talking about.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="typesandterms.html" class="btn btn-neutral float-left" title="Types and terms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="threekindsoftypes.html" class="btn btn-neutral float-right" title="The three kinds of types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bhavik Mehta.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
