@@ -158,3 +158,6 @@ example : ((P → Q) → R) → ((Q → R) → P) → ((R → P) → Q) → P :=
 
 example : ((Q → P) → P) → (Q → R) → (R → P) → P :=
   sorry
+
+example (α : Type*) (P : α → Prop) (h : ¬ ∃ a : α, P a) : ∀ a : α, ¬ P a := by
+  sorry
