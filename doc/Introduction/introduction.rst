@@ -67,7 +67,7 @@ about are: type theories, functional programming, the lambda calculus, and const
 How to read this document
 -------------------------
 
-These notes comes in two parts: Part 1, Part 2.
+These notes come in two parts: Part 1, Part 2.
 
 Part 1 is the non-mathematical background which you will find helpful in order to make sense of what
 is going on. It covers basic material of a more "computer-science" nature. I will flag in the
