@@ -124,7 +124,7 @@ rather than the more clunky `∀ y, (∃ x ∈ U, f x = y) → y ∈ V`.
 
 variable {U : Set α} {V : Set β}
 
-example : U ⊆ f⁻¹' V ↔ ∀ x ∈ U, f x ∈ V := by rfl
+example : U ⊆ f ⁻¹' V ↔ ∀ x ∈ U, f x ∈ V := by rfl
 example : f '' U ⊆ V ↔ ∀ y, (∃ x ∈ U, f x = y) → y ∈ V := by rfl
 
 #check Set.image_subset_iff
@@ -149,7 +149,7 @@ example : Filter.Tendsto f Fα Fβ ↔ Filter.Tendsto₃ f Fα Fβ := by rfl
 
 /-
 The next improvement to be had comes from noticing that the set of all
-`V` with the property that `f ⁻¹' V ∈ Fα` is itself a filter on `Fα`.
+`V` with the property that `f ⁻¹' V ∈ Fα` is itself a filter on `Fβ`.
 This is called `Filter.map`.
 -/
 
