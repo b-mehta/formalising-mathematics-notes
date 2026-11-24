@@ -3,15 +3,15 @@
 Coercions
 =========
 
-Sometimes you have a term of a type, and you really want it to have another type (because that's what we do in maths; we are liberal with our types, unlike Lean). For example you might have a natural number ``n : ℕ`` but a function ``f : ℝ → ℝ`` (like ``Real.sqrt`` or similar), and you want to consider ``f n``. This is problematic in a strongly typed language like Lean: ``n`` has type ``Nat`` and not ``Real``, so ``f n`` does not make sense. However, if you try it...
+Sometimes you have a term of a type, and you really want it to have another type (because that's what we do in maths; we are liberal with our types, unlike Lean). For example, you might have a natural number ``n : ℕ`` but a function ``f : ℝ → ℝ`` (like ``Real.sqrt`` or similar), and you want to consider ``f n``. This is problematic in a strongly typed language like Lean: ``n`` has type ``Nat`` and not ``Real``, so ``f n`` does not make sense. However, if you try it...
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Tactic
 
    def a : ℕ := 37
 
-   #check Real.sqrt a -- real.sqrt ↑a : ℝ
+   #check Real.sqrt a -- Real.sqrt ↑a : ℝ
 
 ...it works anyway! But actually looking more closely, something funny is going on; what is that ``↑`` by the ``a``? That up-arrow is Lean's notation for the completely obvious function from ``ℕ`` to ``ℝ`` which doesn't have a name in mathematics but which Lean needs to apply in order for everything to typecheck.
 
@@ -20,7 +20,7 @@ Coercion to function
 
 Here's another example of something which shouldn't work but which does:
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Tactic
 
@@ -41,7 +41,7 @@ so here ``s : Set ℝ`` is a term, not a type, and so ``a : s`` shouldn't even m
 you look carefully, you see that the type of ``a`` is in fact ``↑s``, because ``s`` has been
 coerced from a term to the corresponding subtype ``{x : ℝ // x ∈ s}``. 
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Tactic
 

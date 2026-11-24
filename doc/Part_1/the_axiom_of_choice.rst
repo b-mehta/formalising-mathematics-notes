@@ -10,14 +10,14 @@ In Lean's type theory, the situation is much simpler (at least in my mind). Ther
 
 If ``X : Type`` then ``Nonempty X : Prop`` is the true-false statement asserting that ``X`` is nonempty, or equivalently, that there's a term of type ``X``. For example here's part of the API for ``Nonempty``:
 
-.. code-block::
+.. code-block:: lean
    
    import Mathlib.Tactic
 
    example (X : Type) : (∃ x : X, True) ↔ Nonempty X := by
      exact exists_true_iff_nonempty
 
-This example shows that given a term of type ``Nonempty X``, you can get a term of type ``∃ x : X, True`` (i.e., "there exists an element of ``X`` such that a true statement is true"). We would now like to go from this to actually *get* a term of type ``X``! In constructive mathematics this is impossible: because ``h`` lives in the ``Prop`` universe, Lean forgot how it was proved. However in classical mathematics we can pass from the ``Prop`` universe to the ``Type`` universe with ``Classical.choice h``, a term of type ```X```. This gives us a "noncomputable" term of type ``X``, magically constructed only from the proof ``h`` that ``X`` was nonempty. Mathematically, "noncomputable" means "it exists, but we don't actually have an algorithm or a formula for it". This is a subtlety which is often not explicitly talked about in mathematics courses, probably because it is often not relevant in a mathematical argument; a proof in classical mathematics is not a program, so we don't need an algorithm or formula for the terms involved.
+This example shows that given a term of type ``Nonempty X``, you can get a term of type ``∃ x : X, True`` (i.e., "there exists an element of ``X`` such that a true statement is true"). We would now like to go from this to actually *get* a term of type ``X``! In constructive mathematics this is impossible: because ``h`` lives in the ``Prop`` universe, Lean forgot how it was proved. However in classical mathematics we can pass from the ``Prop`` universe to the ``Type`` universe with ``Classical.choice h``, a term of type ``X``. This gives us a "noncomputable" term of type ``X``, magically constructed only from the proof ``h`` that ``X`` was nonempty. Mathematically, "noncomputable" means "it exists, but we don't actually have an algorithm or a formula for it". This is a subtlety which is often not explicitly talked about in mathematics courses, probably because it is often not relevant in a mathematical argument; a proof in classical mathematics is not a program, so we don't need an algorithm or formula for the terms involved.
 
 You might wonder what the code for this ``Classical.choice`` function looks like, but in fact there isn't any code for it; Lean simply declares that ``Classical.choice`` is an ``axiom``, just like how in set theory the axiom of choice is declared to be an axiom.
 
@@ -28,13 +28,13 @@ Classical.choose
 
 In my experience, the way people want to use the axiom of choice when doing mathematics in Lean is to get an element of X not from a hypothesis ``∃ x : X, true``, but from a hypothesis like ``∃ x : ℝ, x^2 = 2`` or more generally ``∃ x : X, p x`` where ``p : X → Prop`` is a predicate on ``X``. The way to do this is as follows: you run ``Classical.choose`` on ``h : ∃ x : X, p x`` to get the element of ``X``, and the proof that this element satisfies ``p`` is ``Classical.choose_spec h``. Here's a worked example.
 
-.. code-block::
+.. code-block:: lean
 
    import Mathlib.Tactic
    import Mathlib.Analysis.Complex.Polynomial -- import proof of fundamental theorem of algebra
 
    open Polynomial -- so I can use notation ℂ[X] for polynomial rings
-                   -- and so I can write `X` and not `polynomial.X`
+                   -- and so I can write `X` and not `Polynomial.X`
 
    suppress_compilation -- because everything is noncomputable
 
